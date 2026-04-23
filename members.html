@@ -1,0 +1,518 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CIC-Lab@HYU</title>
+<link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
+<style type="text/css">
+
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background-color: #ececeb;
+	margin: 0;
+	padding: 0;
+	/* [disabled]color: #C39; */
+}
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+ul{
+	font-size:13px;
+}
+h1, h2, h3, h4, h5, h6, p{
+	margin-top: 10px;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
+	margin-bottom: 0;
+	padding-right: 15px;
+	padding-left: 15px; /* adding the padding to the sides of the elements within the blocks, instead of the block elements themselves, gets rid of any box model math. A nested block with side padding can also be used as an alternate method. */
+}
+p.lab_head{
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px;
+}
+p.lab{
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px;
+	font-size: 12px;
+}
+p.article{
+    margin-top: 0;    
+    margin-left: 30px;
+    text-indent: -30px;
+    margin-bottom: 3px;
+    font-size: 12px;
+    line-height: 18px;
+}
+p.bottom{
+    border-bottom: 1px solid #FFF;  /* this creates the button separation */
+    border-top: 0px solid #FFF;  /* this creates the button separation */
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+p.both{
+    border-bottom: 1px solid #FFF;  /* this creates the button separation */
+    border-top: 1px solid #FFF;  /* this creates the button separation */
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+	border: none;
+}
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link {
+	color: #42413C; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
+}
+a:visited {
+	color: #6E6C64;
+}
+a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	text-decoration: none;
+}
+/* ~~ This fixed width container surrounds all other blocks ~~ */
+.container {
+	width: 960px;
+	background-color: #FFFFFF;
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+/* ~~ The header is not given a width. It will extend the full width of your layout. ~~ */
+header {
+	font: 150%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	background-color: #022E80;
+	background-image: url("header_cic.jpg");
+	background-size: cover;
+	height: 40px;
+	padding-top: 6px;
+	padding-right: 0px;
+	padding-bottom: 4px;
+	padding-left: 0px;
+	position: relative;
+}
+/* ~~ These are the columns for the layout. ~~ 
+
+1) Padding is only placed on the top and/or bottom of the block elements. The elements within these blocks have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the block itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the block element and place a second block element within it with no width and the padding necessary for your design.
+
+2) No margin has been given to the columns since they are all floated. If you must add margin, avoid placing it on the side you're floating toward (for example: a right margin on a block set to float right). Many times, padding can be used instead. For blocks where this rule must be broken, you should add a "display:inline" declaration to the block element's rule to tame a bug where some versions of Internet Explorer double the margin.
+
+3) Since classes can be used multiple times in a document (and an element can also have multiple classes applied), the columns have been assigned class names instead of IDs. For example, two sidebar blocks could be stacked if necessary. These can very easily be changed to IDs if that's your preference, as long as you'll only be using them once per document.
+
+4) If you prefer your nav on the left instead of the right, simply float these columns the opposite direction (all left instead of all right) and they'll render in reverse order. There's no need to move the blocks around in the HTML source.
+
+*/
+.sidebar1 {
+	float: left;
+	width: 150px;
+	background-color: #FFFFFF;
+	padding-bottom: 10px;
+	border-color:#FFF;
+}
+.content {
+	padding: 10px 0;
+	width: 800px;
+	float: right;
+}
+
+/* ~~ This grouped selector gives the lists in the .content area space ~~ */
+.content ul, .content ol {
+	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+}
+
+/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
+nav ul{
+	list-style: none; /* this removes the list marker */
+	border-top: 1px solid #FFF; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
+	margin-bottom: 15px; /* this creates the space between the navigation on the content below */
+}
+nav li {
+	border-bottom: 1px solid #FFF; /* this creates the button separation */
+}
+nav a, nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
+	padding: 5px 5px 5px 15px;
+	display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
+	width: 130px;  /*this width makes the entire button clickable for IE6. If you don't need to support IE6, it can be removed. Calculate the proper width by subtracting the padding on this link from the width of your sidebar container. */
+	text-decoration: none;
+	background-color: #5197FF;
+	background-image: url("sidebar1.jpg");
+}
+nav a:hover, nav a:active, nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+	background-color: #1573FF;
+	color: #FFF;
+	background-image: url("sidebar2.jpg");
+}
+
+/* ~~ The footer ~~ */
+footer {
+	position: relative;/* this gives IE6 hasLayout to properly clear */
+	clear: both;
+	background-color: #00366C;
+	vertical-align: middle;
+	height: 25px;	
+}
+
+/*HTML 5 support - Sets new HTML 5 tags to display:block so browsers know how to render the tags properly. */
+header, section, footer, aside, article, figure {
+	display: block;
+}
+
+</style><!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]--></head>
+
+<body>
+
+<div class="container">
+  <header>
+    <p class="lab_head"> <strong style="color:white; font-size:20px"><capital style="font-size:23px">C</capital>onstruction <capital style="font-size:23px">I</capital>nformatics and <capital style="font-size:23px">C</capital>omputing <capital style="font-size:23px">L</capital>ab</strong></p>
+  </header>
+  <div class="sidebar1">
+  <nav>
+    <ul>    
+      <p class="bottom"><a href="http://civil.hanyang.ac.kr/cem" style="color:white">&nbsp; Home</a></p>
+
+      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
+      &nbsp; Members
+      </a><div style="DISPLAY: block">
+      <a href="http://civil.hanyang.ac.kr/cem/advisor.html" style="color:white">&nbsp; &raquo; Advisor</a>
+      <a href="http://civil.hanyang.ac.kr/cem/members.html" style="color:white">&nbsp; &raquo; Lab Members</a>
+      </div>     
+
+      <p class="both"><a href="http://civil.hanyang.ac.kr/cem/research.html" style="color:white">&nbsp; Research Projects</a></li></p>
+
+      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
+      &nbsp; Publications
+      </a><div style="DISPLAY: block">
+      <a href="http://civil.hanyang.ac.kr/cem/publications.html" style="color:white">&nbsp; &raquo; International</a>
+      <a href="http://civil.hanyang.ac.kr/cem/publications_domestic.html" style="color:white">&nbsp; &raquo; Domestic (KOR)</a>
+      </div>
+
+      <p class="both"><a href="http://civil.hanyang.ac.kr/cem/courses.html" style="color:white">&nbsp; Courses</a></p>
+	  <p class="bottom"><a href="http://civil.hanyang.ac.kr/cem/admission.html" style="color:white">&nbsp; Admission</a></p>
+      <li style="font-size:5px">&nbsp;</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Quick Links</b></li>
+      <p class="bottom"><a href="http://civil.hanyang.ac.kr/eng/class_0101.html" style="color:white" target="_blank">&nbsp; Department</a></p>
+      <p class="bottom"><a href="http://www.hanyang.ac.kr/english/" style="color:white" target="_blank">&nbsp; University</a></p>
+	  <p class="both" style="margin-top: 5px"><center><img src="HYU.jpg" width="132" height="35" border="none" aligh="middle"></center></p>
+    </ul>
+    </nav>
+  <!-- end .sidebar1 --></div>
+  <article class="content">
+	<section>
+     <h3>Lab Members</h3>
+	 <hr size="1px" noshade align="center">   
+    </section>
+     
+     <section>
+     <h4>Graduate Students and Undergraduates: Current</h4>     
+      <p></p>
+      	  
+	  <p class="lab" style="font-size: 13px"><b>KiYeong Jeong</b>, PhD student (part-time), Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: BIM-based Cost Estimation</li>
+	  <li>Study period: Mar 2018 - present</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Junghwan Lee</b>, PhD student (part-time), Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Construction Worker Health Monitoring</li>	  
+	  <li>Study period: Mar 2020 - present</li>
+	  </ul>	           
+	  
+	  <p class="lab" style="font-size: 13px"><b>ChungBae Yoon</b>, PhD student (MS/PhD), Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Agent-based Learning and Simulation for Social Interaction and Collaboration</li>
+	  <li>Study period: Sep 2020 - present</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>JinHyeok Lee</b>, PhD student (MS/PhD), Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Virtual Reality-based Motion Study for Generative Simulation and Training</li>
+	  <li>Study period: Nov 2020 - present</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Hieu Truong Thi Le Pham</b>,  PhD student (MS/PhD), Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Natural Language Processing for Construction Documents</li> 
+	  <li>Study period: Apr 2021 - present</li>
+	  </ul>
+
+	  <p class="lab" style="font-size: 13px"><b>JiWook Kim</b>, PhD student (part-time), Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Construction Artificial Intelligence</li>	  
+      <li>Study period: Mar 2024 - present</li>
+	  </ul> 
+	  
+      <p class="lab" style="font-size: 13px"><b>Aram Seo</b>, MS student, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Artificial Intelligence for Signal Processing</li>
+	  <li>Study period: Sep 2023 - present</li>
+	  </ul>	  
+	  
+      <p class="lab" style="font-size: 13px"><b>Jooyeong Kwon</b>, MS student (part-time), Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Discrete Event Simulation for Operational Planning</li>
+	  <li>Study period: Sep 2023 - present</li>
+	  </ul>
+	  	  
+	  <p class="lab" style="font-size: 13px"><b>YoungHwan Jang</b>, undergraduate research intern, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Learning-based Remote Control and Robotics of an Excavator</li>
+	  <li>Study period: Feb 2024 - present</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Da-Hye Kim</b>, undergraduate research intern, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Large Language Model Application for Construction Accident Investigation</li>
+	  <li>Study period: March 2024 - present</li>
+	  </ul>
+		  	  	  
+	  <!---
+	  <h4>Postdoctoral Fellows</h4>
+	  <p></p>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Dr. Name</b>, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: topic</li> 
+      <li>Study period: xxx 202x - present</li>
+	  </ul>
+	  --->
+	  <hr size="1px" noshade align="center">
+	  <h4>Alumni</h4>
+	  
+	  <p></p>
+      <p class="lab" style="font-size: 13px"><b>Dr. Mahdi Rafieizonooz</b>, Postdoctoral Fellow, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Artificial Intelligence Applications for Civil Engineering</li>
+	  <li>Study period: Nov 2020 - Feb 2022</li>
+	  </ul>
+
+	  <p class="lab" style="font-size: 13px"><b>Bilawal Mahmood</b>, PhD, Hanyang University, 2021</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Reality Technology-based Visualization of Spatial and Temporal Information for Automated Monitoring of Onsite Resources in Construction</li> 
+      <li>Study period: May 2017 - Aug 2021 (MS/PhD), and Nov 2021 - Nov 2022 (Postdoctoral fellow)</li>
+	  <li>Post-graduation career: Postdoctoral fellow at the Korea National University of Transportation, Korea</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Sangjun Ahn</b>, PhD, University of Alberta, 2019<br>
+      <em>(Co-supervision with Dr. Al-Hussein)</em></p>
+	  <ul style="line-height: 18px">
+	  <li>Thesis: Logistics Framework for Modular and Offsite Construction for Residential Building</li>
+	  <li>Study period: Sep 2015 - Aug 2019</li>
+	  <li>Post-graduation career: PCL, Canada (current position: Research Officer at National Research Council (NRC), Canada)</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Alireza Golabchi</b>, PhD, University of Alberta, 2018<br>
+      <em>(Co-supervision with Dr. Simaan AbouRizk)</em></p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Integrated Productive and Ergonomic Workplace Design in Construction</li>
+	  <li>Study period: Jan 2014 - Apr 2018</li>
+	  <li>Post-graduation career: EWI Works, Canada</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Estacio Pereira</b>, PhD, University of Alberta, 2017<br>
+      <em>(Co-advisor; advisor Dr. Simaan AbouRizk)</em></p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: A Proactive Approach for Assessing the Safety Performance by using Safety-related Measures</li>
+	  <li>Study period: Sep 2013 - Aug 2017</li>
+	  <li>Post-graduation career: University of Nottingham, UK (current position: Assistant Professor at the University of Calgary, Canada)</li>
+      </ul>  
+	  
+      <p class="lab" style="font-size: 13px"><b>Gwan Choi</b>, MS, Hanyang University, 2024</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Dynamic Planning of Cut and Fill Operations for Earthwork Optimization using Reinforcement Learning</li>
+	  <li>Study period: Oct 2021 - Feb 2024</li>
+	  <li>Post-graduation career: Dohwa Engineering, Korea</li>
+	  </ul>
+	  
+      <p class="lab" style="font-size: 13px"><b>Jinpyo Hong</b>, MS, Hanyang University, 2024</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Estimation of Cycle Time using GPS for the Automated Productivity Monitoring of Earthwork Operations</li>
+	  <li>Study period: Oct 2019 - Feb 2024</li>
+	  <li>Post-graduation career: HD Hyundai XiteSolution, Korea</li>
+	  </ul>	  
+	  	  
+	  <p class="lab" style="font-size: 13px"><b>TaeYoul Lim</b>, MS, Hanyang University, 2023</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: 3D Point Cloud Data-based Deep Learning for Enrichment of BIM Interoperability</li>  
+	  <li>Study period: Nov 2020 - Feb 2023</li>
+	  <li>Post-graduation career: Dohwa Engineering, Korea</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>HyeonSeok Jo</b>, MS, Hanyang University, 2023</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Framework for Earthwork Monitoring and Simulation using Smartphone GPS Data and PointCloud</li>
+	  <li>Study period: Jul 2020 - Feb 2023</li>
+	  <li>Post-graduation career: Fieldy Lab Inc., Korea (Start-up)</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Seunggeon Lim</b>, MS, Hanyang University, 2023</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Synthetic Data Augmentation for Vision-based Excavator Pose Estimation using Generative Models</li>
+	  <li>Study period: Dec 2019 - Feb 2023</li><!-- Getting a job around Dec 2021-->
+	  <li>Post-graduation career: Alookso Corp., Korea</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Kangho Lee</b>, MS, Hanyang University, 2022</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Scaffolding Structure Acceleration-based Deep Learning Modeling for Fall-related behavior Monitoring</li>
+	  <li>Study period: Jan 2019 - Aug 2022</li> 
+	  <li>Post-graduation career: Deepingcompany Corp., Korea (current position: HITS, Korea) </li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>SungHwan Cho</b>, MS, Hanyang University, 2022</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Simulation and Automation for Tower Crane 3D Lift Planning Using Reinforcement Learning</li>
+	  <li>Study period: Feb 2019 - Aug 2022</li>
+	  <li>Post-graduation career: DL E&amp;C, Korea</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Hyewon Seo</b>, MS, Hanyang University, 2022</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Biomechanical Simulation Approach to Identification, Evaluation, and Intervention of Ergonomic Risk for Concrete Work</li>
+	  <li>Study period: Mar 2019 - Jun 2022</li>
+	  <li>Post-graduation career: PhD program at Purdue University, US</li>
+	  </ul>	  
+	  
+	  <p class="lab" style="font-size: 13px"><b>Jae Heo</b>, MS, Hanyang University, 2021</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Optimal Site Selection for Solar Photovoltaic Power Plants using Machine Learning Techniques and GIS-BIM Integration Approaches</li>
+	  <li>Study period: Aug 2017 - Jul 2021</li>
+	  <li>Post-graduation career: PhD program at Purdue University, US</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Juhyeon Bae</b>, MS, Hanyang University, 2020</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: A Vision-based Inspection Framework for Quality Assessment in Off-site Construction</li>
+	  <li>Study period: May 2017 - Aug 2020</li>
+	  <li>Post-graduation career: PhD program at University of Michigan - Ann Arbor, US (current position: Assistant Professor at San Diego State University, US)</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>JiWook Kim</b>, MS, Hanyang University, 2020</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Jobsite Condition-based Construction Manual Work Modeling for Activity Duration Estimation</li>	  
+      <li>Study period: Aug 2017 - Jun 2021</li>
+	  <li>Post-graduation career: Daewoo E&amp;C, Korea</li>
+	  </ul> 
+	  
+	  <p class="lab" style="font-size: 13px"><b>Xingzhou Guo</b>, MSc, University of Alberta, 2016</p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Vision-based Tracking of Worker Trajectories in Built Workplaces for Safety and Health Study</li>
+	  <li>Study period: Sep 2014 - Sep 2016</li>
+	  <li>Post-graduation career: PhD program at Purdue University, US</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Jihun Chang</b>, MSc, University of Alberta, 2016<br>
+      <em>(Co-advisor; advisor Dr. Simaan AbouRizk)</em></p>
+      <ul style="line-height: 18px">
+	  <li>Thesis: Effectiveness Evaluation Model for Frontline Worker Safety Intervention: An Exploratory Case Study of a Construction Prefabrication Company</li>
+	  <li>Study period: Sep 2014 - Jun 2016</li>
+	  <li>Post-graduation career: City of Edmonton, Canada</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>JiHyeon Park</b>, BS (undergraduate research intern), Hanyang University, 2024</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Digital Platform for Visualization of Discrete Event Simulation</li>
+	  <li>Study period: Jul 2021 - Dec 2023</li>
+	  <li>Post-graduation career: HD Hyundai XiteSolution, Korea</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Bumsoo Park</b>, BS (undergraduate research intern / research assistant), Hanyang University, 2022</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Wearable Sensing for Activity Monitoring</li>
+	  <li>Study period: Jul 2019 - Feb 2023</li><!-- to Aug 2022, Graduation: Feb 2024-->
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>JiHwan Kim</b>, BS (undergraduate research intern), Hanyang University, 2020</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Virtual Reality for Worker Training</li>
+	  <li>Study period: May 2018 - Dec 2019</li>
+	  <li>Post-graduation career: Graduate program in Computer Science at Hanyang University</li>
+ 	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>InBae Chung</b>, BS (undergraduate research intern), Hanyang University, 2019</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Motion Capture for Posture Analysis</li>
+	  <li>Study period: Sep 2018 - Dec 2019</li>
+	  <li>Post-graduation career: Graduate program at University of Texas at Austin, US</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>YoonHwa Jung</b>, BS (undergraduate research intern), Hanyang University, 2019</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Long-short term memory (LSTM)-Recurrent Neural Network (RNN) for solar energy forecasting</li>
+	  <li>Study period: Jan 2018 - Jun 2019</li>
+	  <li>Post-graduation career: Graduate program at University of Illinois at Urbana-Champaign, US</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>HeungJin Oh</b>, visiting researcher, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Construcion Automation</li>
+	  <li>Study period: Feb 2018 - Aug 2018</li>
+	  <li>Post-intern career: Graduate program at Georgia Tech, US (current position: Assistant Professor at Purdue University, US)</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Tommy Lee</b>, undergraduate research intern, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Reinforcement Learning for Mobile Crane Operations</li>
+	  <li>Study period: Jul 2022 - Dec 2022</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Yubin Kim</b>, undergraduate research intern, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: GIS-based Spatial Data Processing</li>
+	  <li>Study period: Mar 2022 - Dec 2022</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>ChaeYeon Lim</b>,  undergraduate research intern, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Construction Safety</li>			
+	  <li>Study period: Jul 2020 - May 2021</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>JunJae Choi</b>, undergraduate research intern, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Machine Learning Approach for Site Search of Solar Photovoltaic (PV) Facilities</li>
+	  <li>Study period: Aug 2019 - Jan 2020</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>ChoongHyun Lee</b>, undergraduate research intern, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: High Dimensional Spatial Data Processing (GIS-ML)</li>
+	  <li>Study period: Dec 2018 - Jun 2019</li>
+	  </ul>
+	  
+	  <p class="lab" style="font-size: 13px"><b>Jaesung Park</b>, undergraduate research intern, Hanyang University</p>
+      <ul style="line-height: 18px">
+	  <li>Topic: Machine Learning Application and Program Development</li>	  
+	  <li>Study period: May 2018 - Feb 2019</li>
+	  </ul>
+	  
+	  	  
+<!--
+    </section>
+    <section>
+      <h5>Alumni </h5>
+      <ul>
+      <li>Students</li>
+      </ul>
+
+
+    </section>
+-->
+    <!-- end .content --></article>
+  <footer>
+    <p align="center" style="color: #FFF; font-size:14px">&copy; 2013 SangUk Han</p>
+  </footer>
+  <!-- end .container --></div>
+</body>
+</html>

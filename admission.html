@@ -1,0 +1,272 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CIC-Lab@HYU</title>
+<link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
+<style type="text/css">
+
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background-color: #ececeb;
+	margin: 0;
+	padding: 0;
+	/* [disabled]color: #C39; */
+}
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+ul{
+	font-size:13px;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+	margin-top: 10px;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
+	margin-bottom: 0;
+	padding-right: 15px;
+	padding-left: 15px; /* adding the padding to the sides of the elements within the blocks, instead of the block elements themselves, gets rid of any box model math. A nested block with side padding can also be used as an alternate method. */
+}
+p.lab_head{
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px;
+}
+p.lab{
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px;
+	font-size: 13px;
+}
+p.article{
+    margin-top: 0;    
+    margin-left: 30px;
+    text-indent: -30px;
+    margin-bottom: 3px;
+    font-size: 12px;
+    line-height: 18px;
+}
+p.bottom{
+    border-bottom: 1px solid #FFF;  /* this creates the button separation */
+    border-top: 0px solid #FFF;  /* this creates the button separation */
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+p.both{
+    border-bottom: 1px solid #FFF;  /* this creates the button separation */
+    border-top: 1px solid #FFF;  /* this creates the button separation */
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+	border: none;
+}
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link {
+	color: #42413C; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
+}
+a:visited {
+	color: #6E6C64;
+}
+a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	text-decoration: none;
+}
+/* ~~ This fixed width container surrounds all other blocks ~~ */
+.container {
+	width: 960px;
+	background-color: #FFFFFF;
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+/* ~~ The header is not given a width. It will extend the full width of your layout. ~~ */
+header {
+	font: 150%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	background-color: #022E80;
+	background-image: url("header_cic.jpg");
+	background-size: cover;
+	height: 40px;
+	padding-top: 6px;
+	padding-right: 0px;
+	padding-bottom: 4px;
+	padding-left: 0px;
+	position: relative;
+}
+/* ~~ These are the columns for the layout. ~~ 
+
+1) Padding is only placed on the top and/or bottom of the block elements. The elements within these blocks have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the block itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the block element and place a second block element within it with no width and the padding necessary for your design.
+
+2) No margin has been given to the columns since they are all floated. If you must add margin, avoid placing it on the side you're floating toward (for example: a right margin on a block set to float right). Many times, padding can be used instead. For blocks where this rule must be broken, you should add a "display:inline" declaration to the block element's rule to tame a bug where some versions of Internet Explorer double the margin.
+
+3) Since classes can be used multiple times in a document (and an element can also have multiple classes applied), the columns have been assigned class names instead of IDs. For example, two sidebar blocks could be stacked if necessary. These can very easily be changed to IDs if that's your preference, as long as you'll only be using them once per document.
+
+4) If you prefer your nav on the left instead of the right, simply float these columns the opposite direction (all left instead of all right) and they'll render in reverse order. There's no need to move the blocks around in the HTML source.
+
+*/
+.sidebar1 {
+	float: left;
+	width: 150px;
+	background-color: #FFFFFF;
+	padding-bottom: 10px;
+	border-color:#FFF;
+}
+.content {
+	padding: 10px 0;
+	width: 800px;
+	float: right;
+}
+
+/* ~~ This grouped selector gives the lists in the .content area space ~~ */
+.content ul, .content ol {
+	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+}
+
+/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
+nav ul{
+	list-style: none; /* this removes the list marker */
+	border-top: 1px solid #FFF; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
+	margin-bottom: 15px; /* this creates the space between the navigation on the content below */
+}
+nav li {
+	border-bottom: 1px solid #FFF; /* this creates the button separation */
+}
+nav a, nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
+	padding: 5px 5px 5px 15px;
+	display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
+	width: 130px;  /*this width makes the entire button clickable for IE6. If you don't need to support IE6, it can be removed. Calculate the proper width by subtracting the padding on this link from the width of your sidebar container. */
+	text-decoration: none;
+	background-color: #5197FF;
+	background-image: url("sidebar1.jpg");
+}
+nav a:hover, nav a:active, nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+	background-color: #1573FF;
+	color: #FFF;
+	background-image: url("sidebar2.jpg");
+}
+
+/* ~~ The footer ~~ */
+footer {
+	position: relative;/* this gives IE6 hasLayout to properly clear */
+	clear: both;
+	background-color: #00366C;
+	vertical-align: middle;
+	height: 25px;	
+}
+
+/*HTML 5 support - Sets new HTML 5 tags to display:block so browsers know how to render the tags properly. */
+header, section, footer, aside, article, figure {
+	display: block;
+}
+
+</style><!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]--></head>
+
+<body>
+
+<div class="container">
+  <header>
+    <p class="lab_head"> <strong style="color:white; font-size:20px"><capital style="font-size:23px">C</capital>onstruction <capital style="font-size:23px">I</capital>nformatics and <capital style="font-size:23px">C</capital>omputing <capital style="font-size:23px">L</capital>ab</strong></p>
+  </header>
+  <div class="sidebar1">
+  <nav>
+    <ul>    
+      <p class="bottom"><a href="http://civil.hanyang.ac.kr/cem" style="color:white">&nbsp; Home</a></p>
+
+      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
+      &nbsp; Members
+      </a><div style="DISPLAY: block">
+      <a href="http://civil.hanyang.ac.kr/cem/advisor.html" style="color:white">&nbsp; &raquo; Advisor</a>
+      <a href="http://civil.hanyang.ac.kr/cem/members.html" style="color:white">&nbsp; &raquo; Lab Members</a>
+      </div>     
+
+      <p class="both"><a href="http://civil.hanyang.ac.kr/cem/research.html" style="color:white">&nbsp; Research Projects</a></li></p>
+
+      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
+      &nbsp; Publications
+      </a><div style="DISPLAY: block">
+      <a href="http://civil.hanyang.ac.kr/cem/publications.html" style="color:white">&nbsp; &raquo; International</a>
+      <a href="http://civil.hanyang.ac.kr/cem/publications_domestic.html" style="color:white">&nbsp; &raquo; Domestic (KOR)</a>
+      </div>
+
+      <p class="both"><a href="http://civil.hanyang.ac.kr/cem/courses.html" style="color:white">&nbsp; Courses</a></p>
+	  <p class="bottom"><a href="http://civil.hanyang.ac.kr/cem/admission.html" style="color:white">&nbsp; Admission</a></p>
+      <li style="font-size:5px">&nbsp;</li>
+      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Quick Links</b></li>
+      <p class="bottom"><a href="http://civil.hanyang.ac.kr/eng/class_0101.html" style="color:white" target="_blank">&nbsp; Department</a></p>
+      <p class="bottom"><a href="http://www.hanyang.ac.kr/english/" style="color:white" target="_blank">&nbsp; University</a></p>
+	  <p class="both" style="margin-top: 5px"><center><img src="HYU.jpg" width="132" height="35" border="none" aligh="middle"></center></p>
+    </ul>
+    </nav>
+  <!-- end .sidebar1 --></div>
+  <article class="content">
+	<section>
+     <h3>Graduate Student Recruitment</h3>
+	 <hr size="1px" noshade align="center">
+    </section>
+     
+     <section>
+     <h5>Information for Prospective Students</h5>
+      <p></p>
+	  <p class="lab" style="text-align: justify">The CIC lab recruits graduate students with priority given to <b>PhD students</b>, and <b>postdoc fellows</b> in the area of <b>construction engineering and management</b> in the Department of Civil and Environmental Engineering at Hanyang University. Students with a strong background in programming are always welcome. Applicants are encouraged to contact me (sanguk@hanyang.ac.kr) early in order to meet the application deadline and to secure funding in advance;<font color="#6E6E6E"> Please kindly understand and excuse that I cannot reply to every email due to a large number of emails I receive</font>.
+	  <br><br>Research interests include but not limited to: 
+	  </p>
+	  
+	  <ul style="line-height: 18px">
+      <li style="line-height: 20px;">Construction Health and Safety</li>
+	  <li style="line-height: 20px;">Computer Vision, Machine Learning, and Robotics</li>
+	  <li style="line-height: 20px;">Data Sensing and Visualization (Digital Twin) --- <b>ongoing project</b></li>
+	  <li style="line-height: 20px;">Virtual Reality (VR) and Augmented Reality (AR)</li>
+	  <li style="line-height: 20px;">Building Information Modeling (BIM) and Geographic Information System (GIS)</li>
+	  <li style="line-height: 20px;">System Dynamics and Discrete Event Simulation</li>
+	  </ul>
+
+      <img src="wordcloud.png" style="display: block; margin: 0 auto;">       
+	  <p class="lab" style="display: block; text-align: center">[Word Cloud: Research keywords extracted from selected papers]</p>
+	  
+	  <p class="lab" style="text-align: justify"><br>The application procedures and schedules can be found on <a href="http://www.grad.hanyang.ac.kr" style="color:black"><b>http://www.grad.hanyang.ac.kr</b></a> for a domestic student or <a href="http://study.hanyang.ac.kr" style="color:black"><b>http://study.hanyang.ac.kr</b></a> for an international student. Please carefully check the application deadline before you contact me. For an international student, the deadlines for Spring and Fall semesters, as an example, can be early October and mid April, respectively.</p>
+	  
+	  <hr size="1px" noshade align="center">
+	  <h5>Undergraduate Research Internship</h5>
+	   <p></p>
+	   <p class="lab" style="text-align: justify">The CIC lab opens an internship position for an undergraduate at Hanyang University. Applicants are encouraged to read our papers in advance and understand what research we have been doing. That will be the thing you will most likely do when you join the lab. If you are interested in building your future career in the research area, please do not wait until you graduate and feel free to contact me (sanguk@hanyang.ac.kr) as soon as possible. Students with a strong background in programming are always welcome, but not necessarily required or expected. Your interest in computing and passion to learn is only required.
+	   <br><br>The following are the common subjects our students generally study when they join the lab: 
+	  </p>
+	  
+	  <ul style="line-height: 18px">
+      <li style="line-height: 20px;">Python</li>
+	  <li style="line-height: 20px;">Neural Network</li>
+	  <li style="line-height: 20px;">Deep Learning (e.g., convolutional neural network, recurrent neural network, reinforcement learning) </li>
+	  <li style="line-height: 20px;">Any subject of your interest (e.g., BIM, GIS, Unity, Simulation)</li>
+	  </ul>
+	  
+	  <p class="lab" style="text-align: justify">If you have any inquiry, you can also contact our current students at #515 Jaesung Civil Engineering Building. A lab tour may be available upon request.</p>
+	  
+       </p>
+    </section>
+<!--
+    <section>
+      <h5>Alumni </h5>
+      <ul>
+      <li>Students</li>
+      </ul>
+
+
+    </section>
+-->
+    <!-- end .content --></article>
+  <footer>
+    <p align="center" style="color: #FFF; font-size:14px">&copy; 2013 SangUk Han</p>
+  </footer>
+  <!-- end .container --></div>
+</body>
+</html>
