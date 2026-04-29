@@ -492,6 +492,22 @@ footer {
 </div>
 <script>
 function toggleNav(el){el.classList.toggle('open');var c=el.nextElementSibling;if(c)c.classList.toggle('hidden');}
+function toggleNav(el) {
+  el.classList.toggle("open");
+  var children = el.nextElementSibling;
+  if (children) children.classList.toggle("hidden");
+}
+document.addEventListener("DOMContentLoaded", function() {
+  const links = document.querySelectorAll(".nav-link");
+  const current = window.location.pathname.split("/").pop();
+
+  links.forEach(link => {
+    const href = link.getAttribute("href");
+    if (href === current) {
+      link.classList.add("active");
+    }
+  });
+});
 </script>
 </body>
 </html>
