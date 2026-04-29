@@ -1,352 +1,542 @@
-﻿<!doctype html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<title>CIC-Lab@HYU</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
-<style type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #022E80;
+  --navy-dark: #011d52;
+  --navy-light: #1a4fa8;
+  --accent: #4A8FE7;
+  --accent-light: #e8f0fd;
+  --text: #1a1a2e;
+  --text-muted: #5a6070;
+  --bg: #f7f8fc;
+  --white: #ffffff;
+  --border: #e2e6f0;
+  --sidebar-w: 220px;
+  --radius: 10px;
+}
 
 body {
-	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	background-color: #ececeb;
-	margin: 0;
-	padding: 0;
-	/* [disabled]color: #C39; */
-}
-/* ~~ Element/tag selectors ~~ */
-ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
-	padding: 0;
-	margin: 0;
-}
-ul{
-	font-size:13px;
-}
-h1, h2, h3, h4, h5, h6, p{
-	margin-top: 10px;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	margin-bottom: 0;
-	padding-right: 15px;
-	padding-left: 15px; /* adding the padding to the sides of the elements within the blocks, instead of the block elements themselves, gets rid of any box model math. A nested block with side padding can also be used as an alternate method. */
-}
-p.lab_head{
-	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	padding-right: 15px;
-	padding-left: 15px;
-}
-p.lab{
-	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	padding-right: 15px;
-	padding-left: 15px;
-	font-size: 12px;
-}
-p.article{
-    margin-top: 0;    
-    margin-left: 30px;
-    text-indent: -30px;
-    margin-bottom: 3px;
-    font-size: 12px;
-    line-height: 18px;
-}
-p.bottom{
-    border-bottom: 1px solid #FFF;  /* this creates the button separation */
-    border-top: 0px solid #FFF;  /* this creates the button separation */
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-p.both{
-    border-bottom: 1px solid #FFF;  /* this creates the button separation */
-    border-top: 1px solid #FFF;  /* this creates the button separation */
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0;
-    margin-bottom: 0;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
 }
 
-a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
-	border: none;
-}
-/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
-a:link {
-	color: #42413C; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
-}
-a:visited {
-	color: #6E6C64;
-}
-a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
-	text-decoration: none;
-}
-/* ~~ This fixed width container surrounds all other blocks ~~ */
-.container {
-	width: 960px;
-	background-color: #FFFFFF;
-	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
-}
-/* ~~ The header is not given a width. It will extend the full width of your layout. ~~ */
-header {
-	font: 150%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	vertical-align: middle;
-	background-color: #022E80;
-	background-image: url("header_cic.jpg");
-	background-size: cover;
-	height: 40px;
-	padding-top: 6px;
-	padding-right: 0px;
-	padding-bottom: 4px;
-	padding-left: 0px;
-	position: relative;
-}
-/* ~~ These are the columns for the layout. ~~ 
+a { color: var(--navy); text-decoration: none; }
+a:hover { color: var(--accent); }
 
-1) Padding is only placed on the top and/or bottom of the block elements. The elements within these blocks have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the block itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the block element and place a second block element within it with no width and the padding necessary for your design.
-
-2) No margin has been given to the columns since they are all floated. If you must add margin, avoid placing it on the side you're floating toward (for example: a right margin on a block set to float right). Many times, padding can be used instead. For blocks where this rule must be broken, you should add a "display:inline" declaration to the block element's rule to tame a bug where some versions of Internet Explorer double the margin.
-
-3) Since classes can be used multiple times in a document (and an element can also have multiple classes applied), the columns have been assigned class names instead of IDs. For example, two sidebar blocks could be stacked if necessary. These can very easily be changed to IDs if that's your preference, as long as you'll only be using them once per document.
-
-4) If you prefer your nav on the left instead of the right, simply float these columns the opposite direction (all left instead of all right) and they'll render in reverse order. There's no need to move the blocks around in the HTML source.
-
-*/
-.sidebar1 {
-	float: left;
-	width: 150px;
-	background-color: #FFFFFF;
-	padding-bottom: 10px;
-	border-color:#FFF;
-}
-.content {
-	padding: 10px 0;
-	width: 800px;
-	float: right;
+/* ── LAYOUT ── */
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-/* ~~ This grouped selector gives the lists in the .content area space ~~ */
-.content ul, .content ol {
-	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--navy);
+  background-image: url("header.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(2,46,128,0.18);
+  position: relative;
 }
 
-/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
-nav ul{
-	list-style: none; /* this removes the list marker */
-	border-top: 1px solid #FFF; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
-	margin-bottom: 15px; /* this creates the space between the navigation on the content below */
-}
-nav li {
-	border-bottom: 1px solid #FFF; /* this creates the button separation */
-}
-nav a, nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
-	padding: 5px 5px 5px 15px;
-	display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
-	width: 130px;  /*this width makes the entire button clickable for IE6. If you don't need to support IE6, it can be removed. Calculate the proper width by subtracting the padding on this link from the width of your sidebar container. */
-	text-decoration: none;
-	background-color: #5197FF;
-	background-image: url("sidebar1.jpg");
-}
-nav a:hover, nav a:active, nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-	background-color: #1573FF;
-	color: #FFF;
-	background-image: url("sidebar2.jpg");
+.topbar-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 30px;
+  color: #fff;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+  text-align: center;
 }
 
-/* ~~ The footer ~~ */
+.topbar-title span {
+  color: #ffffff;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.topbar-logo {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px;
+  width: auto;
+  opacity: 0.92;
+}
+
+/* ── BODY LAYOUT ── */
+.body-layout {
+  display: flex;
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px 16px;
+  gap: 24px;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+}
+
+.sidebar-inner {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+
+.nav-section {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.nav-section:last-child { border-bottom: none; }
+
+.nav-section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 18px 4px;
+}
+
+.nav-marker {
+  display: inline-block;
+  width: 4px;
+  height: 14px;
+  background: #1F497D;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  font-size: 13.5px;
+  color: var(--text);
+  transition: background 0.15s, color 0.15s;
+  gap: 8px;
+}
+.nav-link:hover, .nav-link.active {
+  background: var(--accent-light);
+  color: var(--navy);
+}
+.nav-link.active { font-weight: 500; }
+
+.nav-sub { padding-left: 14px; }
+.nav-sub .nav-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 6px 18px 6px 26px;
+}
+.nav-sub .nav-link::before {
+  content: "›";
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.nav-toggle {
+  cursor: pointer;
+  user-select: none;
+}
+.nav-toggle-icon {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.nav-toggle.open .nav-toggle-icon { transform: rotate(180deg); }
+.nav-children { display: block; }
+.nav-children.hidden { display: none; }
+
+.sidebar-logo {
+  padding: 14px 18px;
+  display: flex;
+  justify-content: center;
+}
+.sidebar-logo img { width: 140px; opacity: 0.85; }
+
+.translate-wrap {
+  padding: 10px 14px 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── MAIN ── */
+.main { flex: 1; min-width: 0; }
+
+/* ── CARD ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-light);
+}
+
+/* ── COURSE ITEMS ── */
+.section-divider {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--navy);
+  margin: 24px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.section-divider:first-of-type { margin-top: 0; }
+
+.course-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.course-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.course-title {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.course-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11.5px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+.tag-ug      { background: #e8f0fd; color: #1a4fa8; }
+.tag-g       { background: #e8fdf0; color: #0f6e56; }
+.tag-offered { background: #fdf3e8; color: #854f0b; }
+
+.course-desc {
+  font-size: 13.5px;
+  line-height: 1.72;
+  color: var(--text);
+}
+
+.course-extra {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  line-height: 1.6;
+}
+
+/* ── FOOTER ── */
 footer {
-	position: relative;/* this gives IE6 hasLayout to properly clear */
-	clear: both;
-	background-color: #00366C;
-	vertical-align: middle;
-	height: 25px;	
+  background: var(--navy-dark);
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  font-size: 13px;
+  padding: 18px;
 }
 
-/*HTML 5 support - Sets new HTML 5 tags to display:block so browsers know how to render the tags properly. */
-header, section, footer, aside, article, figure {
-	display: block;
+/* ── RESPONSIVE ── */
+@media (max-width: 760px) {
+  .body-layout { flex-direction: column; padding: 12px; }
+  .sidebar { width: 100%; }
+  .sidebar-inner { position: static; }
+  .topbar-title { font-size: 17px; }
 }
+</style>
 
-</style><!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]--></head>
+<title>Courses – CIC Lab</title>
+</head>
 
 <body>
+<div class="wrapper">
 
-<div class="container">
-  <header>
-    <p class="lab_head"> <strong style="color:white; font-size:20px"><capital style="font-size:23px">C</capital>onstruction <capital style="font-size:23px">I</capital>nformatics and <capital style="font-size:23px">C</capital>omputing <capital style="font-size:23px">L</capital>ab</strong></p>
-  </header>
-  <div class="sidebar1">
-  <nav>
-    <ul>    
-      <p class="bottom"><a href="index.html" style="color:white">&nbsp; Home</a></p>
+  <!-- TOP NAV BAR -->
+  <div class="topbar notranslate">
+    <span class="topbar-title">
+      <span>C</span>onstruction <span>I</span>nformatics and <span>C</span>omputing <span>L</span>ab
+    </span>
+    <img src="CIC_logo.png" class="topbar-logo" alt="CIC Logo">
+  </div>
 
-      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
-      &nbsp; Members
-      </a><div style="DISPLAY: block">
-      <a href="advisor.html" style="color:white">&nbsp; &raquo; Advisor</a>
-      <a href="members.html" style="color:white">&nbsp; &raquo; Lab Members</a>
-      </div>     
+  <!-- BODY -->
+  <div class="body-layout">
 
-      <p class="both"><a href="research.html" style="color:white">&nbsp; Research Projects</a></li></p>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-inner">
 
-      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
-      &nbsp; Publications
-      </a><div style="DISPLAY: block">
-      <a href="publications.html" style="color:white">&nbsp; &raquo; International</a>
-      <a href="publications_domestic.html" style="color:white">&nbsp; &raquo; Domestic (KOR)</a>
+        <div class="nav-section notranslate">
+          <a href="index.html" class="nav-link active"><span class="nav-marker"></span> Home</a>
+        </div>
+
+        <div class="nav-section notranslate">
+          <div class="nav-link nav-toggle open" onclick="toggleNav(this)">
+            <span class="nav-marker"></span> Members <span class="nav-toggle-icon">▾</span>
+          </div>
+          <div class="nav-children nav-sub">
+            <a href="advisor.html" class="nav-link">Advisor</a>
+            <a href="members.html" class="nav-link">Lab Members</a>
+          </div>
+        </div>
+
+        <div class="nav-section notranslate">
+          <a href="research.html" class="nav-link"><span class="nav-marker"></span> Research Projects</a>
+        </div>
+
+        <div class="nav-section notranslate">
+          <div class="nav-link nav-toggle open" onclick="toggleNav(this)">
+            <span class="nav-marker"></span> Publications <span class="nav-toggle-icon">▾</span>
+          </div>
+          <div class="nav-children nav-sub">
+            <a href="publications.html" class="nav-link">International</a>
+            <a href="publications_domestic.html" class="nav-link">Domestic (KOR)</a>
+          </div>
+        </div>
+
+        <div class="nav-section notranslate">
+          <a href="courses.html" class="nav-link"><span class="nav-marker"></span> Courses</a>
+          <a href="admission.html" class="nav-link"><span class="nav-marker"></span> Admission</a>
+        </div>
+
+        <div class="nav-section notranslate">
+          <div class="nav-section-label">Quick Links</div>
+          <a href="https://civil.hanyang.ac.kr/" class="nav-link" target="_blank" rel="noopener noreferrer">Department ↗</a>
+          <a href="https://www.hanyang.ac.kr/web/www/home" class="nav-link" target="_blank" rel="noopener noreferrer">University ↗</a>
+        </div>
+
+        <div class="sidebar-logo">
+          <img src="HYU.jpg" alt="Hanyang University">
+        </div>
+
+        <div class="translate-wrap notranslate">
+          <div id="google_translate_element"></div>
+          <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+          <script>
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement(
+                {pageLanguage: 'en', includedLanguages: 'ko,en', layout: google.translate.TranslateElement.InlineLayout.VERTICAL},
+                'google_translate_element'
+              );
+            }
+          </script>
+          <style>.goog-te-banner-frame.skiptranslate { display: none !important; }</style>
+        </div>
+
       </div>
+    </aside>
 
-      <p class="both"><a href="courses.html" style="color:white">&nbsp; Courses</a></p>
-	  <p class="bottom"><a href="admission.html" style="color:white">&nbsp; Admission</a></p>
-      <li style="font-size:5px">&nbsp;</li>
-      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Quick Links</b></li>
-      <p class="bottom"><a href="https://civil.hanyang.ac.kr/" style="color:white" target="_blank">&nbsp; Department</a></p>
-      <p class="bottom"><a href="https://www.hanyang.ac.kr/web/www/home" style="color:white" target="_blank">&nbsp; University</a></p>
-	  <p class="both" style="margin-top: 5px"><center><img src="HYU.jpg" width="132" height="35" border="none" aligh="middle"></center></p>
-    </ul>
-    </nav>
-  <!-- end .sidebar1 --></div>
-  <article class="content">
-	<section>
-     <h3>Teaching: Courses</h3>
-	 <hr size="1px" noshade align="center">
-    </section>
-     
-    <section>
-	<p></p>
-	<!--   <p class="lab"><b><em>Hanyang University</em></b></p>   
-	<h5><font color="#6E6E6E">Hanyang University</font></h5>   -->	
-	<h5>CIE2071 Construction Geospatial Informatics and Practice</h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Undergraduate (Hanyang University)</li>
-	  <li>Offered in: Spring 2017-present</li>
-      <li>Description: Comprehensive principles and advanced techniques of geospatial informatics associated with the design and construction of civil infrastructure.</li>
-      </ul>
-    </section>
-	<section>
-	<h5>CIE4081 Construction Information Modeling</h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Undergraduate (Hanyang University)</li>
-	  <li>Offered in: Fall 2019-present</li>
-      <li>Description: This course focuses on characteristics and basics of construction information and advanced techniques of construction information modeling (e.g., Building Information Modeling) for the design, construction, and operations of civil infrastructure.</li>
-      </ul>
-    </section>
-    <section>
-	<h5>CIV9071 Construction Data Informatics</h5> <!--<span style="font-weight:normal">, Spring 2018</span>-->
-      <ul style="line-height: 18px">
-      <li>Level: Graduate (Hanyang University)</li>
-	  <li>Offered in: Spring 2018-present (biennial)</li>
-      <li>Description: This course covers principles of data modeling and analytical techniques for construction management by exploring various applications with data collected during a construction project.</li>      
-	  <li>External material</li>
-	  “This class is supported by <a href="https://www.datacamp.com/home" target="_blank"> DataCamp</a>, the most intuitive learning platform for data science. Learn R, Python and SQL the way you learn best through a combination of short expert videos and hands-on-the-keyboard exercises. Take over 100+ courses by expert instructors on topics such as importing data, data visualization or machine learning and learn faster through immediate and personalised feedback on every exercise.”
-	  </ul>
-    </section>
-	<section>
-	<h5>CIV9072 Advanced Construction Safety Management</h5> <!--<span style="font-weight:normal">, Spring 2018</span>-->
-      <ul style="line-height: 18px">
-      <li>Level: Graduate (Hanyang University)</li>
-	  <li>Offered in: Fall 2018-present (biennial)</li>
-      <li>Description: This course covers principles of construction safety management by exploring the use of relevant data collected from construction jobsites. The lectures are focused on the basics and applications of sensing and modeling techniques (e.g., machine learning) for the analysis of human motions and workplace environments in order to understand emerging methods for safety enhancement.</li>      
-	  </ul>
-    </section>
-	<section>
-	<h5>CIV9073 Construction Operations Management and Simulation</h5> <!--<span style="font-weight:normal">, Spring 2018</span>-->
-      <ul style="line-height: 18px">
-      <li>Level: Graduate (Hanyang University)</li>
-	  <li>Offered in: Spring 2019-present (biennial)</li>
-      <li>Description: This course covers principles of earthwork equipment and operations from perspectives of scheduling, operational efficiency, and cost effectiveness. Examples and case studies are used to provide students with insight into the challenges and uncertainties in practice as well as hands-on experience on relevant skills and techniques.</li>      
-	  </ul>
-    </section>
-	<section>
-	<h5>CIV8059 Construction Cost Analysis</h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Graduate (Hanyang University)</li>
-	  <li>Offered in: Fall 2016, and Fall 2019-present (biennial)</li>
-      <li>Description: Knowledge, techniques and skills to formulate and apply a scientific, integrative, and systematic approach to detailed cost estimating and project planning and control.</li>
-      </ul>
-    </section>
-	<section>
-	<h5>GEN1031 Creative Computing for Engineers</h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Undergraduate (Hanyang University)</li>
-	  <li>Offered in: Fall 2018</li>
-      <li>Description: This course covers the concept and applications of computer programming including the programming fundamentals and the implementation of basic data analysis techniques (programming language: Python).</li>
-      </ul>
-    </section>
-	<section>
-	<h5>CME9001 Value Engineering and Life Cycle Cost</h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Graduate (Hanyang University)</li>
-	  <li>Offered in: Fall 2017</li>
-      <li>Description: This course covers the principles of life-cycle cost analysis and value engineering for the decision making involved in construction projects.</li>
-      </ul>
-    </section>
-	<section>
-	<h5>CIV9041 Eco-Friendly Construction Process and Automation</h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Graduate (Hanyang University)</li>
-	  <li>Offered in: Fall 2017</li>
-      <li>Description: This course covers principles of earthwork equipment and operations from perspectives of operational efficiency, cost effectiveness, and environmental impact. Examples and case studies are used to provide students with insight into the challenges and uncertainties in practice as well as hands-on experience on relevant skills and techniques.</li>
-      </ul>
-    </section>
-	<section>
-	<h5>CIV9055 CEE Thesis and Journal Writing in English</h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Graduate (Hanyang University)</li>
-	  <li>Offered in: Spring 2017</li>
-      <li>Description: Principles, process, and types of engineering research for thesis and journal writing, covering research process, literature review, research question and problem formulation, research design and method, result validation, and presentation.</li>
-      </ul>
-    </section>	
-	<section>
-	<h5>CIE3033 Construction Economy</h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Undergraduate (Hanyang University)</li>
-	  <li>Offered in: Fall 2016-2017</li>
-      <li>Description: Principles required for the systematic evaluation of economic performance in relation to the design, construction, and operation of civil infrastructure.</li>
-      </ul>
-    </section>
-	
-	 <section>
-	 <p></p>
-	 <!--   <p class="lab"><b><em>University of Alberta</em></b></p>
-	 <h5><font color="#6E6E6E">University of Alberta</font></h5>   -->
-      <h5>CIVE608 Construction Engineering <span style="font-weight:normal; font-size:11px"><em>(co-instructor)</em></span></h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Graduate (University of Alberta)</li>
-	  <li>Offered in: Winter 2016</li>
-      <li>Description: Principles of building, heavy and bridge construction; wood and formwork design, stability during construction, economics of equipment selection, movement of material on construction sites, safety, and constructability issues.</li>
-      </ul>
-    </section> 
-	<section> 
-	<h5>CIVE709 Research Methods</h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Graduate (University of Alberta)</li>
-	  <li>Offered in: Fall 2015</li>
-      <li>Description: Principle of research design and methods, scientific writing, types of research, research statements, proposal and paper writing, data collection and analysis, and ethics considerations.</li>
-      </ul>
-    </section> 
-	<section>
-      <h5>CIVE409 Construction Methods</h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Undergraduate (University of Alberta)</li>
-	  <li>Offered in: Winter 2014-2016</li>
-      <li>Description: Principles of building, heavy and industrial construction, formwork and falsework design, economics of equipment selection, crane operations, earthwork planning, safety, and constructability issues.</li>
-      </ul>
-    </section>    
-    <section>
-      <h5>CIVE709 Best Practice: Construction Project Management <span style="font-weight:normal; font-size:11px"><em>(co-instructor)</em></span></h5>
-      <ul style="line-height: 18px">
-	  <li>Level: Graduate (University of Alberta)</li>
-	  <li>Offered in: Fall 2013-2014</li>
-      <li>Description: Construction Industry Institute (CII) Best Practice. Topics include zero accident techniques, front end planning and alignment, constructability, quality management, lessons learned, change management, risk assessment, project controls, and benchmarking and metrics.</li>
-      </ul>
-    </section>
-    
-    <!-- end .content --></article>
-  <footer>
-    <p align="center" style="color: #FFF; font-size:14px">&copy; 2013 SangUk Han</p>
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+      <div class="card">
+        <h2>Teaching: Courses at Hanyang University</h2>
+        
+        <div class="course-item">
+          <div class="course-title">CIE2071 Construction Geospatial Informatics and Practice</div>
+          <div class="course-meta">
+            <span class="tag tag-ug">Undergraduate</span>
+            <span class="tag tag-offered">Spring 2017–present</span>
+          </div>
+          <p class="course-desc">Comprehensive principles and advanced techniques of geospatial informatics associated with the design and construction of civil infrastructure.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIE4081 Construction Information Modeling</div>
+          <div class="course-meta">
+            <span class="tag tag-ug">Undergraduate</span>
+            <span class="tag tag-offered">Fall 2019–present</span>
+          </div>
+          <p class="course-desc">This course focuses on characteristics and basics of construction information and advanced techniques of construction information modeling (e.g., Building Information Modeling) for the design, construction, and operations of civil infrastructure.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIV9071 Construction Data Informatics</div>
+          <div class="course-meta">
+            <span class="tag tag-g">Graduate</span>
+            <span class="tag tag-offered">Spring 2018–present (biennial)</span>
+          </div>
+          <p class="course-desc">This course covers principles of data modeling and analytical techniques for construction management by exploring various applications with data collected during a construction project.</p>
+          <div class="course-extra">External material: "This class is supported by <a href="https://www.datacamp.com/home" target="_blank">DataCamp</a>, the most intuitive learning platform for data science. Learn R, Python and SQL the way you learn best through a combination of short expert videos and hands-on-the-keyboard exercises. Take over 100+ courses by expert instructors on topics such as importing data, data visualization or machine learning and learn faster through immediate and personalised feedback on every exercise."</div>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIV9072 Advanced Construction Safety Management</div>
+          <div class="course-meta">
+            <span class="tag tag-g">Graduate</span>
+            <span class="tag tag-offered">Fall 2018–present (biennial)</span>
+          </div>
+          <p class="course-desc">This course covers principles of construction safety management by exploring the use of relevant data collected from construction jobsites. The lectures are focused on the basics and applications of sensing and modeling techniques (e.g., machine learning) for the analysis of human motions and workplace environments in order to understand emerging methods for safety enhancement.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIV9073 Construction Operations Management and Simulation</div>
+          <div class="course-meta">
+            <span class="tag tag-g">Graduate</span>
+            <span class="tag tag-offered">Spring 2019–present (biennial)</span>
+          </div>
+          <p class="course-desc">This course covers principles of earthwork equipment and operations from perspectives of scheduling, operational efficiency, and cost effectiveness. Examples and case studies are used to provide students with insight into the challenges and uncertainties in practice as well as hands-on experience on relevant skills and techniques.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIV8059 Construction Cost Analysis</div>
+          <div class="course-meta">
+            <span class="tag tag-g">Graduate</span>
+            <span class="tag tag-offered">Fall 2016, and Fall 2019–present (biennial)</span>
+          </div>
+          <p class="course-desc">Knowledge, techniques and skills to formulate and apply a scientific, integrative, and systematic approach to detailed cost estimating and project planning and control.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">GEN1031 Creative Computing for Engineers</div>
+          <div class="course-meta">
+            <span class="tag tag-ug">Undergraduate</span>
+            <span class="tag tag-offered">Fall 2018</span>
+          </div>
+          <p class="course-desc">This course covers the concept and applications of computer programming including the programming fundamentals and the implementation of basic data analysis techniques (programming language: Python).</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CME9001 Value Engineering and Life Cycle Cost</div>
+          <div class="course-meta">
+            <span class="tag tag-g">Graduate</span>
+            <span class="tag tag-offered">Fall 2017</span>
+          </div>
+          <p class="course-desc">This course covers the principles of life-cycle cost analysis and value engineering for the decision making involved in construction projects.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIV9041 Eco-Friendly Construction Process and Automation</div>
+          <div class="course-meta">
+            <span class="tag tag-g">Graduate</span>
+            <span class="tag tag-offered">Fall 2017</span>
+          </div>
+          <p class="course-desc">This course covers principles of earthwork equipment and operations from perspectives of operational efficiency, cost effectiveness, and environmental impact. Examples and case studies are used to provide students with insight into the challenges and uncertainties in practice as well as hands-on experience on relevant skills and techniques.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIV9055 CEE Thesis and Journal Writing in English</div>
+          <div class="course-meta">
+            <span class="tag tag-g">Graduate</span>
+            <span class="tag tag-offered">Spring 2017</span>
+          </div>
+          <p class="course-desc">Principles, process, and types of engineering research for thesis and journal writing, covering research process, literature review, research question and problem formulation, research design and method, result validation, and presentation.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIE3033 Construction Economy</div>
+          <div class="course-meta">
+            <span class="tag tag-ug">Undergraduate</span>
+            <span class="tag tag-offered">Fall 2016–2017</span>
+          </div>
+          <p class="course-desc">Principles required for the systematic evaluation of economic performance in relation to the design, construction, and operation of civil infrastructure.</p>
+        </div>
+	    </div>
+		
+		<div class="card">
+        <h2>University of Alberta</h2>
+		
+        <div class="course-item">
+          <div class="course-title">CIVE608 Construction Engineering <em style="font-weight:normal; font-size:13px">(co-instructor)</em></div>
+          <div class="course-meta">
+            <span class="tag tag-g">Graduate</span>
+            <span class="tag tag-offered">Winter 2016</span>
+          </div>
+          <p class="course-desc">Principles of building, heavy and bridge construction; wood and formwork design, stability during construction, economics of equipment selection, movement of material on construction sites, safety, and constructability issues.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIVE709 Research Methods</div>
+          <div class="course-meta">
+            <span class="tag tag-g">Graduate</span>
+            <span class="tag tag-offered">Fall 2015</span>
+          </div>
+          <p class="course-desc">Principle of research design and methods, scientific writing, types of research, research statements, proposal and paper writing, data collection and analysis, and ethics considerations.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIVE409 Construction Methods</div>
+          <div class="course-meta">
+            <span class="tag tag-ug">Undergraduate</span>
+            <span class="tag tag-offered">Winter 2014–2016</span>
+          </div>
+          <p class="course-desc">Principles of building, heavy and industrial construction, formwork and falsework design, economics of equipment selection, crane operations, earthwork planning, safety, and constructability issues.</p>
+        </div>
+
+        <div class="course-item">
+          <div class="course-title">CIVE709 Best Practice: Construction Project Management <em style="font-weight:normal; font-size:13px">(co-instructor)</em></div>
+          <div class="course-meta">
+            <span class="tag tag-g">Graduate</span>
+            <span class="tag tag-offered">Fall 2013–2014</span>
+          </div>
+          <p class="course-desc">Construction Industry Institute (CII) Best Practice. Topics include zero accident techniques, front end planning and alignment, constructability, quality management, lessons learned, change management, risk assessment, project controls, and benchmarking and metrics.</p>
+        </div>
+        </div>
+      
+
+    </main>
+  </div>
+
+  <footer class="notranslate">
+    <p>&copy; 2013 SangUk Han &nbsp;·&nbsp; CIC Lab, Hanyang University</p>
   </footer>
-  <!-- end .container --></div>
+
+</div>
+
+<script>
+function toggleNav(el) {
+  el.classList.toggle("open");
+  var children = el.nextElementSibling;
+  if (children) children.classList.toggle("hidden");
+}
+</script>
+
 </body>
 </html>

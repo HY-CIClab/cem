@@ -1,272 +1,497 @@
-﻿<!doctype html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<title>CIC-Lab@HYU</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
-<style type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #022E80;
+  --navy-dark: #011d52;
+  --navy-light: #1a4fa8;
+  --accent: #4A8FE7;
+  --accent-light: #e8f0fd;
+  --text: #1a1a2e;
+  --text-muted: #5a6070;
+  --bg: #f7f8fc;
+  --white: #ffffff;
+  --border: #e2e6f0;
+  --sidebar-w: 220px;
+  --radius: 10px;
+}
 
 body {
-	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	background-color: #ececeb;
-	margin: 0;
-	padding: 0;
-	/* [disabled]color: #C39; */
-}
-/* ~~ Element/tag selectors ~~ */
-ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
-	padding: 0;
-	margin: 0;
-}
-ul{
-	font-size:13px;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
 }
 
-h1, h2, h3, h4, h5, h6, p{
-	margin-top: 10px;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	margin-bottom: 0;
-	padding-right: 15px;
-	padding-left: 15px; /* adding the padding to the sides of the elements within the blocks, instead of the block elements themselves, gets rid of any box model math. A nested block with side padding can also be used as an alternate method. */
-}
-p.lab_head{
-	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	padding-right: 15px;
-	padding-left: 15px;
-}
-p.lab{
-	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	padding-right: 15px;
-	padding-left: 15px;
-	font-size: 13px;
-}
-p.article{
-    margin-top: 0;    
-    margin-left: 30px;
-    text-indent: -30px;
-    margin-bottom: 3px;
-    font-size: 12px;
-    line-height: 18px;
-}
-p.bottom{
-    border-bottom: 1px solid #FFF;  /* this creates the button separation */
-    border-top: 0px solid #FFF;  /* this creates the button separation */
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-p.both{
-    border-bottom: 1px solid #FFF;  /* this creates the button separation */
-    border-top: 1px solid #FFF;  /* this creates the button separation */
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0;
-    margin-bottom: 0;
+a { color: var(--navy); text-decoration: none; }
+a:hover { color: var(--accent); }
+
+/* ── LAYOUT ── */
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
-	border: none;
-}
-/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
-a:link {
-	color: #42413C; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
-}
-a:visited {
-	color: #6E6C64;
-}
-a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
-	text-decoration: none;
-}
-/* ~~ This fixed width container surrounds all other blocks ~~ */
-.container {
-	width: 960px;
-	background-color: #FFFFFF;
-	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
-}
-/* ~~ The header is not given a width. It will extend the full width of your layout. ~~ */
-header {
-	font: 150%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	vertical-align: middle;
-	background-color: #022E80;
-	background-image: url("header_cic.jpg");
-	background-size: cover;
-	height: 40px;
-	padding-top: 6px;
-	padding-right: 0px;
-	padding-bottom: 4px;
-	padding-left: 0px;
-	position: relative;
-}
-/* ~~ These are the columns for the layout. ~~ 
-
-1) Padding is only placed on the top and/or bottom of the block elements. The elements within these blocks have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the block itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the block element and place a second block element within it with no width and the padding necessary for your design.
-
-2) No margin has been given to the columns since they are all floated. If you must add margin, avoid placing it on the side you're floating toward (for example: a right margin on a block set to float right). Many times, padding can be used instead. For blocks where this rule must be broken, you should add a "display:inline" declaration to the block element's rule to tame a bug where some versions of Internet Explorer double the margin.
-
-3) Since classes can be used multiple times in a document (and an element can also have multiple classes applied), the columns have been assigned class names instead of IDs. For example, two sidebar blocks could be stacked if necessary. These can very easily be changed to IDs if that's your preference, as long as you'll only be using them once per document.
-
-4) If you prefer your nav on the left instead of the right, simply float these columns the opposite direction (all left instead of all right) and they'll render in reverse order. There's no need to move the blocks around in the HTML source.
-
-*/
-.sidebar1 {
-	float: left;
-	width: 150px;
-	background-color: #FFFFFF;
-	padding-bottom: 10px;
-	border-color:#FFF;
-}
-.content {
-	padding: 10px 0;
-	width: 800px;
-	float: right;
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--navy);
+  background-image: url("header.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(2,46,128,0.18);
+  position: relative;
 }
 
-/* ~~ This grouped selector gives the lists in the .content area space ~~ */
-.content ul, .content ol {
-	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+.topbar-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 30px;
+  color: #fff;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+  text-align: center;
 }
 
-/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
-nav ul{
-	list-style: none; /* this removes the list marker */
-	border-top: 1px solid #FFF; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
-	margin-bottom: 15px; /* this creates the space between the navigation on the content below */
-}
-nav li {
-	border-bottom: 1px solid #FFF; /* this creates the button separation */
-}
-nav a, nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
-	padding: 5px 5px 5px 15px;
-	display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
-	width: 130px;  /*this width makes the entire button clickable for IE6. If you don't need to support IE6, it can be removed. Calculate the proper width by subtracting the padding on this link from the width of your sidebar container. */
-	text-decoration: none;
-	background-color: #5197FF;
-	background-image: url("sidebar1.jpg");
-}
-nav a:hover, nav a:active, nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-	background-color: #1573FF;
-	color: #FFF;
-	background-image: url("sidebar2.jpg");
+.topbar-title span {
+  color: #ffffff;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-/* ~~ The footer ~~ */
+.topbar-logo {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px;
+  width: auto;
+  opacity: 0.92;
+}
+
+/* ── BODY LAYOUT ── */
+.body-layout {
+  display: flex;
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px 16px;
+  gap: 24px;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+}
+
+.sidebar-inner {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+
+.nav-section {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.nav-section:last-child { border-bottom: none; }
+
+.nav-section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 18px 4px;
+}
+
+.nav-marker {
+  display: inline-block;
+  width: 4px;
+  height: 14px;
+  background: #1F497D;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  font-size: 13.5px;
+  color: var(--text);
+  transition: background 0.15s, color 0.15s;
+  gap: 8px;
+}
+.nav-link:hover, .nav-link.active {
+  background: var(--accent-light);
+  color: var(--navy);
+}
+.nav-link.active { font-weight: 500; }
+
+.nav-sub { padding-left: 14px; }
+.nav-sub .nav-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 6px 18px 6px 26px;
+}
+.nav-sub .nav-link::before {
+  content: "›";
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.nav-toggle {
+  cursor: pointer;
+  user-select: none;
+}
+.nav-toggle-icon {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.nav-toggle.open .nav-toggle-icon { transform: rotate(180deg); }
+.nav-children { display: block; }
+.nav-children.hidden { display: none; }
+
+.sidebar-logo {
+  padding: 14px 18px;
+  display: flex;
+  justify-content: center;
+}
+.sidebar-logo img { width: 140px; opacity: 0.85; }
+
+.translate-wrap {
+  padding: 10px 14px 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── MAIN ── */
+.main { flex: 1; min-width: 0; }
+
+/* ── HERO IMAGE ── */
+.hero {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.hero img { width: 100%; display: block; max-height: 340px; object-fit: cover; }
+
+/* ── CARD ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-light);
+}
+
+.card p {
+  color: var(--text);
+  font-size: 14.5px;
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+.card p:last-child { margin-bottom: 0; }
+
+.card ul {
+  list-style: none;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card ul li {
+  font-size: 14px;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.5;
+  color: var(--text);
+}
+.card ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ── SLIDESHOW ── */
+.slideshow-wrap {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.slideshow-wrap h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-light);
+}
+
+.slideshow-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.mySlides { display: none; position: relative; }
+.mySlides img {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  display: block;
+}
+.slide-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.65));
+  color: #fff;
+  padding: 28px 20px 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.slide-num {
+  position: absolute;
+  top: 12px; right: 14px;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.85);
+  color: var(--navy);
+  border: none;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 17px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+  z-index: 10;
+}
+.prev:hover, .next:hover { background: #fff; }
+.prev { left: 12px; }
+.next { right: 12px; }
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.dot.active { background: var(--navy); transform: scale(1.3); }
+
+/* ── RESEARCH ITEMS ── */
+.research-list { display: flex; flex-direction: column; gap: 0; }
+
+.research-item {
+  padding: 14px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: 1px solid transparent;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.research-item:hover, .research-item.active {
+  background: var(--accent-light);
+  border-color: #c5d8f8;
+}
+.research-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  margin-top: 6px;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.research-item.active .research-dot,
+.research-item:hover .research-dot { background: var(--navy); }
+
+.research-item strong { font-size: 14px; display: block; margin-bottom: 4px; color: var(--navy); }
+.research-item p { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+/* ── CONTACT ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 4px;
+}
+.contact-item { display: flex; flex-direction: column; gap: 4px; }
+.contact-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.contact-value { font-size: 13.5px; color: var(--text); line-height: 1.5; }
+
+/* ── FOOTER ── */
 footer {
-	position: relative;/* this gives IE6 hasLayout to properly clear */
-	clear: both;
-	background-color: #00366C;
-	vertical-align: middle;
-	height: 25px;	
+  background: var(--navy-dark);
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  font-size: 13px;
+  padding: 18px;
 }
 
-/*HTML 5 support - Sets new HTML 5 tags to display:block so browsers know how to render the tags properly. */
-header, section, footer, aside, article, figure {
-	display: block;
+/* ── RESPONSIVE ── */
+@media (max-width: 760px) {
+  .body-layout { flex-direction: column; padding: 12px; }
+  .sidebar { width: 100%; }
+  .sidebar-inner { position: static; }
+  .topbar-title { font-size: 17px; }
 }
 
-</style><!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]--></head>
+.fade {
+  animation: fadein 0.7s ease;
+}
+@keyframes fadein {
+  from { opacity: 0.4; }
+  to   { opacity: 1; }
+}
+</style>
 
+<title>Admission – CIC Lab</title>
+</head>
 <body>
-
-<div class="container">
-  <header>
-    <p class="lab_head"> <strong style="color:white; font-size:20px"><capital style="font-size:23px">C</capital>onstruction <capital style="font-size:23px">I</capital>nformatics and <capital style="font-size:23px">C</capital>omputing <capital style="font-size:23px">L</capital>ab</strong></p>
-  </header>
-  <div class="sidebar1">
-  <nav>
-    <ul>    
-      <p class="bottom"><a href="index.html" style="color:white">&nbsp; Home</a></p>
-
-      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
-      &nbsp; Members
-      </a><div style="DISPLAY: block">
-      <a href="advisor.html" style="color:white">&nbsp; &raquo; Advisor</a>
-      <a href="members.html" style="color:white">&nbsp; &raquo; Lab Members</a>
-      </div>     
-
-      <p class="both"><a href="research.html" style="color:white">&nbsp; Research Projects</a></li></p>
-
-      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
-      &nbsp; Publications
-      </a><div style="DISPLAY: block">
-      <a href="publications.html" style="color:white">&nbsp; &raquo; International</a>
-      <a href="publications_domestic.html" style="color:white">&nbsp; &raquo; Domestic (KOR)</a>
+<div class="wrapper">
+  <div class="topbar notranslate">
+    <span class="topbar-title"><span>C</span>onstruction <span>I</span>nformatics and <span>C</span>omputing <span>L</span>ab</span>
+    <img src="CIC_logo.png" class="topbar-logo" alt="CIC Logo">
+  </div>
+  <div class="body-layout">
+  <aside class="sidebar">
+    <div class="sidebar-inner notranslate">
+      <div class="nav-section"><a href="index.html" class="nav-link"><span class="nav-marker"></span> Home</a></div>
+      <div class="nav-section">
+        <div class="nav-link nav-toggle open" onclick="toggleNav(this)"><span class="nav-marker"></span> Members<span class="nav-toggle-icon">▾</span></div>
+        <div class="nav-sub nav-children">
+          <a href="advisor.html" class="nav-link">Advisor</a>
+          <a href="members.html" class="nav-link">Lab Members</a>
+        </div>
       </div>
+      <div class="nav-section"><a href="research.html" class="nav-link"><span class="nav-marker"></span> Research Projects</a></div>
+      <div class="nav-section">
+        <div class="nav-link nav-toggle open" onclick="toggleNav(this)"><span class="nav-marker"></span> Publications<span class="nav-toggle-icon">▾</span></div>
+        <div class="nav-sub nav-children">
+          <a href="publications.html" class="nav-link">International</a>
+          <a href="publications_domestic.html" class="nav-link">Domestic (KOR)</a>
+        </div>
+      </div>
+      <div class="nav-section">
+        <a href="courses.html" class="nav-link"><span class="nav-marker"></span> Courses</a>
+        <a href="admission.html" class="nav-link active"><span class="nav-marker"></span> Admission</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Quick Links</div>
+        <a href="https://civil.hanyang.ac.kr/" class="nav-link" target="_blank" rel="noopener noreferrer">Department ↗</a>
+        <a href="https://www.hanyang.ac.kr/web/www/home" class="nav-link" target="_blank" rel="noopener noreferrer">University ↗</a>
+      </div>
+      <div class="sidebar-logo"><img src="HYU.jpg" alt="Hanyang University"></div>
+      <div class="translate-wrap">
+        <div id="google_translate_element"></div>
+        <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <script>function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'ko,en',layout:google.translate.TranslateElement.InlineLayout.VERTICAL},'google_translate_element');}</script>
+      </div>
+    </div>
+  </aside>
+    <main class="main">
 
-      <p class="both"><a href="courses.html" style="color:white">&nbsp; Courses</a></p>
-	  <p class="bottom"><a href="admission.html" style="color:white">&nbsp; Admission</a></p>
-      <li style="font-size:5px">&nbsp;</li>
-      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Quick Links</b></li>
-      <p class="bottom"><a href="https://civil.hanyang.ac.kr/" style="color:white" target="_blank">&nbsp; Department</a></p>
-      <p class="bottom"><a href="https://www.hanyang.ac.kr/web/www/home" style="color:white" target="_blank">&nbsp; University</a></p>
-	  <p class="both" style="margin-top: 5px"><center><img src="HYU.jpg" width="132" height="35" border="none" aligh="middle"></center></p>
-    </ul>
-    </nav>
-  <!-- end .sidebar1 --></div>
-  <article class="content">
-	<section>
-     <h3>Graduate Student Recruitment</h3>
-	 <hr size="1px" noshade align="center">
-    </section>
-     
-     <section>
-     <h5>Information for Prospective Students</h5>
-      <p></p>
-	  <p class="lab" style="text-align: justify">The CIC lab recruits graduate students with priority given to <b>PhD students</b>, and <b>postdoc fellows</b> in the area of <b>construction engineering and management</b> in the Department of Civil and Environmental Engineering at Hanyang University. Students with a strong background in programming are always welcome. Applicants are encouraged to contact me (sanguk@hanyang.ac.kr) early in order to meet the application deadline and to secure funding in advance;<font color="#6E6E6E"> Please kindly understand and excuse that I cannot reply to every email due to a large number of emails I receive</font>.
-	  <br><br>Research interests include but not limited to: 
-	  </p>
-	  
-	  <ul style="line-height: 18px">
-      <li style="line-height: 20px;">Occupational Health and Safety</li>
-	  <li style="line-height: 20px;">Artificial Intelligence: Computer Vision, Deep Learning, and Robotics</li>
-	  <li style="line-height: 20px;">Data Sensing and Visualization (Digital Twin)</li>
-	  <li style="line-height: 20px;">Virtual Reality (VR) and Augmented Reality (AR)</li>
-	  <li style="line-height: 20px;">Building Information Modeling (BIM) and Geographic Information System (GIS)</li>
-	  <li style="line-height: 20px;">System Dynamics and Discrete Event Simulation</li>
-	  </ul>
+<div class="card">
+  <h2 class="card-title">Graduate Student Recruitment</h2> 
+  <p style="text-align:justify;margin-top:10px">The CIC lab recruits graduate students with priority given to <strong>PhD students</strong>, and <strong>postdoc fellows</strong> in the area of <strong>construction engineering and management</strong> in the Department of Civil and Environmental Engineering at Hanyang University. Students with a strong background in programming are always welcome. Applicants are encouraged to contact me (<a href="mailto:sanguk@hanyang.ac.kr">sanguk@hanyang.ac.kr</a>) early in order to meet the application deadline and to secure funding in advance; <span style="color:var(--text-muted)"><em>Please kindly understand and excuse that I cannot reply to every email due to a large number of emails I receive</em>.</span></p>
+  <p style="margin-top:10px"><strong>Research interests include but not limited to:</strong></p>
+  <ul>
+    <li>Occupational Health and Safety</li>
+    <li>Artificial Intelligence: Computer Vision, Deep Learning, and Robotics</li>
+    <li>Data Sensing and Visualization (Digital Twin)</li>
+    <li>Virtual Reality (VR) and Augmented Reality (AR)</li>
+    <li>Building Information Modeling (BIM) and Geographic Information System (GIS)</li>
+    <li>System Dynamics and Discrete Event Simulation</li>
+  </ul>
+  <div style="text-align:center;margin:18px 0">
+    <img src="wordcloud.png" style="max-width:100%;border-radius:8px">
+    <p style="font-size:12px;color:var(--text-muted);margin-top:6px">[Word Cloud: Research keywords extracted from selected papers]</p>
+  </div>
+  <p style="text-align:justify">The application procedures and schedules can be found on <a href="http://www.grad.hanyang.ac.kr" target="_blank" rel="noopener noreferrer"><strong>http://www.grad.hanyang.ac.kr</strong></a> for a domestic student or <a href="https://oia.hanyang.ac.kr/" target="_blank" rel="noopener noreferrer"><strong>https://oia.hanyang.ac.kr/</strong></a> for an international student. Please carefully check the application deadline before you contact me. For an international student, the deadlines for Spring and Fall semesters, as an example, can be early October and mid April, respectively.</p>
+</div>
 
-      <img src="wordcloud.png" style="display: block; margin: 0 auto;">       
-	  <p class="lab" style="display: block; text-align: center">[Word Cloud: Research keywords extracted from selected papers]</p>
-	  
-	  <p class="lab" style="text-align: justify"><br>The application procedures and schedules can be found on <a href="http://www.grad.hanyang.ac.kr" style="color:black" target="_blank" rel="noopener noreferrer"><b>http://www.grad.hanyang.ac.kr</b></a> for a domestic student or <a href="https://oia.hanyang.ac.kr/" style="color:black" target="_blank" rel="noopener noreferrer"><b>https://oia.hanyang.ac.kr/</b></a> for an international student. Please carefully check the application deadline before you contact me. For an international student, the deadlines for Spring and Fall semesters, as an example, can be early October and mid April, respectively.</p>
-	  
-	  <hr size="1px" noshade align="center">
-	  <h5>Undergraduate Research Internship</h5>
-	   <p></p>
-	   <p class="lab" style="text-align: justify">The CIC lab opens an internship position for an undergraduate at Hanyang University. Applicants are encouraged to read our papers in advance and understand what research we have been doing. That will be the thing you will most likely do when you join the lab. If you are interested in building your future career in the research area, please do not wait until you graduate and feel free to contact me (sanguk@hanyang.ac.kr) as soon as possible. Students with a strong background in programming are always welcome, but not necessarily required or expected. Your interest in computing and passion to learn is only required.
-	   <br><br>The following are the common subjects our students generally study when they join the lab: 
-	  </p>
-	  
-	  <ul style="line-height: 18px">
-      <li style="line-height: 20px;">Python</li>
-	  <li style="line-height: 20px;">Neural Network</li>
-	  <li style="line-height: 20px;">Deep Learning (e.g., convolutional neural network, recurrent neural network, reinforcement learning) </li>
-	  <li style="line-height: 20px;">Any subject of your interest (e.g., BIM, GIS, Unity, Simulation)</li>
-	  </ul>
-	  
-	  <p class="lab" style="text-align: justify">If you have any inquiry, you can also contact our current students at #515 Jaesung Civil Engineering Building. A lab tour may be available upon request.</p>
-	  
-       </p>
-    </section>
-<!--
-    <section>
-      <h5>Alumni </h5>
-      <ul>
-      <li>Students</li>
-      </ul>
+<div class="card">
+  <h2 class="card-title">Undergraduate Research Internship</h2>
+  <p style="text-align:justify">The CIC lab opens an internship position for an undergraduate at Hanyang University. Applicants are encouraged to read our papers in advance and understand what research we have been doing. That will be the thing you will most likely do when you join the lab. If you are interested in building your future career in the research area, please do not wait until you graduate and feel free to contact me (<a href="mailto:sanguk@hanyang.ac.kr">sanguk@hanyang.ac.kr</a>) as soon as possible. Students with a strong background in programming are always welcome, but not necessarily required or expected. Your interest in computing and passion to learn is only required.</p>
+  <p style="margin-top:10px"><strong>The following are the common subjects our students generally study when they join the lab:</strong></p>
+  <ul>
+    <li>Python</li>
+    <li>Neural Network</li>
+    <li>Deep Learning (e.g., convolutional neural network, recurrent neural network, reinforcement learning)</li>
+    <li>Any subject of your interest (e.g., BIM, GIS, Unity, Simulation)</li>
+  </ul>
+  <p style="margin-top:12px;text-align:justify">If you have any inquiry, you can also contact our current students at #515 Jaesung Civil Engineering Building. A lab tour may be available upon request.</p>
+</div>
 
-
-    </section>
--->
-    <!-- end .content --></article>
-  <footer>
-    <p align="center" style="color: #FFF; font-size:14px">&copy; 2013 SangUk Han</p>
-  </footer>
-  <!-- end .container --></div>
+    </main>
+  </div>
+  <footer class="notranslate"><p>&copy; 2013 SangUk Han &nbsp;·&nbsp; CIC Lab, Hanyang University</p></footer>
+</div>
+<script>
+function toggleNav(el){el.classList.toggle('open');var c=el.nextElementSibling;if(c)c.classList.toggle('hidden');}
+</script>
 </body>
 </html>

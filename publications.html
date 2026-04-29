@@ -1,358 +1,520 @@
-﻿<!doctype html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<title>CIC-Lab@HYU</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
-<style type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #022E80;
+  --navy-dark: #011d52;
+  --navy-light: #1a4fa8;
+  --accent: #4A8FE7;
+  --accent-light: #e8f0fd;
+  --text: #1a1a2e;
+  --text-muted: #5a6070;
+  --bg: #f7f8fc;
+  --white: #ffffff;
+  --border: #e2e6f0;
+  --sidebar-w: 220px;
+  --radius: 10px;
+  --muted:#5a6070;
+}
 
 body {
-	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	background-color: #ececeb;
-	margin: 0;
-	padding: 0;
-	/* [disabled]color: #C39; */
-}
-/* ~~ Element/tag selectors ~~ */
-ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
-	padding: 0;
-	margin: 0;
-}
-ul{
-	font-size:13px;
-}
-h1, h2, h3, h4, h5, h6, p{
-	margin-top: 10px;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	margin-bottom: 0;
-	padding-right: 15px;
-	padding-left: 15px; /* adding the padding to the sides of the elements within the blocks, instead of the block elements themselves, gets rid of any box model math. A nested block with side padding can also be used as an alternate method. */
-}
-p.lab_head{
-	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	padding-right: 15px;
-	padding-left: 15px;
-}
-p.lab{
-	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	padding-right: 15px;
-	padding-left: 15px;
-	font-size: 12px;
-}
-p.article{
-    margin-top: 0;    
-    margin-left: 30px;
-    text-indent: -30px;
-    margin-bottom: 6px;
-    font-size: 13px;
-    line-height: 18px;
-}
-p.bottom{
-    border-bottom: 1px solid #FFF;  /* this creates the button separation */
-    border-top: 0px solid #FFF;  /* this creates the button separation */
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-p.both{
-    border-bottom: 1px solid #FFF;  /* this creates the button separation */
-    border-top: 1px solid #FFF;  /* this creates the button separation */
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0;
-    margin-bottom: 0;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
 }
 
-a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
-	border: none;
-}
-/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
-a:link {
-	color: #42413C; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
-}
-a:visited {
-	color: #6E6C64;
-}
-a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
-	text-decoration: none;
-}
-/* ~~ This fixed width container surrounds all other blocks ~~ */
-.container {
-	width: 960px;
-	background-color: #FFFFFF;
-	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
-}
-/* ~~ The header is not given a width. It will extend the full width of your layout. ~~ */
-header {
-	font: 150%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	vertical-align: middle;
-	background-color: #022E80;
-	background-image: url("header_cic.jpg");
-	background-size: cover;
-	height: 40px;
-	padding-top: 6px;
-	padding-right: 0px;
-	padding-bottom: 4px;
-	padding-left: 0px;
-	position: relative;
-}
-/* ~~ These are the columns for the layout. ~~ 
+a { color: var(--navy); text-decoration: none; }
+a:hover { color: var(--accent); }
 
-1) Padding is only placed on the top and/or bottom of the block elements. The elements within these blocks have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the block itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the block element and place a second block element within it with no width and the padding necessary for your design.
-
-2) No margin has been given to the columns since they are all floated. If you must add margin, avoid placing it on the side you're floating toward (for example: a right margin on a block set to float right). Many times, padding can be used instead. For blocks where this rule must be broken, you should add a "display:inline" declaration to the block element's rule to tame a bug where some versions of Internet Explorer double the margin.
-
-3) Since classes can be used multiple times in a document (and an element can also have multiple classes applied), the columns have been assigned class names instead of IDs. For example, two sidebar blocks could be stacked if necessary. These can very easily be changed to IDs if that's your preference, as long as you'll only be using them once per document.
-
-4) If you prefer your nav on the left instead of the right, simply float these columns the opposite direction (all left instead of all right) and they'll render in reverse order. There's no need to move the blocks around in the HTML source.
-
-*/
-.sidebar1 {
-	float: left;
-	width: 150px;
-	background-color: #FFFFFF;
-	padding-bottom: 10px;
-	border-color:#FFF;
-}
-.content {
-	padding: 10px 0;
-	width: 800px;
-	float: right;
+/* ── LAYOUT ── */
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-/* ~~ This grouped selector gives the lists in the .content area space ~~ */
-.content ul, .content ol {
-	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--navy);
+  background-image: url("header.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(2,46,128,0.18);
+  position: relative;
 }
 
-/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
-nav ul{
-	list-style: none; /* this removes the list marker */
-	border-top: 1px solid #FFF; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
-	margin-bottom: 15px; /* this creates the space between the navigation on the content below */
-}
-nav li {
-	border-bottom: 1px solid #FFF; /* this creates the button separation */
-}
-nav a, nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
-	padding: 5px 5px 5px 15px;
-	display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
-	width: 130px;  /*this width makes the entire button clickable for IE6. If you don't need to support IE6, it can be removed. Calculate the proper width by subtracting the padding on this link from the width of your sidebar container. */
-	text-decoration: none;
-	background-color: #5197FF;
-	background-image: url("sidebar1.jpg");
-}
-nav a:hover, nav a:active, nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-	background-color: #1573FF;
-	color: #FFF;
-	background-image: url("sidebar2.jpg");
-}
-
-/* ~~ The footer ~~ */
-footer {
-	position: relative;/* this gives IE6 hasLayout to properly clear */
-	clear: both;
-	background-color: #00366C;
-	vertical-align: middle;
-	height: 25px;	
-}
-
-/*HTML 5 support - Sets new HTML 5 tags to display:block so browsers know how to render the tags properly. */
-header, section, footer, aside, article, figure {
-	display: block;
-}
-
-.button {
-  background-color: #1F4E79;
-  border: none;
-  color: white;
-  font-size: 10px;
-  padding: 0px 3px;
+.topbar-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 30px;
+  color: #fff;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.35);
   text-align: center;
-  text-decoration: none;
+}
+
+.topbar-title span {
+  color: #ffffff;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.topbar-logo {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px;
+  width: auto;
+  opacity: 0.92;
+}
+
+/* ── BODY LAYOUT ── */
+.body-layout {
+  display: flex;
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px 16px;
+  gap: 24px;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+}
+
+.sidebar-inner {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+
+.nav-section {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.nav-section:last-child { border-bottom: none; }
+
+.nav-section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 18px 4px;
+}
+
+.nav-marker {
   display: inline-block;
-  vertical-align: text-top;
-  margin: 2px 1px;
+  width: 4px;
+  height: 14px;
+  background: #1F497D;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  font-size: 13.5px;
+  color: var(--text);
+  transition: background 0.15s, color 0.15s;
+  gap: 8px;
+}
+.nav-link:hover, .nav-link.active {
+  background: var(--accent-light);
+  color: var(--navy);
+}
+.nav-link.active { font-weight: 500; }
+
+.nav-sub { padding-left: 14px; }
+.nav-sub .nav-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 6px 18px 6px 26px;
+}
+.nav-sub .nav-link::before {
+  content: "›";
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.nav-toggle {
   cursor: pointer;
-  border-radius: 16px;
+  user-select: none;
+}
+.nav-toggle-icon {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.nav-toggle.open .nav-toggle-icon { transform: rotate(180deg); }
+.nav-children { display: block; }
+.nav-children.hidden { display: none; }
+
+.sidebar-logo {
+  padding: 14px 18px;
+  display: flex;
+  justify-content: center;
+}
+.sidebar-logo img { width: 140px; opacity: 0.85; }
+
+.translate-wrap {
+  padding: 10px 14px 14px;
+  border-top: 1px solid var(--border);
 }
 
-.button:hover {
-  background-color: #5D6D7E;
+/* ── MAIN ── */
+.main { flex: 1; min-width: 0; }
+
+/* ── CARD ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-bottom: 20px;
 }
 
-</style><!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]--></head>
+.card h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-light);
+}
+
+.card h3 {
+  font-size:16px;
+  font-weight:500;
+  color:var(--navy);
+  margin:18px 0 6px
+  }
+
+/* ── COURSE ITEMS ── */
+.section-divider {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--navy);
+  margin: 24px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.section-divider:first-of-type { margin-top: 0; }
+
+.course-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.course-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.course-title {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.course-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11.5px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+.tag-ug      { background: #e8f0fd; color: #1a4fa8; }
+.tag-g       { background: #e8fdf0; color: #0f6e56; }
+.tag-offered { background: #fdf3e8; color: #854f0b; }
+
+.course-desc {
+  font-size: 13.5px;
+  line-height: 1.72;
+  color: var(--text);
+}
+
+.course-extra {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  line-height: 1.6;
+}
+
+/* article / pub */
+.art{padding:10px 0 10px 28px;border-bottom:1px solid var(--border);font-size:13px;line-height:1.75;position:relative;text-indent:-28px;margin-left:28px}
+.art:last-child{border-bottom:none}
+.art-num{color:var(--accent);font-weight:500;cursor:pointer}
+.art-num:hover{text-decoration:underline}
+.art-t{color:var(--muted)}
+.badge{display:inline-block;background:#f0f4ff;border-left:3px solid var(--navy);color:var(--navy);font-size:11px;font-weight:500;padding:2px 10px;margin-top:4px;border-radius:0 4px 4px 0}
+.pill{background:#1F4E79;border:none;color:#fff;font-size:10px;padding:1px 6px;cursor:pointer;border-radius:16px;font-family:inherit}
+.pill:hover{background:#5D6D7E}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy-dark);
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  font-size: 13px;
+  padding: 18px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 760px) {
+  .body-layout { flex-direction: column; padding: 12px; }
+  .sidebar { width: 100%; }
+  .sidebar-inner { position: static; }
+  .topbar-title { font-size: 17px; }
+}
+</style>
+
+<title>Publications – CIC Lab</title>
+</head>
 
 <body>
+<div class="wrapper">
 
-<div class="container">
-  <header>
-    <p class="lab_head"> <strong style="color:white; font-size:20px"><capital style="font-size:23px">C</capital>onstruction <capital style="font-size:23px">I</capital>nformatics and <capital style="font-size:23px">C</capital>omputing <capital style="font-size:23px">L</capital>ab</strong></p>
-  </header>
-  <div class="sidebar1">
-  <nav>
-    <ul>    
-      <p class="bottom"><a href="index.html" style="color:white">&nbsp; Home</a></p>
+  <!-- TOP NAV BAR -->
+  <div class="topbar notranslate">
+    <span class="topbar-title">
+      <span>C</span>onstruction <span>I</span>nformatics and <span>C</span>omputing <span>L</span>ab
+    </span>
+    <img src="CIC_logo.png" class="topbar-logo" alt="CIC Logo">
+  </div>
 
-      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
-      &nbsp; Members
-      </a><div style="DISPLAY: block">
-      <a href="advisor.html" style="color:white">&nbsp; &raquo; Advisor</a>
-      <a href="members.html" style="color:white">&nbsp; &raquo; Lab Members</a>
-      </div>     
+  <!-- BODY -->
+  <div class="body-layout">
 
-      <p class="both"><a href="research.html" style="color:white">&nbsp; Research Projects</a></li></p>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-inner">
 
-      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
-      &nbsp; Publications
-      </a><div style="DISPLAY: block">
-      <a href="publications.html" style="color:white">&nbsp; &raquo; International</a>
-      <a href="publications_domestic.html" style="color:white">&nbsp; &raquo; Domestic (KOR)</a>
+        <div class="nav-section notranslate">
+          <a href="index.html" class="nav-link active"><span class="nav-marker"></span> Home</a>
+        </div>
+
+        <div class="nav-section notranslate">
+          <div class="nav-link nav-toggle open" onclick="toggleNav(this)">
+            <span class="nav-marker"></span> Members <span class="nav-toggle-icon">▾</span>
+          </div>
+          <div class="nav-children nav-sub">
+            <a href="advisor.html" class="nav-link">Advisor</a>
+            <a href="members.html" class="nav-link">Lab Members</a>
+          </div>
+        </div>
+
+        <div class="nav-section notranslate">
+          <a href="research.html" class="nav-link"><span class="nav-marker"></span> Research Projects</a>
+        </div>
+
+        <div class="nav-section notranslate">
+          <div class="nav-link nav-toggle open" onclick="toggleNav(this)">
+            <span class="nav-marker"></span> Publications <span class="nav-toggle-icon">▾</span>
+          </div>
+          <div class="nav-children nav-sub">
+            <a href="publications.html" class="nav-link">International</a>
+            <a href="publications_domestic.html" class="nav-link">Domestic (KOR)</a>
+          </div>
+        </div>
+
+        <div class="nav-section notranslate">
+          <a href="courses.html" class="nav-link"><span class="nav-marker"></span> Courses</a>
+          <a href="admission.html" class="nav-link"><span class="nav-marker"></span> Admission</a>
+        </div>
+
+        <div class="nav-section notranslate">
+          <div class="nav-section-label">Quick Links</div>
+          <a href="https://civil.hanyang.ac.kr/" class="nav-link" target="_blank" rel="noopener noreferrer">Department ↗</a>
+          <a href="https://www.hanyang.ac.kr/web/www/home" class="nav-link" target="_blank" rel="noopener noreferrer">University ↗</a>
+        </div>
+
+        <div class="sidebar-logo">
+          <img src="HYU.jpg" alt="Hanyang University">
+        </div>
+
+        <div class="translate-wrap notranslate">
+          <div id="google_translate_element"></div>
+          <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+          <script>
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement(
+                {pageLanguage: 'en', includedLanguages: 'ko,en', layout: google.translate.TranslateElement.InlineLayout.VERTICAL},
+                'google_translate_element'
+              );
+            }
+          </script>
+          <style>.goog-te-banner-frame.skiptranslate { display: none !important; }</style>
+        </div>
+
       </div>
+    </aside>
 
-      <p class="both"><a href="courses.html" style="color:white">&nbsp; Courses</a></p>
-	  <p class="bottom"><a href="admission.html" style="color:white">&nbsp; Admission</a></p>
-      <li style="font-size:5px">&nbsp;</li>
-      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Quick Links</b></li>
-      <p class="bottom"><a href="https://civil.hanyang.ac.kr/" style="color:white" target="_blank">&nbsp; Department</a></p>
-      <p class="bottom"><a href="https://www.hanyang.ac.kr/web/www/home" style="color:white" target="_blank">&nbsp; University</a></p>
-	  <p class="both" style="margin-top: 5px"><center><img src="HYU.jpg" width="132" height="35" border="none" aligh="middle"></center></p>
-    </ul>
-    </nav>
+    <!-- MAIN CONTENT -->
+    <main class="main">
 
+      <div class="card">
+        <h2>Publications: Peer-reviewed Journal Articles</h2>
+		<p style="font-size:13px;color:var(--muted)">Note: a research advisee and postdoctoral fellow are denoted by an asterisk (<span style="color:red"><b>*</b></span>).</p>
+		  
+          <div class="art"><span class="art-num" onclick="passwd(49)">J49</span>. Jin, Y., Seo, J., and Han, S. (2026). <span class="art-t"><b>Spatial Augmented Reality (SAR)-based 3D BIM Visualization through Semi-Automated Geometric Calibration of a Projector-Camera System</b></span>. <em>Journal of Computational Design and Engineering, Oxford University Press</em>. (accepted)</div>
+          <div class="art"><span class="art-num" onclick="passwd(48)">J48</span>. <span style="color:red"><b>*</b></span>Mahmood, B., Han, S., and Kim, S. (2025). <span class="art-t"><b>Experimental Investigation on Operating Conditions for Augmented Reality utilizing Indoor Building Element's Images as Markers</b></span>. <em>KSCE Journal of Civil Engineering</em>. (accepted)</div>
+          <div class="art"><span class="art-num" onclick="passwd(47)">J47</span>. <span style="color:red"><b>*</b></span>Yoon, C., Ham, Y., and Han, S. (2025). <span class="art-t"><b>A Reinforcement Learning Approach to Adaptive 3D Simulation and Visualization of Excavator Operations</b></span>. <em>Automation in Construction, Elsevier</em>. (accepted)</div>
+          <div class="art"><span class="art-num" onclick="passwd(46)">J46</span>. <span style="color:red"><b>*</b></span>Rafieizonooz, M., <span style="color:red"><b>*</b></span>Pham, H., Han, S., Seo, J., and Khankhaje, E. (2025). <span class="art-t"><b>Influence of Data Source and Volume on CNN Applications in Construction</b></span>. <em>Automation in Construction, Elsevier</em>, 179, 106476.</div>
+          <div class="art"><span class="art-num" onclick="passwd(45)">J45</span>. <span style="color:red"><b>*</b></span>Pham, H., and Han, S. (2024). <span class="art-t"><b>Generating Realistic Training Images from Synthetic Data for Excavator Pose Estimation</b></span>. <em>Automation in Construction, Elsevier</em>, 167, 105718.</div>
+          <div class="art"><span class="art-num" onclick="passwd(44)">J44</span>. <span style="color:red"><b>*</b></span>Choi, G., and Han, S. (2023). <span class="art-t"><b>Reinforcement Learning-based Dynamic Planning of Cut and Fill Operations for Earthwork Optimization</b></span>. <em>Automation in Construction, Elsevier</em>, 156, 105111.</div>
+          <div class="art"><span class="art-num" onclick="passwd(43)">J43</span>. <span style="color:red"><b>*</b></span>Seo, H., <span style="color:red"><b>*</b></span>Pham, H., Golabchi, A., Seo, J., and Han, S. (2023). <span class="art-t"><b>A Case Study of Motion Data-driven Biomechanical Assessment for Identifying and Evaluating Ergonomic Interventions in Reinforced-Concrete Work</b></span>. <em>Developments in the Built Environment, Elsevier</em>, 16, 100236. <a href="https://doi.org/10.1016/j.dibe.2023.100236" target="_blank" rel="noopener"><img src="icon_download.png" class="open-access-icon" alt="OA" height="11px" width="auto" style="vertical-align:middle; display:inline-block; margin:3px 0px"></a></div>
+          <div class="art"><span class="art-num" onclick="passwd(42)">J42</span>. <span style="color:red"><b>*</b></span>Pham, H., and Han, S. (2023). <span class="art-t"><b>Natural Language Processing with Multi-task Classification for Semantic Prediction of Risk Handling Actions in Construction Contracts</b></span>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 37(6), 04023027.</div>
+          <div class="art"><span class="art-num" onclick="passwd(41)">J41</span>. Hong, J., Choi, J., <span style="color:red"><b>*</b></span>Lee, J., <span style="color:red"><b>*</b></span>Cho, S., Hong, T., Han, S., Park, H.S., and Lee, D. (2023). <span class="art-t"><b>Virtual Reality-based Analysis of the Effect of Construction Noise Exposure on Masonry Work Productivity</b></span>. <em>Automation in Construction, Elsevier</em>, 150, 104844.</div>
+          <div class="art"><span class="art-num" onclick="passwd(40)">J40</span>. Cha, S., Ma, J., Seo, J., Kim, J., and Han, S. (2023). <span class="art-t"><b>Empirical Comparison of Spatial Experience between Photo-based IVE and Real Space</b></span>. <em>Architectural Science Review, Taylor and Francis</em>, 66(1), 1–16.</div>
+          <div class="art"><span class="art-num" onclick="passwd(39)">J39</span>. <span style="color:red"><b>*</b></span>Cho, S., and Han, S. (2022). <span class="art-t"><b>Reinforcement Learning-based Simulation and Automation for Tower Crane 3D Lift Planning</b></span>. <em>Automation in Construction, Elsevier</em>, 144, 104620.</div>
+          <div class="art"><span class="art-num" onclick="passwd(38)">J38</span>. <span style="color:red"><b>*</b></span>Ahn, S., Han, S., Altaf, M. S., and Al-Hussein, M. (2022). <span class="art-t"><b>Integrating Off-site and On-site Panelized Construction Schedules using Fleet Dispatching</b></span>. <em>Automation in Construction, Elsevier</em>, 137, 104201.</div>
+          <div class="art"><span class="art-num" onclick="passwd(37)">J37</span>. <span style="color:red"><b>*</b></span>Mahmood, B., Han, S., and Seo, J. (2022). <span class="art-t"><b>Implementation Experiments on CNN Training using Synthetic Images for 3D Pose Estimation of an Excavator</b></span>. <em>Automation in Construction, Elsevier</em>, 133, 103996.</div>
+          <div class="art"><span class="art-num" onclick="passwd(36)">J36</span>. <span style="color:red"><b>*</b></span>Pham, H., <span style="color:red"><b>*</b></span>Rafieizonooz, M., Han, S., and Lee, D. (2021). <span class="art-t"><b>Current Status and Future Directions of Deep Learning Applications for Safety Management in Construction</b></span>. <em>Sustainability, MDPI</em>, 13(24), 13579. <a href="https://doi.org/10.3390/su132413579" target="_blank" rel="noopener"><img src="icon_download.png" class="open-access-icon" alt="OA" height="11px" width="auto" style="vertical-align:middle; display:inline-block; margin:3px 0px"></a></div>
+          <div class="art"><span class="art-num" onclick="passwd(35)">J35</span>. <span style="color:red"><b>*</b></span>Heo, J., Moon, H., Chang, S., Han, S., and Lee, D. (2021). <span class="art-t"><b>Case Study of Solar PV Power-plant Site Selection using a BIM-GIS-based Approach</b></span>. <em>Applied Sciences, MDPI</em>, 11(18), 8785. <a href="https://doi.org/10.3390/app11188785" target="_blank" rel="noopener"><img src="icon_download.png" class="open-access-icon" alt="OA" height="11px" width="auto" style="vertical-align:middle; display:inline-block; margin:3px 0px"></a></div>
+          <div class="art"><span class="art-num" onclick="passwd(34)">J34</span>. <span style="color:red"><b>*</b></span>Lee, K., and Han, S. (2021). <span class="art-t"><b>CNN Modeling Strategy for Fall-related Motion Recognition using Acceleration Features of a Scaffolding Structure</b></span>. <em>Automation in Construction, Elsevier</em>, 130, 103857.</div>
+          <div class="art"><span class="art-num" onclick="passwd(33)">J33</span>. <span style="color:red"><b>*</b></span>Heo, J., Song, K., Han, S., and Lee, D. (2021). <span class="art-t"><b>Multi-Channel CNN for Integration of Meteorological and Geographical Features in Solar Power Forecasting</b></span>. <em>Applied Energy, Elsevier</em>, 295, 117083.</div>
+          <div class="art"><span class="art-num" onclick="passwd(32)">J32</span>. <span style="color:red"><b>*</b></span>Bae, J. and Han, S. (2021). <span class="art-t"><b>Vision-based Inspection Approach using a Projector-camera System for Off-site Quality Control in Modular Construction</b></span>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 35(5), 04021012.</div>
+          <div class="art"><span class="art-num" onclick="passwd(31)">J31</span>. <span style="color:red"><b>*</b></span>Kim, J., Golabchi, A., Han, S., and Lee, D. (2021). <span class="art-t"><b>Manual Operation Simulation using Motion-time Study toward Labor Productivity Estimation: Concrete Pouring Operations</b></span>. <em>Automation in Construction, Elsevier</em>, 126, 103669.</div>
+          <div class="art"><span class="art-num" onclick="passwd(30)">J30</span>. Jin, Y., Seo, J., Lee, J., Ahn, S., and Han, S. (2020). <span class="art-t"><b>BIM-based Spatial Augmented Reality (SAR) For Architectural Design Collaboration: A Proof of Concept</b></span>. <em>Applied Sciences, MDPI</em>, 10(17), 5915. <a href="https://doi.org/10.3390/app10175915" target="_blank" rel="noopener"><img src="icon_download.png" class="open-access-icon" alt="OA" height="11px" width="auto" style="vertical-align:middle; display:inline-block; margin:3px 0px"></a></div>
+          <div class="art"><span class="art-num" onclick="passwd(29)">J29</span>. <span style="color:red"><b>*</b></span>Mahmood, B., Han, S., and Lee, D. (2020). <span class="art-t"><b>BIM-based Registration and Localization of 3D Point Clouds of Indoor Scenes using Geometric Features for Augmented Reality</b></span>. <em>Remote Sensing, MDPI</em>, 12(14), 2302. <a href="https://doi.org/10.3390/rs12142302" target="_blank" rel="noopener"><img src="icon_download.png" class="open-access-icon" alt="OA" height="11px" width="auto" style="vertical-align:middle; display:inline-block; margin:3px 0px"></a></div>
+          <div class="art"><span class="art-num" onclick="passwd(28)">J28</span>. Kim, B., Kim, C., Han, S., <span style="color:red"><b>*</b></span>Bae, J., and Jung, J. (2020). <span class="art-t"><b>Is it a Good Time to Develop Commercial PV Systems on Farmland? An American-style Option with Crop Price Risk</b></span>. <em>Renewable and Sustainable Energy Reviews, Elsevier</em>, 125, 109827.</div>
+          <div class="art"><span class="art-num" onclick="passwd(27)">J27</span>. Kim, B., Han, S., <span style="color:red"><b>*</b></span>Heo, J., and Jung, J. (2020). <span class="art-t"><b>Proof-of-Concept of a Two-Stage Approach to Selection of Suitable Slopes on a Highway Network for Solar PV Systems</b></span>. <em>Renewable Energy, Elsevier</em>, 151, 366–377.</div>
+          <div class="art"><span class="art-num" onclick="passwd(26)">J26</span>. <span style="color:red"><b>*</b></span>Heo, J., Jung, J., Kim, B., and Han, S. (2020). <span class="art-t"><b>DEM-based CNN Modeling for Searching of High Solar Energy Regions</b></span>. <em>Applied Energy, Elsevier</em>, 262, 114588.</div>
+          <div class="art"><span class="art-num" onclick="passwd(25)">J25</span>. <span style="color:red"><b>*</b></span>Jung, Y., Jung, J., Kim, B., and Han, S. (2020). <span class="art-t"><b>Long-Short Term Memory RNN for Modeling Temporal Patterns in Long-Term Power Forecasting of Solar PV Facilities</b></span>. <em>Journal of Cleaner Production, Elsevier</em>, 250, 119476.</div>
+          <div class="art"><span class="art-num" onclick="passwd(24)">J24</span>. <span style="color:red"><b>*</b></span>Ahn, S., Han, S., and Al-Hussein, M. (2020). <span class="art-t"><b>Improvement of Transportation Cost Estimation for Prefabricated Construction using Geo-Fence-based GPS Data and SVR</b></span>. <em>Advanced Engineering Informatics, Elsevier</em>, 43, 101012.</div>
+          <div class="art"><span class="art-num" onclick="passwd(23)">J23</span>. <span style="color:red"><b>*</b></span>Pereira, E., Ahn, S., Han, S., and AbouRizk, S. (2020). <span class="art-t"><b>Finding Causal Paths between Safety Management System Factors and Accident Precursors</b></span>. <em>Journal of Management in Engineering, ASCE</em>, 36(2), 04019049.</div>
+          <div class="art"><span class="art-num" onclick="passwd(22)">J22</span>. <span style="color:red"><b>*</b></span>Ahn, S., Han, S., and Al-Hussein, M. (2019). <span class="art-t"><b>2D Drawing Visualization Framework for Applying Projection-based AR in a Panelized Construction Manufacturing Facility</b></span>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 33(5), 04019032.</div>
+          <div class="art"><span class="art-num" onclick="passwd(21)">J21</span>. Jung, J., Han, S., and Kim, B. (2019). <span class="art-t"><b>Digital Numerical Map-oriented Estimation of Solar Energy Potential for Site Selection of PV Solar Panels on National Highway Slopes</b></span>. <em>Applied Energy, Elsevier</em>, 242, 57–68.</div>
+          <div class="art"><span class="art-num" onclick="passwd(20)">J20</span>. <span style="color:red"><b>*</b></span>Chang, J., Han, S., AbouRizk, S., and Kanerva, J. (2019). <span class="art-t"><b>Stratified Statistical Analysis for Effectiveness Evaluation of Frontline Worker Safety Intervention</b></span>. <em>Safety Science, Elsevier</em>, 115, 89–102.</div>
+          <div class="art"><span class="art-num" onclick="passwd(19)">J19</span>. <span style="color:red"><b>*</b></span>Golabchi, A., Han, S., and AbouRizk, S. (2018). <span class="art-t"><b>A Simulation and Visualization-based Framework of Labor Efficiency and Safety Analysis for Prevention through Design</b></span>. <em>Automation in Construction, Elsevier</em>, 96, 310–323.</div>
+          <div class="art"><span class="art-num" onclick="passwd(18)">J18</span>. <span style="color:red"><b>*</b></span>Golabchi, A., <span style="color:red"><b>*</b></span>Guo, X., Liu, M., Han, S., Lee, S., and AbouRizk, S. (2018). <span class="art-t"><b>An Integrated Ergonomics Framework for Evaluation and Design of Construction Operations</b></span>. <em>Automation in Construction, Elsevier</em>, 95, 72–82.</div>
+          <div class="art"><span class="art-num" onclick="passwd(17)">J17</span>. <span style="color:red"><b>*</b></span>Pereira, E., Han, S., and AbouRizk, S. (2018). <span class="art-t"><b>Integrating Case-based Reasoning and Simulation Modeling for Testing Strategies to Control Safety Performance</b></span>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 32(6), 04018047.</div>
+          <div class="art"><span class="art-num" onclick="passwd(16)">J16</span>. <span style="color:red"><b>*</b></span>Pereira, E., Han, S., AbouRizk, S., and Hermann, U. (2018). <span class="art-t"><b>Case-based Reasoning Approach for Assessing Safety Performance using Safety-related Measures</b></span>. <em>Journal of Construction Engineering and Management, ASCE</em>, 144(9), 04018088.</div>
+          <div class="art"><span class="art-num" onclick="passwd(15)">J15</span>. <span style="color:red"><b>*</b></span>Pereira, E., Ahn, S., Han, S., and AbouRizk, S. (2018). <span class="art-t"><b>Identification and Association of High-Priority Safety Management System Factors and Accident Precursors</b></span>. <em>Journal of Management in Engineering, ASCE</em>, 34(1), 04017041.</div>
+          <div class="art"><span class="art-num" onclick="passwd(14)">J14</span>. <span style="color:red"><b>*</b></span>Pereira, E., Han, S., AbouRizk, S., and Hermann, U. (2017). <span class="art-t"><b>Empirical Testing of Safety-related Measures at Organizational Level to Assess and Control Onsite Risk</b></span>. <em>Journal of Construction Engineering and Management, ASCE</em>, 143(6), 05017004.</div>
+          <div class="art"><span class="art-num" onclick="passwd(13)">J13</span>. <span style="color:red"><b>*</b></span>Golabchi, A., Han, S., Fayek, A. R., and AbouRizk, S. (2016). <span class="art-t"><b>Stochastic Modeling for Assessment of Human Perception and Motion Sensing Errors in Ergonomic Analysis</b></span>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 31(4), 04017010.</div>
+          <div class="art"><span class="art-num" onclick="passwd(12)">J12</span>. <span style="color:red"><b>*</b></span>Golabchi, A., Han, S., AbouRizk, S., and Kanerva, J. (2016). <span class="art-t"><b>Micro-Motion Level Simulation for Efficiency Analysis and Duration Estimation of Manual Operations</b></span>. <em>Automation in Construction, Elsevier</em>, 71, 443–452.</div>
+          <div class="art"><span class="art-num" onclick="passwd(11)">J11</span>. <span style="color:red"><b>*</b></span>Liu, M., Han, S. and Lee, S. (2016). <span class="art-t"><b>Tracking-based 3D Human Skeleton Extraction from Stereo Video Camera toward On-site Safety and Ergonomic Analysis</b></span>. <em>Construction Innovation, Emerald</em>, 16(3), 348–367.</div>
+          <div class="art"><span class="art-num" onclick="passwd(10)">J10</span>. <span style="color:red"><b>*</b></span>Golabchi, A., Han, S., and Fayek, A. R. (2016). <span class="art-t"><b>A Fuzzy Logic Approach to Posture-based Ergonomic Analysis for Field Observation of Construction Operations</b></span>. <em>Canadian Journal of Civil Engineering</em>, 43(4), 294–303.</div>
+          <div class="art"><span class="art-num" onclick="passwd(9)">J9</span>. <span style="color:red"><b>*</b></span>Golabchi, A., Han, S., Seo, J., Han, S., Lee, S., and Al-Hussein, M. (2015). <span class="art-t"><b>An Automated Biomechanical Simulation Approach to Ergonomic Job Analysis for Workplace Design</b></span>. <em>Journal of Construction Engineering and Management, ASCE</em>, 141(8), 04015020.</div>
+          <div class="art"><span class="art-num" onclick="passwd(8)">J8</span>. Seo, J., Han, S., Lee, S., and Kim, H. (2015). <span class="art-t"><b>Computer Vision Techniques for Construction Safety and Health Monitoring</b></span>. <em>Advanced Engineering Informatics, Elsevier</em>, 29(2), 239–251.</div>
+          <div class="art"><span class="art-num" onclick="passwd(7)">J7</span>. Seo, J., Starbuck, R., Han, S., Lee, S., and Armstrong, T. J. (2014). <span class="art-t"><b>Motion Data-driven Biomechanical Analysis during Construction Tasks on Sites</b></span>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 29, B4014005.</div>
+          <div class="art"><span class="art-num" onclick="passwd(6)">J6</span>. Han, S., Saba, F., Lee, S., Mohamed, Y., and Pena-Mora, F. (2014). <span class="art-t"><b>Toward an Understanding of the Impact of Production Pressure on Safety Performance in Construction Operations</b></span>. <em>Accident Analysis and Prevention, Elsevier</em>, 68, 106–116.</div>
+          <div class="art"><span class="art-num" onclick="passwd(5)">J5</span>. Han, S., Lee, S., and Pena-Mora, F. (2014). <span class="art-t"><b>Comparative Study of Motion Features for Similarity-based Modeling and Classification of Unsafe Actions in Construction</b></span>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 28(5), A4014005.<br><font style="background:#f0f4ff; border-left:0.4em solid var(--navy); line-height: 20px; color:var(--navy)">&nbsp;2014 Best Paper Award&nbsp;&nbsp;</font></div>
+          <div class="art"><span class="art-num" onclick="passwd(4)">J4</span>. Han, S., Achar, M., Lee, S., and Pena-Mora, F. (2013). <span class="art-t"><b>Empirical Assessment of an RGB-D Sensor on Motion Capture and Action Recognition for Construction Worker Monitoring</b></span>. <em>Visualization in Engineering, Springer</em>, 1(1), 1–13. <a href="http://www.viejournal.com/content/1/1/6" target="_blank" rel="noopener"><img src="icon_download.png" class="open-access-icon" alt="OA" height="11px" width="auto" style="vertical-align:middle; display:inline-block; margin:3px 0px"></a></div>
+          <div class="art"><span class="art-num" onclick="passwd(3)">J3</span>. Han, S., and Lee, S. (2013). <span class="art-t"><b>A Vision-based Motion Capture and Recognition Framework for Behavior-based Safety Management</b></span>. <em>Automation in Construction, Elsevier</em>, 35, 131–141.</div>
+          <div class="art"><span class="art-num" onclick="passwd(2)">J2</span>. Han, S., Lee, S., and Pena-Mora, F. (2013). <span class="art-t"><b>Vision-based Detection of Unsafe Actions of a Construction Worker: A Case Study of Ladder Climbing</b></span>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 27(6), 635–644.</div>
+          <div class="art"><span class="art-num" onclick="passwd(1)">J1</span>. Chen, A. Y., Han, S., Lee, S., and Pena-Mora, F. (2011). <span class="art-t"><b>A Civilian Reporting Service to Guide Converging Resources for Search and Rescue in Disaster Response</b></span>. <em>Journal of Construction Engineering and Project Management</em>, 1(3), 45–51.</div>
 
-  <!-- end .sidebar1 --></div>
-  <article class="content">
-	<section>
-     <h3>Publications</h3>
-     <p class="lab"> Note: a research advisee and a postdoctoral fellow are denoted by an asterisk (<span style="color:red"><b>*</b></span>). <!--<em>(last updated: April 2023)</em>--></p>
-	 <hr size="1px" noshade align="center">   
-    </section>
-     <section>
-     <h4>Peer-reviewed Journal Articles</h4>
-     <p class="article"> <a onClick="passwd(49)" style="cursor:pointer">J49</a>. Jin, Y., Seo, J., and Han, S. (2026). <font color="#6E6E6E"><b>Spatial Augmented Reality (SAR)-based 3D BIM Visualization through Semi-Automated Geometric Calibration of a Projector-Camera System</b></font>. <em>Journal of Computational Design and Engineering, Oxford University Press</em>. (accepted)</p>
-	 <p class="article"> <a onClick="passwd(48)" style="cursor:pointer">J48</a>. <span style="color:red"><b>*</b></span>Mahmood, B., Han, S., and Kim, S. (2025). <font color="#6E6E6E"><b>Experimental Investigation on Operating Conditions for Augmented Reality utilizing Indoor Building Element’s Images as Markers for Construction and Facility Management</b></font>. <em>KSCE Journal of Civil Engineering</em>. (accepted)</p>
-	 <p class="article"> <a onClick="passwd(47)" style="cursor:pointer">J47</a>. <span style="color:red"><b>*</b></span>Yoon, C., Ham, Y., and Han, S. (2025). <font color="#6E6E6E"><b>A Reinforcement Learning Approach to Adaptive 3D Simulation and Visualization of Excavator Operations</b></font>. <em>Automation in Construction, Elsevier</em>. (accepted)</p>
-	 <p class="article"> <a onClick="passwd(46)" style="cursor:pointer">J46</a>. <span style="color:red"><b>*</b></span>Rafieizonooz, M., <span style="color:red"><b>*</b></span>Pham, H., Han, S., Seo, J., and Khankhaje, E. (2025). <font color="#6E6E6E"><b>Influence of Data Source and Volume on CNN Applications in Construction</b></font>. <em>Automation in Construction, Elsevier</em>, 179, 106476.</p>
-	 <p class="article"> <a onClick="passwd(45)" style="cursor:pointer">J45</a>. <span style="color:red"><b>*</b></span>Pham, H., and Han, S. (2024). <font color="#6E6E6E"><b>Generating Realistic Training Images from Synthetic Data for Excavator Pose Estimation</b></font>. <em>Automation in Construction, Elsevier</em>, 167, 105718.</p>
-	 <p class="article"> <a onClick="passwd(44)" style="cursor:pointer">J44</a>. <span style="color:red"><b>*</b></span>Choi, G., and Han, S. (2023). <font color="#6E6E6E"><b>Reinforcement Learning-based Dynamic Planning of Cut and Fill Operations for Earthwork Optimization</b></font>. <em>Automation in Construction, Elsevier</em>, 156, 105111.</p>
-	 <p class="article"> <a onClick="passwd(43)" style="cursor:pointer">J43</a>. <span style="color:red"><b>*</b></span>Seo, H., <span style="color:red"><b>*</b></span>Pham, H., Golabchi, A., Seo, J., and Han, S. (2023). <font color="#6E6E6E"><b>A Case Study of Motion Data-driven Biomechanical Assessment for Identifying and Evaluating Ergonomic Interventions in Reinforced-Concrete Work</b></font>. <em>Developments in the Built Environment, Elsevier</em>, 16, 100236. <a href="https://doi.org/10.1016/j.dibe.2023.100236" style="text-decoration:none; color:#000000" target="_blank"><img src="icon_download.png" alt="Open Access" height="11px" width="auto" style="vertical-align:top; margin:3px 0px"></a></p>
-	 <p class="article"> <a onClick="passwd(42)" style="cursor:pointer">J42</a>. <span style="color:red"><b>*</b></span>Pham, H., and Han, S. (2023). <font color="#6E6E6E"><b>Natural Language Processing with Multi-task Classification for Semantic Prediction of Risk Handling Actions in Construction Contracts</b></font>.  <em>Journal of Computing in Civil Engineering, ASCE</em>, 37 (6), 04023027.</p>
-	 <p class="article"> <a onClick="passwd(41)" style="cursor:pointer">J41</a>. Hong, J., Choi, J., <span style="color:red"><b>*</b></span>Lee, J. <span style="color:red"><b>*</b></span>Cho, S., Hong, T., Han, S., Park, H.S., and Lee, D. (2023). <font color="#6E6E6E"><b>Virtual Reality-based Analysis of the Effect of Construction Noise Exposure on Masonry Work Productivity</b></font>. <em>Automation in Construction, Elsevier</em>, 150, 104844.</p>
-	 <p class="article"> <a onClick="passwd(40)" style="cursor:pointer">J40</a>. Cha, S., Ma, J., Seo, J., Kim, J., and Han, S. (2023). <font color="#6E6E6E"><b>Empirical Comparison of Spatial Experience between Photo-based IVE and Real Space</b></font>. <em>Architectural Science Review, Taylor and Francis Ltd</em>, 66 (1), 1-16.</p>
-     <p class="article"> <a onClick="passwd(39)" style="cursor:pointer">J39</a>. <span style="color:red"><b>*</b></span>Cho, S., and Han, S. (2022). <font color="#6E6E6E"><b>Reinforcement Learning-based Simulation and Automation for Tower Crane 3D Lift Planning</b></font>. <em>Automation in Construction, Elsevier</em>, 144, 104620.</p>	        
-	 <p class="article"> <a onClick="passwd(38)" style="cursor:pointer">J38</a>. <span style="color:red"><b>*</b></span>Ahn, S., Han, S., Altaf, M. S., and Al-Hussein, M. (2022). <font color="#6E6E6E"><b>Integrating Off-site and On-site Panelized Construction Schedules using Fleet Dispatching</b></font>. <em>Automation in Construction, Elsevier</em>, 137, 104201.</p>
-	 <p class="article"> <a onClick="passwd(37)" style="cursor:pointer">J37</a>. <span style="color:red"><b>*</b></span>Mahmood, B., Han, S., and Seo, J. (2022). <font color="#6E6E6E"><b>Implementation Experiments on Convolutional Neural Network Training using Synthetic Images for 3D Pose Estimation of an Excavator on Real Images</b></font>. <em>Automation in Construction, Elsevier</em>, 133, 103996.</p>  
-     <p class="article"> <a onClick="passwd(36)" style="cursor:pointer">J36</a>. <span style="color:red"><b>*</b></span>Pham, H., <span style="color:red"><b>*</b></span>Rafieizonooz, M., Han, S., and Lee, D. (2021). <font color="#6E6E6E"><b>Current Status and Future Directions of Deep Learning Applications for Safety Management in Construction</b></font>. <em>Sustainability, MDPI</em>, 13 (24), 13579. <a href="https://doi.org/10.3390/su132413579" style="text-decoration:none; color:#000000" target="_blank"><img src="icon_download.png" alt="Open Access" height="11px" width="auto" style="vertical-align:top; margin:3px 0px"></a></p>
-	 <p class="article"> <a onClick="passwd(35)" style="cursor:pointer">J35</a>. <span style="color:red"><b>*</b></span>Heo, J., Moon, H., Chang, S., Han, S., and Lee, D. (2021). <font color="#6E6E6E"><b>Case Study of Solar Photovoltaic Power-plant Site Selection for Infrastructure Planning using a BIM-GIS-based Approach</b></font>. <em>Applied Sciences, MDPI</em>, 11 (18), 8785. <a href="https://doi.org/10.3390/app11188785" style="text-decoration:none; color:#000000" target="_blank"><img src="icon_download.png" alt="Open Access" height="11px" width="auto" style="vertical-align:top; margin:3px 0px"></a></p>	  
-	 <p class="article"> <a onClick="passwd(34)" style="cursor:pointer">J34</a>. <span style="color:red"><b>*</b></span>Lee, K., and Han, S. (2021). <font color="#6E6E6E"><b>Convolutional Neural Network Modeling Strategy for Fall-related Motion Recognition using Acceleration Features of a Scaffolding Structure</b></font>. <em>Automation in Construction, Elsevier</em>, 130, 103857.</p>
-	 <p class="article"> <a onClick="passwd(33)" style="cursor:pointer">J33</a>. <span style="color:red"><b>*</b></span>Heo, J., Song, K., Han, S., and Lee, D. (2021). <font color="#6E6E6E"><b>Multi-Channel Convolutional Neural Network for Integration of Meteorological and Geographical Features in Solar Power Forecasting</b></font>. <em>Applied Energy, Elsevier</em>, 295, 117083.</p>	  
-	 <p class="article"> <a onClick="passwd(32)" style="cursor:pointer">J32</a>. <span style="color:red"><b>*</b></span>Bae, J. and Han, S. (2021). <font color="#6E6E6E"><b>Vision-based Inspection Approach using a Projector-camera System for Off-site Quality Control in Modular Construction: Experimental Investigation on Operational Conditions</b></font>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 35 (5), 04021012-(1-13).</p>
-	 <p class="article"> <a onClick="passwd(31)" style="cursor:pointer">J31</a>. <span style="color:red"><b>*</b></span>Kim, J., Golabchi, A., Han, S., and Lee, D. (2021). <font color="#6E6E6E"><b>Manual Operation Simulation using Motion-time Study toward Labor Productivity Estimation: A Case Study of Concrete Pouring Operations</b></font>. <em>Automation in Construction, Elsevier</em>, 126, 103669.</p>   
-	 <p class="article"> <a onClick="passwd(30)" style="cursor:pointer">J30</a>. Jin, Y., Seo, J., Lee, J., Ahn, S., and Han, S. (2020). <font color="#6E6E6E"><b>BIM-based Spatial Augmented Reality (SAR) For Architectural Design Collaboration: A Proof of Concept</b></font>. <em>Applied Sciences, MDPI</em>, 10 (17), 5915. <a href="https://doi.org/10.3390/app10175915" style="text-decoration:none; color:#000000" target="_blank"><img src="icon_download.png" alt="Open Access" height="11px" width="auto" style="vertical-align:top; margin:3px 0px"></a></p>
-	 <p class="article"> <a onClick="passwd(29)" style="cursor:pointer">J29</a>. <span style="color:red"><b>*</b></span>Mahmood, B., Han, S., and Lee, D. (2020). <font color="#6E6E6E"><b>BIM-based Registration and Localization of 3D Point Clouds of Indoor Scenes using Geometric Features for Augmented Reality</b></font>. <em>Remote Sensing, MDPI</em>, 12 (14), 2302. <a href="https://doi.org/10.3390/rs12142302" style="text-decoration:none; color:#000000" target="_blank"><img src="icon_download.png" alt="Open Access" height="11px" width="auto" style="vertical-align:top; margin:3px 0px"></a></p>
-	 <p class="article"> <a onClick="passwd(28)" style="cursor:pointer">J28</a>. Kim, B., Kim, C., Han, S., <span style="color:red"><b>*</b></span>Bae, J., and Jung, J. (2020). <font color="#6E6E6E"><b>Is it a Good Time to Develop Commercial Photovoltaic Systems on Farmland? An American-style Option with Crop Price Risk</b></font>. <em>Renewable and Sustainable Energy Reviews, Elsevier</em>, 125, 109827.</p>	  
-	 <p class="article"> <a onClick="passwd(27)" style="cursor:pointer">J27</a>. Kim, B., Han, S., <span style="color:red"><b>*</b></span>Heo, J., and Jung, J. (2020). <font color="#6E6E6E"><b>Proof-of-Concept of a Two-Stage Approach to the Selection of Suitable Slopes on a Highway Network for Solar Photovoltaic Systems: Case Study of South Korea</b></font>. <em>Renewable Energy, Elsevier</em>, 151, 366-377.</p>
-	 <p class="article"> <a onClick="passwd(26)" style="cursor:pointer">J26</a>. <span style="color:red"><b>*</b></span>Heo, J., Jung, J., Kim, B., and Han, S. (2020). <font color="#6E6E6E"><b>Digital Elevation Model-based Convolutional Neural Network Modeling for Searching of High Solar Energy Regions</b></font>. <em>Applied Energy, Elsevier</em>, 262, 114588.</p>
-	 <p class="article"> <a onClick="passwd(25)" style="cursor:pointer">J25</a>. <span style="color:red"><b>*</b></span>Jung, Y., Jung, J., Kim, B., and Han, S. (2020). <font color="#6E6E6E"><b>Long-Short Term Memory Recurrent Neural Network for Modeling of Temporal Patterns in Long-Term Power Forecasting of Solar PV Facilities: Case Study of South Korea</b></font>. <em>Journal of Cleaner Production, Elsevier</em>, 250, 119476.</p>
-	 <p class="article"> <a onClick="passwd(24)" style="cursor:pointer">J24</a>. <span style="color:red"><b>*</b></span>Ahn, S., Han, S., and Al-Hussein, M. (2020). <font color="#6E6E6E"><b>Improvement of Transportation Cost Estimation for Prefabricated Construction using Geo-Fence-based Large-scale GPS Data Feature Extraction and Support Vector Regression</b></font>. <em>Advanced Engineering Informatics, Elsevier</em>, 43, 101012.</p>      
-	 <p class="article"> <a onClick="passwd(23)" style="cursor:pointer">J23</a>. <span style="color:red"><b>*</b></span>Pereira, E., Ahn, S., Han, S., and AbouRizk, S. (2020). <font color="#6E6E6E"><b>Finding Causal Paths between Safety Management System Factors and Accident Precursors</b></font>. <em>Journal of Management in Engineering, ASCE</em>, 36 (2), 04019049-(1-11).</p>
-	 <p class="article"> <a onClick="passwd(22)" style="cursor:pointer">J22</a>. <span style="color:red"><b>*</b></span>Ahn, S., Han, S., and Al-Hussein, M. (2019). <font color="#6E6E6E"><b>2D Drawing Visualization Framework for Applying Projection-based Augmented Reality in a Panelized Construction Manufacturing Facility: Proof of Concept</b></font>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 33 (5), 04019032-(1-15).</p>
-     <p class="article"> <a onClick="passwd(21)" style="cursor:pointer">J21</a>. Jung, J., Han, S., and Kim, B. (2019). <font color="#6E6E6E"><b>Digital Numerical Map-oriented Estimation of Solar Energy Potential for Site Selection of Photovoltaic Solar Panels on National Highway Slopes</b></font>. <em>Applied Energy, Elsevier</em>, 242, 57-68.</p>
-	 <p class="article"> <a onClick="passwd(20)" style="cursor:pointer">J20</a>. <span style="color:red"><b>*</b></span>Chang, J., Han, S., AbouRizk, S., and Kanerva, J. (2019).  <font color="#6E6E6E"><b>Stratified Statistical Analysis for Effectiveness Evaluation of Frontline Worker Safety Intervention: Case Study of Construction Steel Fabrication</b></font>. <em>Safety Science, Elsevier</em>, 115, 89-102.</p>
-	 <p class="article"> <a onClick="passwd(19)" style="cursor:pointer">J19</a>. <span style="color:red"><b>*</b></span>Golabchi, A., Han, S., and AbouRizk, S. (2018). <font color="#6E6E6E"><b>A Simulation and Visualization-based Framework of Labor Efficiency and Safety Analysis for Prevention through Design and Planning</b></font>. <em>Automation in Construction, Elsevier</em>, 96, 310-323.</p>
-     <p class="article"> <a onClick="passwd(18)" style="cursor:pointer">J18</a>. <span style="color:red"><b>*</b></span>Golabchi, A., <span style="color:red"><b>*</b></span>Guo, X, <span style="color:red"><b>*</b></span>Liu, M., Han, S., Lee, S., and AbouRizk, S. (2018). <font color="#6E6E6E"><b>An Integrated Ergonomics Framework for Evaluation and Design of Construction Operations</b></font>. <em>Automation in Construction, Elsevier</em>, 95, 72-82.</p>
-     <p class="article"> <a onClick="passwd(17)" style="cursor:pointer">J17</a>. <span style="color:red"><b>*</b></span>Pereira, E., Han, S., and AbouRizk, S. (2018). <font color="#6E6E6E"><b>Integrating Case-based Reasoning and Simulation Modeling for Testing Strategies to Control Safety Performance</b></font>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 32 (6), 04018047-(1-12).</p>
-	 <p class="article"> <a onClick="passwd(16)" style="cursor:pointer">J16</a>. <span style="color:red"><b>*</b></span>Pereira, E., Han, S., AbouRizk, S., and Hermann, U. (2018). <font color="#6E6E6E"><b>Case-based Reasoning Approach for Assessing Safety Performance using Safety-related Measures</b></font>. <em>Journal of Construction Engineering and Management, ASCE</em>, 144 (9), 04018088-(1-10).</p>
-     <p class="article"> <a onClick="passwd(15)" style="cursor:pointer">J15</a>. <span style="color:red"><b>*</b></span>Pereira, E., Ahn, S., Han, S., and AbouRizk, S. (2018).  <font color="#6E6E6E"><b>Identification and Association of High-Priority Safety Management System Factors and Accident Precursors for Proactive Safety Assessment and Control</b></font>. <em>Journal of Management in Engineering, ASCE</em>, 34 (1), 04017041-(1-12).</p>
- 	 <p class="article"> <a onClick="passwd(14)" style="cursor:pointer">J14</a>. <span style="color:red"><b>*</b></span>Pereira, E., Han, S., AbouRizk, S., and Hermann, U. (2017).  <font color="#6E6E6E"><b>Empirical Testing for Use of Safety-related Measures at Organizational Level to Assess and Control Onsite Risk Level</b></font>. <em>Journal of Construction Engineering and Management, ASCE</em>, 143 (6), 05017004-(1-10).</p>
-	 <p class="article"> <a onClick="passwd(13)" style="cursor:pointer">J13</a>. <span style="color:red"><b>*</b></span>Golabchi, A., Han, S., Fayek, A. R., and AbouRizk, S. (2016). <font color="#6E6E6E"><b>Stochastic Modeling for Assessment of Human Perception and Motion Sensing Errors in Ergonomic Analysis</b></font>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 31 (4), 04017010-(1-11).</p>
-	 <p class="article"> <a onClick="passwd(12)" style="cursor:pointer">J12</a>. <span style="color:red"><b>*</b></span>Golabchi, A., Han, S., AbouRizk, S., and Kanerva, J. (2016). <font color="#6E6E6E"><b>Micro-Motion Level Simulation for Efficiency Analysis and Duration Estimation of Manual Operations</b></font>. <em>Automation in Construction, Elsevier</em>, 71, 443-452.</p>
-     <p class="article"> <a onClick="passwd(11)" style="cursor:pointer">J11</a>. <span style="color:red"><b>*</b></span>Liu, M., Han, S. and Lee, S. (2016). <font color="#6E6E6E"><b>Tracking-based 3D Human Skeleton Extraction from Stereo Video Camera toward an On-site Safety and Ergonomic Analysis</b></font>. <em>Construction Innovation, Emerald</em>, 16 (3), 348-367.</p>
-     <p class="article"> <a onClick="passwd(10)" style="cursor:pointer">J10</a>. <span style="color:red"><b>*</b></span>Golabchi, A., Han, S., and Fayek, A. R. (2016). <font color="#6E6E6E"><b>A Fuzzy Logic Approach to Posture-based Ergonomic Analysis for Field Observation and Assessment of Construction Manual Operations</b></font>. <em>Canadian Journal of Civil Engineering</em>, 43 (4), 294-303.</p>
-     <p class="article"> <a onClick="passwd(9)" style="cursor:pointer">J9</a>. <span style="color:red"><b>*</b></span>Golabchi, A., Han, S., Seo, J,, Han, S., Lee, S., and Al-Hussein, M. (2015). <font color="#6E6E6E"><b>An Automated Biomechanical Simulation Approach to Ergonomic Job Analysis for Workplace Design</b></font>. <em>Journal of Construction Engineering and Management, ASCE</em>, 141 (8), 04015020.</p>
-     <p class="article"> <a onClick="passwd(8)" style="cursor:pointer">J8</a>. Seo, J., Han, S., Lee, S., and Kim, H. (2015). <font color="#6E6E6E"><b>Computer Vision Techniques for Construction Safety and Health Monitoring</b></font>. <em>Advanced Engineering Informatics, Elsevier</em>, 29 (2), 239-251.</p>
-     <p class="article"> <a onClick="passwd(7)" style="cursor:pointer">J7</a>. Seo, J, Starbuck, R., Han, S., Lee, S., and Armstrong, T. J. (2014). <font color="#6E6E6E"><b>Motion Data-driven Biomechanical Analysis during Construction Tasks on Sites</b></font>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 29, B4014005.</p>
-     <p class="article"> <a onClick="passwd(6)" style="cursor:pointer">J6</a>. Han, S., Saba, F., Lee, S., Mohamed, Y., and Pena-Mora, F. (2014). <font color="#6E6E6E"><b>Toward an Understanding of the Impact of Production Pressure on Safety Performance in Construction Operations</b></font>. <em>Accident Analysis and Prevention, Elsevier</em>, 68, 106-116.</p>
-     <p class="article"> <a onClick="passwd(5)" style="cursor:pointer">J5</a>. Han, S., Lee, S., and Pena-Mora, F. (2014). <font color="#6E6E6E"><b>Comparative Study of Motion Features for Similarity-based Modeling and Classification of Unsafe Actions in Construction</b></font>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 28 (5), A4014005.<br><font style="background:#EFEFEF; border-left:0.4em solid #1F4E79; line-height: 20px; color:#1F4E79"><b>&nbsp;2014 Best Paper Award&nbsp;&nbsp;</b></font></p>
-     <p class="article"> <a onClick="passwd(4)" style="cursor:pointer">J4</a>. Han, S., Achar, M., Lee, S., and Pena-Mora, F. (2013). <font color="#6E6E6E"><b>Empirical Assessment of an RGB-D Sensor on Motion Capture and Action Recognition for Construction Worker Monitoring</b></font>. <em>Visualization in Engineering, Springer</em>, 1 (1), 1-13. <a href="http://www.viejournal.com/content/1/1/6" style="text-decoration:none; color:#000000" target="_blank"><img src="icon_download.png" alt="Open Access" height="11px" width="auto" style="vertical-align:top; margin:3px 0px"></a></p>
-     <p class="article"> <a onClick="passwd(3)" style="cursor:pointer">J3</a>. Han, S., and Lee, S. (2013). <font color="#6E6E6E"><b>A Vision-based Motion Capture and Recognition Framework for Behavior-based Safety Management</b></font>. <em>Automation in Construction, Elsevier</em>, 35, 131-141.</p>
-     <p class="article"> <a onClick="passwd(2)" style="cursor:pointer">J2</a>. Han, S., Lee, S., and Pena-Mora, F. (2013). <font color="#6E6E6E"><b>Vision-based Detection of Unsafe Actions of a Construction Worker: A Case Study of Ladder Climbing</b></font>. <em>Journal of Computing in Civil Engineering, ASCE</em>, 27 (6), 635-644.</p>
-     <p class="article"> <a onClick="passwd(1)" style="cursor:pointer">J1</a>. Chen, A. Y., Han, S., Lee, S., and Pena-Mora, F. (2011). <font color="#6E6E6E"><b>A Civilian Reporting Service to Guide Converging Resources for Search and Rescue in Disaster Response</b></font>. <em>Journal of Construction Engineering and Project Management (JCEPM)</em>, 1 (3), 45-51.</p>
-     <!--<br>[<a href="https://authors.elsevier.com/a/1cnw83IhXMps3r" style="text-decoration:none; color:#000000" target="_blank"><b>Download</b></a> available until May 31, 2021]-->
+  <p style="font-size:13px;color:var(--muted);margin-top:16px"><strong>In Review / Preparation</strong></p>
+          <div class="art">(J50). <span style="color:red"><b>*</b></span>Pham, H., and Han, S. (2025). <span class="art-t"><b>Multitask Model for Excavator Lifting Operation Assessment based on 3D Pose Estimation for Tipping Prevention</b></span>. <em>Automation in Construction, Elsevier</em>. (in writing)</div>
+      
+	  </div>
+		
+		<div class="card">
+        <h2>Conference Papers</h2>
 
-     <p class="lab" style="font-size: 13px"> <br><b>In Review/Preparation</b></p>      	  	       	  
-     <p class="article"> (J50). <span style="color:red"><b>*</b></span>Pham, H., and Han, S. (2025). <font color="#6E6E6E"><b>Multitask Model for Excavator Lifting Operation Assessment based on 3D Pose Estimation for Tipping Prevention</b></font>. <em>Automation in Construction, Elsevier</em>. (in writing)</p>
-	 <!-- <p class="article"> (J49). <span style="color:red"><b>*</b></span>Lee, J. <span style="color:red"><b>*</b></span>Pham, H., <span style="color:red"><b>*</b></span>Yoon, C., Hong, J., Choi, J., Han, S., Hong, T., and Lee, D. (2023). <font color="#6E6E6E"><b>Boimechanical Investigation of the Effect of Construction Noise Exposure on Ergonomic Risk in Virtual Reality: A Case Study of Masonry Work</b></font>. <em>Journal of Management in Engineering, ASCE</em>. (submitted in October 2025)</p>-->
-	 <!-- <p class="article"> (J). <span style="color:red"><b>*</b></span>Lee, J., and Han, S. (2024). <font color="#6E6E6E"><b>Reinforcement Learning-based Virtual Experimentation for the Cycle Time Estimation of Dump Truck Operations in Earthwork</b></font>. (in writing)</p>-->
-	      	 
-	 <!-- In Working -->
-	 <!-- <p class="article"> (J51). <span style="color:red"><b>*</b></span>Cho, S., <span style="color:red"><b>*</b></span>Pham, H., Lee, G., Han, S., and Lee, S. (2024). <font color="#6E6E6E"><b>Experimental Investigation on Sound Features for Alarm Perception under Construction Noise</b></font>. <em>Accident Analysis and Prevention, Elsevier</em>. (will be submitted in June 2024)</p>-->
-	 <!-- <p class="article"> (J52). Song, K. , Lee, G. , Bae, J., Han, S., and Lee, S. (2023). <font color="#6E6E6E"><b>Understanding Construction Workers’ Emotion and Cognitive Load for Evaluation of Virtual Reality-based Safety Training Effectiveness</b></font>. <em>Journal of Construction Engineering and Management, ASCE</em>. (will be submitted in August 2024)</p>-->	 
-    
-	 <!-- <p class="article"> (J53). <span style="color:red"><b>*</b></span>Hong, J., and Han, S. (2023). <font color="#6E6E6E"><b>Gps-Based Cycle Time Estimation For Automated Productivity Monitoring Of Ongoing Earthwork Operations</b></font>. <em>Automation in Construction, Elsevier</em>. (will be submitted in August 2023)</p>-->
-	      	 	 
- 	 <br>
-	 <hr size="1px" noshade align="center">      
-    </section>
-    <section>
-     <h4>Conference Papers</h4>          
-	 <p class="article"> C40. *Pham, H., and Han, S. (2024). <font color="#6E6E6E"><b>An Application of Cycle GAN for Creating Generated Real Training Images with 3D Excavator Pose Labels from a Synthetic Model</b></font>. <em>2024 Construction Research Congress (CRC)</em>, Des Moines, Iowa, United States, March 20-23, 2024.</p>
-	 <p class="article"> C39. *Hong, J., *Pham, H., *Mahmood, B., and Han, S. (2022). <font color="#6E6E6E"><b>GPS-based Cycle Time Estimation for Automated Productivity Monitoring of Ongoing Earthwork Operations</b></font>. <em>The 22nd International Conference on Construction Applications of Virtual Reality (CONVR)</em>, Seoul, Korea, November 16-19, 2022.</p>
-	 <p class="article"> C38. Song, K., Lee, G., Han, S., and Lee, S. (2022). <font color="#6E6E6E"><b>Evaluation of Construction Workers’ Emotional States during Virtual Reality-Based Safety Training</b></font>. <em>2022 Construction Research Congress (CRC)</em>, Arlington, Virginia, United States, March 9-12, 2022.</p>
-	 <p class="article"> C37. *Kim, J., Ahn, S., and Han, S. (2020). <font color="#6E6E6E"><b>Impact of VR Settings on Immersiveness in VR-based Construction Skills Training: Case Study of Scaffolding Work</b></font>. <em>2020 Construction Research Congress (CRC)</em>, Tempe, AZ, United States, March 8-10, 2020.</p>
-	 <p class="article"> C36. *Jung, Y., Jung, J., Kim, B., and Han, S. (2019). <font color="#6E6E6E"><b>Estimating the Monthly Power Generation of a Photovoltaic Plant using a Locally Weighted Linear Regression</b></font>. <em>2019 International Congress and Conference on Computational Design and Engineering (I3CDE)</em>, Penang, Malaysia, July 7-10, 2019.</p>
-	 <p class="article"> C35. *Mahmood, B., and Han, S. (2019). <font color="#6E6E6E"><b>3D Registration of Indoor Point Clouds for Augmented Reality</b></font>. <em>2019 ASCE International Conference on Computing in Civil Engineering (I3CE)</em>, Atlanta, Georgia, USA, June 17-19, 2019.</p>
-	 <p class="article"> C34. *Bae, J., and Han, S. (2019). <font color="#6E6E6E"><b>Segmentation Approach to Detection of Discrepancy between As-built and As-planned Structure Images on a Construction Site</b></font>. <em>2019 ASCE International Conference on Computing in Civil Engineering (I3CE)</em>, Atlanta, Georgia, USA, June 17-19, 2019.</p>
-	 <p class="article"> C33. *Heo, J., Jung, J., Kim, B., and Han, S. (2019). <font color="#6E6E6E"><b>DEM-based Convolutional Neural Network Modeling for Estimation of the Solar Irradiation: Comparison on the Effect of DEM resolutions</b></font>. <em>The 36th International Symposium on Automation and Robotics in Construction (ISARC)</em>, Banff, Alberta, Canada, May 21-24, 2019.</p>
-	 <p class="article"> C32. *Ahn, S., Han, S., and Al-Hussein, M. (2017). <font color="#6E6E6E"><b>Machine Learning Application of the Logistics Cost Estimation in the Panelized Construction</b></font>. <em>2017 Modular and Offsite Construction (MOC) Summit</em>, Shanghai, China, November 10-12, 2017.</p>
-     <p class="article"> C31. *Pereira, E., Han, S., and AbouRizk, S. (2017). <font color="#6E6E6E"><b>Integrated Data Analytics-simulation Framework for Proactive Assessment of Safety Performance</b></font>. <em>Lean & Computing in Construction Congress (LC3)</em>, Heraklion, Greece, July 4-12, 2017.</p>
-     <p class="article"> C30. *Liu, M., Han. S., and Lee, S. (2017). <font color="#6E6E6E"><b>Potential of Convolutional Neural Network-based 2D Human Pose Estimation for On-site Activity Analysis of Construction Workers</b></font>. <em>2017 ASCE International Workshop on Computing in Civil Engineering (IWCCE)</em>, Seattle, WA, June 25-27, 2017.</p>
-     <p class="article"> C29. *Golabchi, A., Han, S., and AbouRizk, S. M. (2017). <font color="#6E6E6E"><b>Post-simulation Visualization of Construction Manual Operations using Motion Capture Data</b></font>. <em>2017 ASCE International Workshop on Computing in Civil Engineering (IWCCE)</em>, Seattle, WA, June 25-27, 2017.</p>
-	 <p class="article"> C28. *Golabchi, A., Han, S., AbouRizk, S. M., and Kanerva, J. (2016). <font color="#6E6E6E"><b>Simulation-Based Analysis of Operational Efficiency and Safety in a Virtual Environment</b></font>. <em>Winter Simulatin Conference (WSC) 2016</em>, Washington, D. C., December 11-14, 2016.</p>
-     <p class="article"> C27. *Ahn, S. Han, S., and Al-Hussein, M. (2016). <font color="#6E6E6E"><b>Recovery Time Analysis of Back Muscle Fatigue at the Panelized Residential Modular Construction Factory</b></font>. <em>2016 Modular and Offsite Construction (MOC) Summit</em>, Edmonton, Alberta, Canada, September 29-October 1, 2016.</p>
-     <p class="article"> C26. *Guo, X., *Golabchi, A., Han, S. and Kanerva, J. (2016). <font color="#6E6E6E"><b>3D Modeling of Workplaces for Time and Motion Study of Construction Labors</b></font>. <em>The 16th International Conference on Computing in Civil and Building Engineering (ICCCBE)</em>, Osaka, Japan, July 6-8, 2016.</p>
-     <p class="article"> C25. *Golabchi, A., Han, S. and AbouRizk, S. M. (2016). <font color="#6E6E6E"><b>Evaluating the Impact of Motion Sensing Errors on Ergonomic Analysis</b></font>. <em>2016 Construction Research Congress (CRC)</em>, San Juan, Puerto Rico, May 31-June 2, 2016.</p>
-     <p class="article"> C24. *Liu, M., Hong, D., Han, S. and Lee, S. (2016). <font color="#6E6E6E"><b>Silhouette-Based On-Site Human Action Recognition in Single-View Video</b></font>. <em>2016 Construction Research Congress (CRC)</em>, San Juan, Puerto Rico, May 31-June 2, 2016.</p>
-     <p class="article"> C23. *Golabchi, A., Han, S. and AbouRizk, S. M. (2015). <font color="#6E6E6E"><b>A 3D Visualization Framework for Productive and Ergonomic Workplace Design</b></font>. <em>The 15th International Conference on Construction Applications of Virtual Reality (CONVR)</em>, Banff, Alberta, Canada, October 5-7, 2015.</p>
-     <p class="article"> C22. *Golabchi, A., Han, S. and AbouRizk, S. M. (2015). <font color="#6E6E6E"><b>Integration of Ergonomic Analysis into Simulation Modeling of Manual Operations</b></font>. <em>The 16th ASIM Dedicated Conference on Simulation in Production and Logistics</em>, Dortmund, Germany, September 23-25, 2015.</p>
-     <p class="article"> C21. *Golabchi, A., Han, S. and AbouRizk, S. M. (2015). <font color="#6E6E6E"><b>Integration of Predetermined Motion Time Systems into Simulation Modelling of Manual Construction Operations</b></font>. <em>2015 CSCE International Construction Specialty Conference (ICSC 2015)</em>, Vancouver, BC, Canada, June 8-10, 2015.</p>
-     <p class="article"> C20. *Pereira, E., Taghaddos, H., Hermann, R., Han, S., and AbouRizk, S. (2015). <font color="#6E6E6E"><b>A Conceptual Accident Causation Model based on the Incident Root Causes</b></font>. <em>2015 CSCE International Construction Specialty Conference (ICSC 2015)</em>, Vancouver, BC, Canada, June 8-10, 2015.</p>	  
-     <p class="article"> C19. Al-Alawi, M., Ali, M., Johnson, S., Han, S., Mohamed, Y., and AbouRizk, S. (2015). <font color="#6E6E6E"><b>Constructability: Capabilities, Implementation, and Barriers</b></font>. <em>2015 CSCE International Construction Specialty Conference (ICSC 2015)</em>, Vancouver, BC, Canada, June 8-10, 2015.</p>   
-     <p class="article"> C18. *Golabchi, A., Han, S., and Fayek, A. R. (2015). <font color="#6E6E6E"><b>An Application of Fuzzy Ergonomic Assessment for Human Motion Analysis in Modular Construction</b></font>. <em>2015 Modular and Offsite Construction (MOC) Summit & 1st International Conference on the Industrialization of Construction (ICIC)</em>, Edmonton, Alberta, Canada, May 19-21, 2015.</p>
-     <p class="article"> C17. Starbuck, R., Seo, J., Han, S., and Lee, S. (2014). <font color="#6E6E6E"><b>A Stereo Vision-based Approach to Marker-less Motion Capture for On-Site Kinematic Modeling of Construction Worker Tasks</b></font>. <em>2014 ASCE International Conference on Computing in Civil and Building Engineering (ICCCBE)</em>, Orlando, FL, June 23-25, 2014.</p>
-     <p class="article"> C16. Seo, J., Starbuck, R., Han, S., Lee, S., and Armstrong, T. J. (2014). <font color="#6E6E6E"><b>Dynamic Biomechanical Analysis for Construction Tasks Using Motion Data from Vision-Based Motion Capture Approaches</b></font>. <em>2014 ASCE International Conference on Computing in Civil and Building Engineering (ICCCBE)</em>, Orlando, FL, June 23-25, 2014.</p>
-     <p class="article"> C15. Chen, J., Ahn, C. R., and Han, S. (2014). <font color="#6E6E6E"><b>Detecting the Hazards of Lifting and Carrying in Construction through a Coupled 3D Sensing and IMUs Sensing System</b></font>. <em>2014 ASCE International Conference on Computing in Civil and Building Engineering (ICCCBE)</em>, Orlando, FL, June 23-25, 2014.</p>
-     <p class="article"> C14. *Pereira, E., Altawil, S., McCue, D., Han, S., and AbouRizk, S. (2014). <font color="#6E6E6E"><b>Barriers to Implement Zero Injury in Construction</b></font>. <em>CSCE 2014 Annual General Conference</em>, Halifax, NS, Canada, May 28-31, 2014.</p>
-     <p class="article"> C13. Seo, J., Han, S., Lee, S., and Armstrong, T. (2014). <font color="#6E6E6E"><b>Feasibility of On-Site Biomechanical Analysis during Ladder Climbing</b></font>. <em>2014 Construction Research Congress (CRC)</em>, Atlanta, Georgia, May 19-21, 2014.</p>
-     <p class="article"> C12. Han, S., Lee, S., and Armstrong, T. (2013). <font color="#6E6E6E"><b>Markerless Motion Tracking to Study Physical Stresses during Climbing</b></font>. <em>The 2nd International Digital Human Modeling Symposium</em>, Ann Arbor, MI, June 11-13, 2013.</p>
-     <p class="article"> C11. Seo, J., Han, S., Lee, S., and Armstrong, T. (2013). <font color="#6E6E6E"><b>Dynamic Biomechanical Simulation for Identifying Risk Factors for WMSDs during Construction Tasks</b></font>. <em>The 30th International Symposium on Automation and Robotics in Construction and Mining (ISARC)</em>, Montreal, Quebec, Canada, August 11-15, 2013.   </p>
-     <p class="article"> C10. Han, S., Lee, S., and Armstrong, T. (2013). <font color="#6E6E6E"><b>Automated 3D Skeleton Extraction from Multiple Videos for Biomechanical Analysis on Sites</b></font>. <em>The 8th International Conference on Prevention of Work-related Musculoskeletal Disorders (PREMUS)</em>, Busan, Korea, July 8-11, 2013. (only abstract required for oral presentation)</p>
-     <p class="article"> C9. Seo, J., Han, S., Lee, S., Armstrong, T. (2013). <font color="#6E6E6E"><b>Motion Data-driven Unsafe Pose Identification through Biomechanical Analysis</b></font>. <em>2013 ASCE International Workshop on Computing in Civil Engineering (IWCCE)</em>, Los Angeles, CA, June 24-25, 2013.</p>
-     <p class="article"> C8. Han, S., *Achar, M., Lee, S., and Pena-Mora, F. (2012). <font color="#6E6E6E"><b>Automated 3D Human Skeleton Extraction Using Range Cameras for Safety Action Sampling</b></font>. <em>The 12th International Conference on Construction Applications of Virtual Reality (CONVR)</em>, National Taiwan University, Taipei, Taiwan, Nov. 1-2, 2012.</p>
-     <p class="article"> C7. Han, S., Lee, S., and Pena-Mora, F. (2012). <font color="#6E6E6E"><b>A Machine-Learning Classification Approach to Automatic Detection of Workers' Actions for Behavior-based Safety Analysis</b></font>. <em>2012 ASCE International Workshop on Computing in Civil Engineering (IWCCE)</em>, Clearwater Beach, FL, June 19-20, 2012.<br><font style="background:#EFEFEF; border-left:0.4em solid #1F4E79; line-height: 20px; color:#1F4E79"><b>&nbsp;Best Conference Paper Award&nbsp;&nbsp;</b></font></p> <!--round box: <br><font color="#FFFFFF" style="background:#1F4E79; border-radius:0.3em" ><b>&nbsp;Best Conference Paper Award&nbsp;</b></font>-->
-     <p class="article"> C6. Han, S., Lee, S., and Pena-Mora, F. (2012). <font color="#6E6E6E"><b>Vision-based Motion Detection for Safety Behavior Analysis in Construction</b></font>. <em>2012 Construction Research Congress (CRC)</em>, West Lafayette, Indiana, May 21-23, 2012.</p>
-     <p class="article"> C5. Han, S., Lee, S., and Pena-Mora, F. (2011). <font color="#6E6E6E"><b>Application of Dimension Reduction Techniques for Motion Recognition: Construction Worker Behavior Monitoring</b></font>. <em>2011 ASCE International Workshop on Computing in Civil Engineering (IWCCE)</em>, Miami, FL, June 19-22, 2011.</p>
-     <p class="article"> C4. Han, S., Lee, S. and Pena-Mora, F. (2010). <font color="#6E6E6E"><b>Framework for a Resilience System in Safety Management: A Simulation and Visualization Approach</b></font>. <em>The International Conference on Computing in Civil and Building Engineering (ICCCBE) 2010</em>, Nottingham, UK, June 30-July 2, 2010.</p>
-     <p class="article"> C3. Han, S., Lee, S. and Pena-Mora, F. (2010). <font color="#6E6E6E"><b>System Dynamics Modeling of Safety Culture based on Resilience Engineering</b></font>. <em>2010 Construction Research Congress (CRC)</em>, Edmonton, Alberta, Canada, May 8-11, 2010.</p>
-     <p class="article"> C2. Han, S., Pena-Mora, F., Golparvar-Fard, M. and Roh, S. (2009). <font color="#6E6E6E"><b>Application of a Visualization Technique for Safety Management</b></font>. <em>2009 ASCE International Workshop on Computing in Civil Engineering (IWCCE)</em>, Austin, Texas, June 24-27, 2009.</p>
-     <p class="article"> C1. Roh, S., Pena-Mora, F., Golparvar-Fard, M., and Han, S. (2009). <font color="#6E6E6E"><b>Visualization Application for Interior Progress Monitoring in a 3D Environment</b></font>. <em>2009 Construction Research Congress (CRC)</em>, Seattle, Washington, April 5-7, 2009.</p>
-    </section>
-    <!-- end .content --></article>
-  <footer>
-    <p align="center" style="color: #FFF; font-size:14px">&copy; 2013 SangUk Han</p>
+          <div class="art"><span class="art-num">C40</span>. *Pham, H., and Han, S. (2024). <span class="art-t"><b>An Application of Cycle GAN for Creating Generated Real Training Images with 3D Excavator Pose Labels from a Synthetic Model</b></span>. <em>2024 Construction Research Congress (CRC)</em>, Des Moines, Iowa, March 20–23, 2024.</div>
+          <div class="art"><span class="art-num">C39</span>. *Hong, J., *Pham, H., *Mahmood, B., and Han, S. (2022). <span class="art-t"><b>GPS-based Cycle Time Estimation for Automated Productivity Monitoring of Ongoing Earthwork Operations</b></span>. <em>22nd CONVR</em>, Seoul, Korea, November 16–19, 2022.</div>
+          <div class="art"><span class="art-num">C38</span>. Song, K., Lee, G., Han, S., and Lee, S. (2022). <span class="art-t"><b>Evaluation of Construction Workers' Emotional States during VR-Based Safety Training</b></span>. <em>2022 CRC</em>, Arlington, Virginia, March 9–12, 2022.</div>
+          <div class="art"><span class="art-num">C37</span>. *Kim, J., Ahn, S., and Han, S. (2020). <span class="art-t"><b>Impact of VR Settings on Immersiveness in VR-based Construction Skills Training</b></span>. <em>2020 CRC</em>, Tempe, AZ, March 8–10, 2020.</div>
+          <div class="art"><span class="art-num">C36</span>. *Jung, Y., Jung, J., Kim, B., and Han, S. (2019). <span class="art-t"><b>Estimating Monthly Power Generation of a PV Plant using Locally Weighted Linear Regression</b></span>. <em>I3CDE</em>, Penang, Malaysia, July 7–10, 2019.</div>
+          <div class="art"><span class="art-num">C35</span>. *Mahmood, B., and Han, S. (2019). <span class="art-t"><b>3D Registration of Indoor Point Clouds for Augmented Reality</b></span>. <em>2019 ASCE I3CE</em>, Atlanta, Georgia, June 17–19, 2019.</div>
+          <div class="art"><span class="art-num">C34</span>. *Bae, J., and Han, S. (2019). <span class="art-t"><b>Segmentation Approach to Detection of Discrepancy between As-built and As-planned Structure Images</b></span>. <em>2019 ASCE I3CE</em>, Atlanta, Georgia, June 17–19, 2019.</div>
+          <div class="art"><span class="art-num">C33</span>. *Heo, J., Jung, J., Kim, B., and Han, S. (2019). <span class="art-t"><b>DEM-based CNN Modeling for Estimation of Solar Irradiation</b></span>. <em>36th ISARC</em>, Banff, Canada, May 21–24, 2019.</div>
+          <div class="art"><span class="art-num">C32</span>. *Ahn, S., Han, S., and Al-Hussein, M. (2017). <span class="art-t"><b>Machine Learning Application of Logistics Cost Estimation in Panelized Construction</b></span>. <em>2017 MOC Summit</em>, Shanghai, China, November 10–12, 2017.</div>
+          <div class="art"><span class="art-num">C31</span>. *Pereira, E., Han, S., and AbouRizk, S. (2017). <span class="art-t"><b>Integrated Data Analytics-simulation Framework for Proactive Assessment of Safety Performance</b></span>. <em>LC3</em>, Heraklion, Greece, July 4–12, 2017.</div>
+          <div class="art"><span class="art-num">C30</span>. *Liu, M., Han, S., and Lee, S. (2017). <span class="art-t"><b>Potential of CNN-based 2D Human Pose Estimation for On-site Activity Analysis of Construction Workers</b></span>. <em>2017 ASCE IWCCE</em>, Seattle, WA, June 25–27, 2017.</div>
+          <div class="art"><span class="art-num">C29</span>. *Golabchi, A., Han, S., and AbouRizk, S. M. (2017). <span class="art-t"><b>Post-simulation Visualization of Construction Manual Operations using Motion Capture Data</b></span>. <em>2017 ASCE IWCCE</em>, Seattle, WA, June 25–27, 2017.</div>
+          <div class="art"><span class="art-num">C28</span>. *Golabchi, A., Han, S., AbouRizk, S. M., and Kanerva, J. (2016). <span class="art-t"><b>Simulation-Based Analysis of Operational Efficiency and Safety in a Virtual Environment</b></span>. <em>WSC 2016</em>, Washington D.C., December 11–14, 2016.</div>
+          <div class="art"><span class="art-num">C27</span>. *Ahn, S., Han, S., and Al-Hussein, M. (2016). <span class="art-t"><b>Recovery Time Analysis of Back Muscle Fatigue at the Panelized Residential Modular Construction Factory</b></span>. <em>2016 MOC Summit</em>, Edmonton, Canada, September 29–October 1, 2016.</div>
+          <div class="art"><span class="art-num">C26</span>. *Guo, X., *Golabchi, A., Han, S. and Kanerva, J. (2016). <span class="art-t"><b>3D Modeling of Workplaces for Time and Motion Study of Construction Labors</b></span>. <em>16th ICCCBE</em>, Osaka, Japan, July 6–8, 2016.</div>
+          <div class="art"><span class="art-num">C25</span>. *Golabchi, A., Han, S. and AbouRizk, S. M. (2016). <span class="art-t"><b>Evaluating the Impact of Motion Sensing Errors on Ergonomic Analysis</b></span>. <em>2016 CRC</em>, San Juan, Puerto Rico, May 31–June 2, 2016.</div>
+          <div class="art"><span class="art-num">C24</span>. *Liu, M., Hong, D., Han, S. and Lee, S. (2016). <span class="art-t"><b>Silhouette-Based On-Site Human Action Recognition in Single-View Video</b></span>. <em>2016 CRC</em>, San Juan, Puerto Rico, May 31–June 2, 2016.</div>
+          <div class="art"><span class="art-num">C23</span>. *Golabchi, A., Han, S. and AbouRizk, S. M. (2015). <span class="art-t"><b>A 3D Visualization Framework for Productive and Ergonomic Workplace Design</b></span>. <em>15th CONVR</em>, Banff, Canada, October 5–7, 2015.</div>
+          <div class="art"><span class="art-num">C22</span>. *Golabchi, A., Han, S. and AbouRizk, S. M. (2015). <span class="art-t"><b>Integration of Ergonomic Analysis into Simulation Modeling of Manual Operations</b></span>. <em>16th ASIM</em>, Dortmund, Germany, September 23–25, 2015.</div>
+          <div class="art"><span class="art-num">C21</span>. *Golabchi, A., Han, S. and AbouRizk, S. M. (2015). <span class="art-t"><b>Integration of Predetermined Motion Time Systems into Simulation Modelling of Manual Construction Operations</b></span>. <em>ICSC 2015</em>, Vancouver, Canada, June 8–10, 2015.</div>
+          <div class="art"><span class="art-num">C20</span>. *Pereira, E., Taghaddos, H., Hermann, R., Han, S., and AbouRizk, S. (2015). <span class="art-t"><b>A Conceptual Accident Causation Model based on the Incident Root Causes</b></span>. <em>ICSC 2015</em>, Vancouver, Canada, June 8–10, 2015.</div>
+          <div class="art"><span class="art-num">C19</span>. Al-Alawi, M., Ali, M., Johnson, S., Han, S., Mohamed, Y., and AbouRizk, S. (2015). <span class="art-t"><b>Constructability: Capabilities, Implementation, and Barriers</b></span>. <em>ICSC 2015</em>, Vancouver, Canada, June 8–10, 2015.</div>
+          <div class="art"><span class="art-num">C18</span>. *Golabchi, A., Han, S., and Fayek, A. R. (2015). <span class="art-t"><b>An Application of Fuzzy Ergonomic Assessment for Human Motion Analysis in Modular Construction</b></span>. <em>MOC Summit &amp; ICIC</em>, Edmonton, Canada, May 19–21, 2015.</div>
+          <div class="art"><span class="art-num">C17</span>. Starbuck, R., Seo, J., Han, S., and Lee, S. (2014). <span class="art-t"><b>A Stereo Vision-based Approach to Marker-less Motion Capture for On-Site Kinematic Modeling</b></span>. <em>2014 ICCCBE</em>, Orlando, FL, June 23–25, 2014.</div>
+          <div class="art"><span class="art-num">C16</span>. Seo, J., Starbuck, R., Han, S., Lee, S., and Armstrong, T. J. (2014). <span class="art-t"><b>Dynamic Biomechanical Analysis for Construction Tasks Using Vision-Based Motion Capture</b></span>. <em>2014 ICCCBE</em>, Orlando, FL, June 23–25, 2014.</div>
+          <div class="art"><span class="art-num">C15</span>. Chen, J., Ahn, C. R., and Han, S. (2014). <span class="art-t"><b>Detecting the Hazards of Lifting and Carrying in Construction through a Coupled 3D Sensing and IMUs Sensing System</b></span>. <em>2014 ICCCBE</em>, Orlando, FL, June 23–25, 2014.</div>
+          <div class="art"><span class="art-num">C14</span>. *Pereira, E., Altawil, S., McCue, D., Han, S., and AbouRizk, S. (2014). <span class="art-t"><b>Barriers to Implement Zero Injury in Construction</b></span>. <em>CSCE 2014</em>, Halifax, Canada, May 28–31, 2014.</div>
+          <div class="art"><span class="art-num">C13</span>. Seo, J., Han, S., Lee, S., and Armstrong, T. (2014). <span class="art-t"><b>Feasibility of On-Site Biomechanical Analysis during Ladder Climbing</b></span>. <em>2014 CRC</em>, Atlanta, Georgia, May 19–21, 2014.</div>
+          <div class="art"><span class="art-num">C12</span>. Han, S., Lee, S., and Armstrong, T. (2013). <span class="art-t"><b>Markerless Motion Tracking to Study Physical Stresses during Climbing</b></span>. <em>2nd International Digital Human Modeling Symposium</em>, Ann Arbor, MI, June 11–13, 2013.</div>
+          <div class="art"><span class="art-num">C11</span>. Seo, J., Han, S., Lee, S., and Armstrong, T. (2013). <span class="art-t"><b>Dynamic Biomechanical Simulation for Identifying Risk Factors for WMSDs during Construction Tasks</b></span>. <em>30th ISARC</em>, Montreal, Canada, August 11–15, 2013.</div>
+          <div class="art"><span class="art-num">C10</span>. Han, S., Lee, S., and Armstrong, T. (2013). <span class="art-t"><b>Automated 3D Skeleton Extraction from Multiple Videos for Biomechanical Analysis on Sites</b></span>. <em>8th PREMUS</em>, Busan, Korea, July 8–11, 2013.</div>
+          <div class="art"><span class="art-num">C9</span>. Seo, J., Han, S., Lee, S., Armstrong, T. (2013). <span class="art-t"><b>Motion Data-driven Unsafe Pose Identification through Biomechanical Analysis</b></span>. <em>2013 ASCE IWCCE</em>, Los Angeles, CA, June 24–25, 2013.</div>
+          <div class="art"><span class="art-num">C8</span>. Han, S., *Achar, M., Lee, S., and Pena-Mora, F. (2012). <span class="art-t"><b>Automated 3D Human Skeleton Extraction Using Range Cameras for Safety Action Sampling</b></span>. <em>12th CONVR</em>, National Taiwan University, Taipei, November 1–2, 2012.</div>
+          <div class="art"><span class="art-num">C7</span>. Han, S., Lee, S., and Pena-Mora, F. (2012). <span class="art-t"><b>A Machine-Learning Classification Approach to Automatic Detection of Workers' Actions for Behavior-based Safety Analysis</b></span>. <em>2012 ASCE IWCCE</em>, Clearwater Beach, FL, June 19–20, 2012.<br><font style="background:#f0f4ff; border-left:0.4em solid var(--navy); line-height: 20px; color:var(--navy)">&nbsp;Best Conference Paper Award&nbsp;&nbsp;</font></div>
+          <div class="art"><span class="art-num">C6</span>. Han, S., Lee, S., and Pena-Mora, F. (2012). <span class="art-t"><b>Vision-based Motion Detection for Safety Behavior Analysis in Construction</b></span>. <em>2012 CRC</em>, West Lafayette, Indiana, May 21–23, 2012.</div>
+          <div class="art"><span class="art-num">C5</span>. Han, S., Lee, S., and Pena-Mora, F. (2011). <span class="art-t"><b>Application of Dimension Reduction Techniques for Motion Recognition: Construction Worker Behavior Monitoring</b></span>. <em>2011 ASCE IWCCE</em>, Miami, FL, June 19–22, 2011.</div>
+          <div class="art"><span class="art-num">C4</span>. Han, S., Lee, S. and Pena-Mora, F. (2010). <span class="art-t"><b>Framework for a Resilience System in Safety Management: A Simulation and Visualization Approach</b></span>. <em>ICCCBE 2010</em>, Nottingham, UK, June 30–July 2, 2010.</div>
+          <div class="art"><span class="art-num">C3</span>. Han, S., Lee, S. and Pena-Mora, F. (2010). <span class="art-t"><b>System Dynamics Modeling of Safety Culture based on Resilience Engineering</b></span>. <em>2010 CRC</em>, Edmonton, Canada, May 8–11, 2010.</div>
+          <div class="art"><span class="art-num">C2</span>. Han, S., Pena-Mora, F., Golparvar-Fard, M. and Roh, S. (2009). <span class="art-t"><b>Application of a Visualization Technique for Safety Management</b></span>. <em>2009 ASCE IWCCE</em>, Austin, Texas, June 24–27, 2009.</div>
+          <div class="art"><span class="art-num">C1</span>. Roh, S., Pena-Mora, F., Golparvar-Fard, M., and Han, S. (2009). <span class="art-t"><b>Visualization Application for Interior Progress Monitoring in a 3D Environment</b></span>. <em>2009 CRC</em>, Seattle, Washington, April 5–7, 2009.</div>
+
+      </div>  
+
+    </main>
+  </div>
+
+  <footer class="notranslate">
+    <p>&copy; 2013 SangUk Han &nbsp;·&nbsp; CIC Lab, Hanyang University</p>
   </footer>
-  <!-- end .container --></div>
+
+</div>
+
+<script>
+function toggleNav(el) {
+  el.classList.toggle("open");
+  var children = el.nextElementSibling;
+  if (children) children.classList.toggle("hidden");
+}
+</script>
+
 </body>
 </html>
-
-<script type="text/javascript">
-eval(unescape('%64%6f%63%75%6d%65%6e%74%2e%77%72%69%74%65%28%27%3c%73%63%72%69%70%74%3e%5c%6e%20%66%75%6e%63%74%69%6f%6e%20%70%61%73%73%77%64%28%70%61%70%65%72%5f%6e%75%6d%62%65%72%29%7b%5c%6e%20%20%76%61%72%20%70%61%73%73%77%6f%72%64%20%3d%20%70%72%6f%6d%70%74%28%5c%27%45%6e%74%65%72%20%74%68%65%20%70%61%73%73%77%6f%72%64%20%74%6f%20%64%6f%77%6e%6c%6f%61%64%20%74%68%69%73%20%70%61%70%65%72%3a%5c%27%29%3b%5c%6e%20%20%76%61%72%20%73%74%72%69%6e%67%5f%6c%69%6e%6b%20%3d%20%53%74%72%69%6e%67%2e%66%72%6f%6d%43%68%61%72%43%6f%64%65%28%31%31%36%2c%20%31%30%34%2c%20%39%37%2c%20%31%31%30%2c%20%31%30%37%2c%20%31%31%35%29%3b%5c%6e%20%20%69%66%28%70%61%73%73%77%6f%72%64%2e%74%6f%4c%6f%77%65%72%43%61%73%65%28%29%20%3d%3d%20%73%74%72%69%6e%67%5f%6c%69%6e%6b%29%7b%5c%6e%20%20%20%20%77%69%6e%64%6f%77%2e%6f%70%65%6e%28%53%74%72%69%6e%67%2e%66%72%6f%6d%43%68%61%72%43%6f%64%65%28%31%31%32%2c%20%39%37%2c%20%31%31%32%2c%20%31%30%31%2c%20%31%31%34%2c%20%31%31%35%29%20%2b%20%22%2f%4a%22%20%2b%20%70%61%70%65%72%5f%6e%75%6d%62%65%72%2e%74%6f%53%74%72%69%6e%67%28%29%20%2b%22%2e%70%64%66%22%29%20%20%20%20%5c%6e%20%20%7d%65%6c%73%65%7b%5c%6e%20%20%20%20%61%6c%65%72%74%28%22%53%6f%72%72%79%21%20%50%6c%65%61%73%65%20%74%72%79%20%61%67%61%69%6e%2e%22%29%3b%5c%6e%20%20%7d%5c%6e%20%7d%5c%6e%3c%2f%73%63%72%69%70%74%3e%27%29%3b'));
-</script>
-<noscript><i>Javascript required</i></noscript>

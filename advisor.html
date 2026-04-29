@@ -1,324 +1,658 @@
-﻿<!doctype html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SangUk Han: CIC Lab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIC-Lab @ Hanyang University</title>
 <link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
-<style type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #022E80;
+  --navy-dark: #011d52;
+  --navy-light: #1a4fa8;
+  --accent: #4A8FE7;
+  --accent-light: #e8f0fd;
+  --text: #1a1a2e;
+  --text-muted: #5a6070;
+  --bg: #f7f8fc;
+  --white: #ffffff;
+  --border: #e2e6f0;
+  --sidebar-w: 220px;
+  --radius: 10px;
+}
 
 body {
-	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	background-color: #ececeb;
-	margin: 0;
-	padding: 0;
-	/* [disabled]color: #C39; */
-}
-/* ~~ Element/tag selectors ~~ */
-ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
-	padding: 0;
-	margin: 0;
-}
-ul{
-	font-size:13px;
-}
-h1, h2, h3, h4, h5, h6, p{
-	margin-top: 10px;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	margin-bottom: 0;
-	padding-right: 15px;
-	padding-left: 15px; /* adding the padding to the sides of the elements within the blocks, instead of the block elements themselves, gets rid of any box model math. A nested block with side padding can also be used as an alternate method. */
-}
-p.lab_head{
-	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	padding-right: 15px;
-	padding-left: 15px;
-}
-p.lab{
-	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
-	padding-right: 15px;
-	padding-left: 15px;
-	font-size: 12px;
-}
-p.article{
-    margin-top: 0;    
-    margin-left: 30px;
-    text-indent: -30px;
-    margin-bottom: 3px;
-    font-size: 12px;
-    line-height: 18px;
-}
-p.bottom{
-    border-bottom: 1px solid #FFF;  /* this creates the button separation */
-    border-top: 0px solid #FFF;  /* this creates the button separation */
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-p.both{
-    border-bottom: 1px solid #FFF;  /* this creates the button separation */
-    border-top: 1px solid #FFF;  /* this creates the button separation */
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-top: 0;
-    margin-bottom: 0;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
 }
 
-a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
-	border: none;
-}
-/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
-a:link {
-	color: #42413C; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
-}
-a:visited {
-	color: #6E6C64;
-}
-a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
-	text-decoration: none;
-}
-/* ~~ This fixed width container surrounds all other blocks ~~ */
-.container {
-	width: 960px;
-	background-color: #FFFFFF;
-	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
-}
-/* ~~ The header is not given a width. It will extend the full width of your layout. ~~ */
-header {
-	font: 150%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	vertical-align: middle;
-	background-color: #022E80;
-	background-image: url("header_cic.jpg");
-	background-size: cover;
-	height: 40px;
-	padding-top: 6px;
-	padding-right: 0px;
-	padding-bottom: 4px;
-	padding-left: 0px;
-	position: relative;
-}
-/* ~~ These are the columns for the layout. ~~ 
+a { color: var(--navy); text-decoration: none; }
+a:hover { color: var(--accent); }
 
-1) Padding is only placed on the top and/or bottom of the block elements. The elements within these blocks have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the block itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the block element and place a second block element within it with no width and the padding necessary for your design.
-
-2) No margin has been given to the columns since they are all floated. If you must add margin, avoid placing it on the side you're floating toward (for example: a right margin on a block set to float right). Many times, padding can be used instead. For blocks where this rule must be broken, you should add a "display:inline" declaration to the block element's rule to tame a bug where some versions of Internet Explorer double the margin.
-
-3) Since classes can be used multiple times in a document (and an element can also have multiple classes applied), the columns have been assigned class names instead of IDs. For example, two sidebar blocks could be stacked if necessary. These can very easily be changed to IDs if that's your preference, as long as you'll only be using them once per document.
-
-4) If you prefer your nav on the left instead of the right, simply float these columns the opposite direction (all left instead of all right) and they'll render in reverse order. There's no need to move the blocks around in the HTML source.
-
-*/
-.sidebar1 {
-	float: left;
-	width: 150px;
-	background-color: #FFFFFF;
-	padding-bottom: 10px;
-	border-color:#FFF;
-}
-.content {
-	padding: 10px 0;
-	width: 800px;
-	float: right;
+/* ── LAYOUT ── */
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-/* ~~ This grouped selector gives the lists in the .content area space ~~ */
-.content ul, .content ol {
-	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--navy);
+  background-image: url("header.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(2,46,128,0.18);
+  position: relative;
 }
 
-/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
-nav ul{
-	list-style: none; /* this removes the list marker */
-	border-top: 1px solid #FFF; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
-	margin-bottom: 15px; /* this creates the space between the navigation on the content below */
-}
-nav li {
-	border-bottom: 1px solid #FFF; /* this creates the button separation */
-}
-nav a, nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
-	padding: 5px 5px 5px 15px;
-	display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
-	width: 130px;  /*this width makes the entire button clickable for IE6. If you don't need to support IE6, it can be removed. Calculate the proper width by subtracting the padding on this link from the width of your sidebar container. */
-	text-decoration: none;
-	background-color: #5197FF;
-	background-image: url("sidebar1.jpg");
-}
-nav a:hover, nav a:active, nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-	background-color: #1573FF;
-	color: #FFF;
-	background-image: url("sidebar2.jpg");
+.topbar-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 30px;
+  color: #fff;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+  text-align: center;
 }
 
-/* ~~ The footer ~~ */
+.topbar-title span {
+  color: #ffffff;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.topbar-logo {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px;
+  width: auto;
+  opacity: 0.92;
+}
+
+/* ── BODY LAYOUT ── */
+.body-layout {
+  display: flex;
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px 16px;
+  gap: 24px;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+}
+
+.sidebar-inner {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+
+.nav-section {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.nav-section:last-child { border-bottom: none; }
+
+.nav-section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 18px 4px;
+}
+
+.nav-marker {
+  display: inline-block;
+  width: 4px;
+  height: 14px;
+  background: #1F497D;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  font-size: 13.5px;
+  color: var(--text);
+  transition: background 0.15s, color 0.15s;
+  gap: 8px;
+}
+.nav-link:hover, .nav-link.active {
+  background: var(--accent-light);
+  color: var(--navy);
+}
+.nav-link.active { font-weight: 500; }
+
+.nav-sub { padding-left: 14px; }
+.nav-sub .nav-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 6px 18px 6px 26px;
+}
+.nav-sub .nav-link::before {
+  content: "›";
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.nav-toggle {
+  cursor: pointer;
+  user-select: none;
+}
+.nav-toggle-icon {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.nav-toggle.open .nav-toggle-icon { transform: rotate(180deg); }
+.nav-children { display: block; }
+.nav-children.hidden { display: none; }
+
+.sidebar-logo {
+  padding: 14px 18px;
+  display: flex;
+  justify-content: center;
+}
+.sidebar-logo img { width: 140px; opacity: 0.85; }
+
+.translate-wrap {
+  padding: 10px 14px 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── MAIN ── */
+.main { flex: 1; min-width: 0; }
+
+/* ── HERO IMAGE ── */
+.hero {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.hero img { width: 100%; display: block; max-height: 340px; object-fit: cover; }
+
+/* ── CARD ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-light);
+}
+
+.card p {
+  color: var(--text);
+  font-size: 14.5px;
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+.card p:last-child { margin-bottom: 0; }
+
+.card ul {
+  list-style: none;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card ul li {
+  font-size: 14px;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.5;
+  color: var(--text);
+}
+.card ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ── SLIDESHOW ── */
+.slideshow-wrap {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.slideshow-wrap h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-light);
+}
+
+.slideshow-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.mySlides { display: none; position: relative; }
+.mySlides img {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  display: block;
+}
+.slide-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.65));
+  color: #fff;
+  padding: 28px 20px 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.slide-num {
+  position: absolute;
+  top: 12px; right: 14px;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.85);
+  color: var(--navy);
+  border: none;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 17px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+  z-index: 10;
+}
+.prev:hover, .next:hover { background: #fff; }
+.prev { left: 12px; }
+.next { right: 12px; }
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.dot.active { background: var(--navy); transform: scale(1.3); }
+
+/* ── RESEARCH ITEMS ── */
+.research-list { display: flex; flex-direction: column; gap: 0; }
+
+.research-item {
+  padding: 14px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: 1px solid transparent;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.research-item:hover, .research-item.active {
+  background: var(--accent-light);
+  border-color: #c5d8f8;
+}
+.research-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  margin-top: 6px;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.research-item.active .research-dot,
+.research-item:hover .research-dot { background: var(--navy); }
+
+.research-item strong { font-size: 14px; display: block; margin-bottom: 4px; color: var(--navy); }
+.research-item p { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+/* ── CONTACT ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 4px;
+}
+.contact-item { display: flex; flex-direction: column; gap: 4px; }
+.contact-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.contact-value { font-size: 13.5px; color: var(--text); line-height: 1.5; }
+
+/* profile */
+.profile-hdr{display:flex;gap:24px;align-items:flex-start;margin-bottom:20px}
+.profile-photo{width:110px;height:150px;object-fit:cover;border-radius:8px;flex-shrink:0;border:1px solid var(--border)}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:6px}
+.clabel{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.cval{font-size:13.5px;line-height:1.5}
+
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;margin-right:4px;margin-bottom:4px}
+.tag-ug{background:#e8f0fd;color:#1a4fa8}
+.tag-g{background:#e8fdf0;color:#0f6e56}
+.tag-period{background:#fdf3e8;color:#854f0b}
+
+/* ── FOOTER ── */
 footer {
-	position: relative;/* this gives IE6 hasLayout to properly clear */
-	clear: both;
-	background-color: #00366C;
-	vertical-align: middle;
-	height: 25px;	
+  background: var(--navy-dark);
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  font-size: 13px;
+  padding: 18px;
 }
 
-/*HTML 5 support - Sets new HTML 5 tags to display:block so browsers know how to render the tags properly. */
-header, section, footer, aside, article, figure {
-	display: block;
+/* ── RESPONSIVE ── */
+@media (max-width: 760px) {
+  .body-layout { flex-direction: column; padding: 12px; }
+  .sidebar { width: 100%; }
+  .sidebar-inner { position: static; }
+  .topbar-title { font-size: 17px; }
 }
 
-</style><!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]--></head>
+.fade {
+  animation: fadein 0.7s ease;
+}
+@keyframes fadein {
+  from { opacity: 0.4; }
+  to   { opacity: 1; }
+}
+</style>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83687716-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</head>
 
 <body>
+<div class="wrapper">
 
-<div class="container">
-  <header>
-    <p class="lab_head"> <strong style="color:white; font-size:20px"><capital style="font-size:23px">C</capital>onstruction <capital style="font-size:23px">I</capital>nformatics and <capital style="font-size:23px">C</capital>omputing <capital style="font-size:23px">L</capital>ab</strong></p>
-  </header>
-  <div class="sidebar1">
-  <nav>
-    <ul>    
-      <p class="bottom"><a href="index.html" style="color:white">&nbsp; Home</a></p>
+  <!-- TOP NAV BAR -->
+  <div class="topbar notranslate">
+    <span class="topbar-title">
+      <span>C</span>onstruction <span>I</span>nformatics and <span>C</span>omputing <span>L</span>ab
+    </span>
+    <img src="CIC_logo.png" class="topbar-logo" alt="CIC Logo">
+  </div>
 
-      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
-      &nbsp; Members
-      </a><div style="DISPLAY: block">
-      <a href="advisor.html" style="color:white">&nbsp; &raquo; Advisor</a>
-      <a href="members.html" style="color:white">&nbsp; &raquo; Lab Members</a>
-      </div>     
+  <!-- BODY -->
+  <div class="body-layout">
 
-      <p class="both"><a href="research.html" style="color:white">&nbsp; Research Projects</a></li></p>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-inner">
 
-      <a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" style="color:white"> 
-      &nbsp; Publications
-      </a><div style="DISPLAY: block">
-      <a href="publications.html" style="color:white">&nbsp; &raquo; International</a>
-      <a href="publications_domestic.html" style="color:white">&nbsp; &raquo; Domestic (KOR)</a>
+        <div class="nav-section notranslate">
+          <a href="index.html" class="nav-link active"><span class="nav-marker"></span> Home</a>
+        </div>
+
+        <div class="nav-section notranslate">
+          <div class="nav-link nav-toggle open" onclick="toggleNav(this)">
+            <span class="nav-marker"></span> Members <span class="nav-toggle-icon">▾</span>
+          </div>
+          <div class="nav-children nav-sub">
+            <a href="advisor.html" class="nav-link">Advisor</a>
+            <a href="members.html" class="nav-link">Lab Members</a>
+          </div>
+        </div>
+
+        <div class="nav-section notranslate">
+          <a href="research.html" class="nav-link"><span class="nav-marker"></span> Research Projects</a>
+        </div>
+
+        <div class="nav-section notranslate">
+          <div class="nav-link nav-toggle open" onclick="toggleNav(this)">
+            <span class="nav-marker"></span> Publications <span class="nav-toggle-icon">▾</span>
+          </div>
+          <div class="nav-children nav-sub">
+            <a href="publications.html" class="nav-link">International</a>
+            <a href="publications_domestic.html" class="nav-link">Domestic (KOR)</a>
+          </div>
+        </div>
+
+        <div class="nav-section notranslate">
+          <a href="courses.html" class="nav-link"><span class="nav-marker"></span> Courses</a>
+          <a href="admission.html" class="nav-link"><span class="nav-marker"></span> Admission</a>
+        </div>
+
+        <div class="nav-section notranslate">
+          <div class="nav-section-label">Quick Links</div>
+          <a href="https://civil.hanyang.ac.kr/" class="nav-link" target="_blank" rel="noopener noreferrer">Department ↗</a>
+          <a href="https://www.hanyang.ac.kr/web/www/home" class="nav-link" target="_blank" rel="noopener noreferrer">University ↗</a>
+        </div>
+
+        <div class="sidebar-logo">
+          <img src="HYU.jpg" alt="Hanyang University">
+        </div>
+
+        <div class="translate-wrap notranslate">
+          <div id="google_translate_element"></div>
+          <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+          <script>
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement(
+                {pageLanguage: 'en', includedLanguages: 'ko,en', layout: google.translate.TranslateElement.InlineLayout.VERTICAL},
+                'google_translate_element'
+              );
+            }
+          </script>
+          <style>.goog-te-banner-frame.skiptranslate { display: none !important; }</style>
+        </div>
+
       </div>
+    </aside>
 
-      <p class="both"><a href="courses.html" style="color:white">&nbsp; Courses</a></p>
-	  <p class="bottom"><a href="admission.html" style="color:white">&nbsp; Admission</a></p>
-      <li style="font-size:5px">&nbsp;</li>
-      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Quick Links</b></li>
-      <p class="bottom"><a href="https://civil.hanyang.ac.kr/" style="color:white" target="_blank">&nbsp; Department</a></p>
-      <p class="bottom"><a href="https://www.hanyang.ac.kr/web/www/home" style="color:white" target="_blank">&nbsp; University</a></p>
-	  <p class="both" style="margin-top: 5px"><center><img src="HYU.jpg" width="132" height="35" border="none" aligh="middle"></center></p>
-    </ul>
-    </nav>
-  <!-- end .sidebar1 --></div>
-<article class="content">
-    <h3>SangUk Han, PhD<img class="img1" src="han.jpg" width="100" height="140" align="right"></h3>
-    
-    <h5>Professor</h5>
-    <p class="lab" style="font-size:13px;">
-       Construction Engineering and Management<br>
-       Department of Civil and Environmental Engineering<br>
-       Hanyang University</p>
-    <h5>Contact</h5>  
-    <p class="lab" style="font-size: 13px">Office: Jaesung Civil Eng Bldg #413, 222 Wangsimni-ro, Seongdong-gu, Seoul, S. Korea (04763)<br>
-       Phone: +82 (02) 2220-0326<br>
-       Email: sanguk@hanyang.ac.kr<br></p>
-	<h5>Researcher Profiles</h5>  
-	<p class="lab"><a href="https://scholar.google.com/citations?user=H9I7cbUAAAAJ&hl=en&oi=ao" style="text-decoration:none" target="_blank"><font color="#4885ed"><b>G</b></font><font color="#db3236"><b>o</b></font><font color="#f4c20d"><b>o</b></font><font color="#4885ed"><b>g</b></font><font color="#3cba54"><b>l</b></font><font color="#db3236"><b>e</b></font><font color="#808080"><b> Scholar</b></font></a>&nbsp;&nbsp;&nbsp;<a href="https://www.scopus.com/authid/detail.uri?authorId=55487857100" style="text-decoration:none;" target="_blank"><span style="color:#FFFFFF; background-color:#E67E22;font-weight: bold;"> Scopus </span></a>&nbsp;&nbsp;&nbsp;<!---<a href="https://hanyang.elsevierpure.com/en/persons/sanguk-han" style="text-decoration:none;" target="_blank"><font color="#E67E22"><b>Elsevier Pure</b></font></a>&nbsp;&nbsp;&nbsp;---><a href="https://www.webofscience.com/wos/author/record/51527000" style="text-decoration:none;" target="_blank"><font color="#000000"><b>Web of Science</b></font></a> <font color="#808080"><i>(login req)</i></font><br>
-	</p>
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+<div class="card">
+  <div class="profile-hdr">
+    <img class="profile-photo" src="han.jpg" alt="SangUk Han">
+    <div>
+      <h2 class="card-title" style="border:none;padding:0;margin-bottom:6px">SangUk Han, PhD</h2>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:2px"> Professor · Department Chair</p>
+      <p style="font-size:13.5px;margin-bottom:2px">Construction Engineering and Management</p>
+      <p style="font-size:13.5px;margin-bottom:2px">Department of Civil and Environmental Engineering</p>
+      <p style="font-size:13.5px">Hanyang University</p>
+    </div>
+  </div>
+  <hr class="sec">
+  <div class="contact-grid">
+    <div class="contact-item"><span class="clabel">Office</span><span class="cval">Jaesung Civil Eng Bldg #413<br>222 Wangsimni-ro, Seongdong-gu<br>Seoul, S. Korea 04763</span></div>
+    <div class="contact-item"><span class="clabel">Phone</span><span class="cval">+82 (02) 2220-0326</span></div>
+    <div class="contact-item"><span class="clabel">Email</span><span class="cval"><a href="mailto:sanguk@hanyang.ac.kr">sanguk@hanyang.ac.kr</a></span></div>
+  </div>
+  <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://scholar.google.com/citations?user=H9I7cbUAAAAJ&hl=en" target="_blank" class="tag tag-ug" style="font-size:13px;padding:4px 12px"><b style="color:#4885ed">G</b><b style="color:#db3236">o</b><b style="color:#f4c20d">o</b><b style="color:#4885ed">g</b><b style="color:#3cba54">l</b><b style="color:#db3236">e</b> Scholar</a>
+    <a href="https://www.scopus.com/authid/detail.uri?authorId=55487857100" target="_blank" class="tag" style="background:#E67E22;color:#fff;font-size:13px;padding:4px 12px;font-weight:600">Scopus</a>
+    <a href="https://www.webofscience.com/wos/author/record/51527000" target="_blank" class="tag tag-period" style="font-size:13px;padding:4px 12px;font-weight:600">Web of Science <span style="font-weight:400;color:var(--muted)">(login req)</span></a>
+  </div>
+</div>
+
+<div class="card">
+  <h2 class="card-title">Academic Positions</h2>
+  <ul>
+    <li>Professor, Dept of Civil and Environmental Eng, Hanyang University, Korea, 2025–present</li>
+    <li>Associate Professor, Dept of Civil and Environmental Eng, Hanyang University, Korea, 2020–2025</li>
+    <li>Assistant Professor, Dept of Civil and Environmental Eng, Hanyang University, Korea, 2016–2020</li>
+    <li>Assistant Professor, Dept of Civil and Environmental Eng, University of Alberta, Canada, 2013–2016</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2 class="card-title">Education</h2>
+  <ul>
+    <li>Doctor of Philosophy, Civil Engineering (Construction Management), University of Illinois at Urbana-Champaign, IL, USA, 2013</li>
+    <li>Master of Science, Computer Science (Vision and Graphics), Columbia University, NY, USA, 2012</li>
+    <li>Master of Science, Civil Engineering (Information Technology), University of Illinois at Urbana-Champaign, IL, USA, 2009</li>
+    <li>Bachelor of Science, Civil Engineering, Hanyang University, Seoul, Korea, 2005</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2 class="card-title">Awards, Honors &amp; Recognition</h2>
+  <ul>
+    <li>2023 Outstanding Paper Award, Journal of KIBIM, 2023</li>
+    <li>HY Researcher of the Month (June 2022, November 2023), Hanyang University</li>
+    <li>2014, 2016, 2017 &amp; 2022 Outstanding Reviewer, ASCE Journal of Computing in Civil Engineering</li>
+    <li>Outstanding Conference Poster Paper Award, 2022 KSARC Convention Conference</li>
+    <li>Best Teacher Award, Hanyang University, 2022</li>
+    <li>Outstanding Conference Award, 2021 KICS Annual Conference</li>
+    <li>2020 Outstanding Paper Award, Korean Journal of Construction Engineering and Management</li>
+    <li>2016 &amp; 2019 Outstanding Reviewer, ASCE Journal of Construction Engineering and Management</li>
+    <li>Outstanding Teacher Award, Hanyang University, 2019</li>
+    <li>2018 Jang, Won-Suk Special Award, KICEM, 2018</li>
+    <li>Outstanding Conference Paper Award, 2017 KICEM Annual Conference</li>
+    <li>2014 Best Paper Award, ASCE Journal of Computing in Civil Engineering, 2015</li>
+    <li>Best Conference Paper Award, 2012 ASCE IWCCE</li>
+    <li>Travel Grant Award, 12th CONVR, National Taiwan University, 2012</li>
+    <li>Travel Grant Award, 2012 ASCE Construction Research Congress (sponsored by KACEPMA)</li>
+    <li>Scholarships, Department of Civil Engineering, Hanyang University, 2002 &amp; 2004</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2 class="card-title">Selected Service Activities</h2>
+  <ul>
+    <li>Associate Editor, KSCE Journal of Civil Engineering, 2023–present</li>
+    <li>Editor-in-chief, KSARC Journal of Construction Automation and Robotics, 2022–2023</li>
+    <li>Assistant Specialty Editor, ASCE Journal of Construction Engineering and Management, 2015–present</li>
+    <li>Reviewer, Automation in Construction, Elsevier, 2014–present</li>
+    <li>Reviewer, ASCE Journal of Computing in Civil Engineering, 2013–present</li>
+    <li>Reviewer, ASCE Journal of Construction Engineering and Management, 2012–present</li>
+    <li>Board Member, Korean Society of Automation and Robotics in Construction (KSARC), 2024–2025</li>
+    <li>Board Member, Korean Institute of Building Information Modeling, 2019–2020</li>
+    <li>Organizing &amp; Technical Committee Co-chair, CONVR 2015, Banff, Canada</li>
+    <li>Member, Central Construction Technology Committee, Ministry of Land, Infrastructure and Transport, 2024</li>
+    <li>Member, Technical Advisory Committee, Gyeonggi Housing and Urban Development Corporation, 2021–2022</li>
+    <li>Member, Public-Private Partnership Project Evaluation Committee, Seoul Metropolitan Government, 2019–2022</li>
+    <li>Member, Technical Advisory Committee, Korea Rail Network Authority, 2018–2020</li>
+    <li>Member, Technology Review and Evaluation Committee, Korea Land and Housing Corporation, 2018–2020, 2024–2025</li>
+    <li>Member, Plant Education Advisory Committee, Korea Plant Industries Association, 2018–2020</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2 class="card-title">Short Biography</h2>
+  <p style="text-align:justify">Dr. Han is a Professor in the Department of Civil and Environmental Engineering at Hanyang University. He earned MS and PhD degrees in Civil Engineering from the University of Illinois at Urbana-Champaign in 2009 and 2013, and a MS degree in Computer Science from Columbia University in 2012. He joined Hanyang University in September 2016, after serving as a faculty member at the University of Alberta, Canada.</p>
+  <p style="text-align:justify">His research interests include construction automation and informatics for computer-aided decision making — spanning mixed reality (VR/AR) for quality inspection, digital twin technology for resource management, motion data-driven simulation for ergonomic analysis, data mining for proactive accident prevention, and high-dimensional spatial data processing for GIS analysis.</p>
+  <p style="text-align:justify">He is a member of the American Society of Civil Engineers and serves as an assistant specialty editor of the ASCE Journal of Construction Engineering and Management and as a reviewer for several international journals.</p>
+</div>
+
 	
-    <hr size="1px" noshade align="center">
-	<section>
-      <h4>Academic Positions</h4>
-      <ul style="line-height: 18px">
-       <li>Professor, Dept of Civil and Environmental Eng, Hanyang University, Korea, 2025-present</li>
-	   <li>Associate Professor, Dept of Civil and Environmental Eng, Hanyang University, Korea, 2020-2025</li>
-	   <li>Assistant Professor, Dept of Civil and Environmental Eng, Hanyang University, Korea, 2016-2020</li>
-       <li>Assistant Professor, Dept of Civil and Environmental Eng, University of Alberta, Canada, 2013-2016</li>
-	  </ul>
-    </section>
-    <section>
-      <h4>Education</h4>
-      <ul style="line-height: 18px">
-       <li>Doctor of Philosophy, Civil Engineering (Construction Management program), University of Illinois at Urbana-Champaign, IL, USA, 2013</li>
-       <li>Master of Science, Computer Science (Vision and Graphics track), Columbia University, NY, USA, 2012</li>
-       <li>Master of Science, Civil Engineering (Information Technology program), University of Illinois at Urbana-Champaign, IL, USA, 2009</li>
-       <li>Bachelor of Science, Civil Engineering, Hanyang University, Seoul, Korea, 2005</li>
-	  </ul>
-    </section>
-    <section>
-      <h4>Awards, Honors, & Recognition</h4>
-      <ul style="line-height: 18px">
-       <li>2023 Outstanding Paper Award, Journal of KIBIM, Korean Institute of Building Information Modeling (KIBIM), 2023</li>
-	   <li>HY Researcher of the Month (June 2022, November 2023), Hanyang University, 2022 & 2023</li>
-	   <li>2014, 2016, 2017 & 2022 Outstanding Reviewer, ASCE Journal of Computing in Civil Engineering, 2015, 2017, 2018 & 2023</li>
-	   <li>Outstanding Conference Poster Paper Award, 2022 Korean Society of Automation and Robotics in Construction (KSARC) Convention Conference, Sejong, South Korea, 2022</li>
-	   <li>Best Teacher Award, Hanyang University, 2022</li>
-	   <li>Outstanding Conference Award, 2021 Korea Institute of Construction Safety (KICS) Annual Conference, Goyang, South Korea, 2021</li>
-	   <li>2020 Outstanding Paper Award, Korean Journal of Construction Engineering and Management, Korean Institute of Construction Engineering and Management (KICEM), 2020</li>
-	   <li>2016 & 2019 Outstanding Reviewer, ASCE Journal of Construction Engineering and Management, 2017 & 2020</li>
-	   <li>Outstanding Teacher Award, Hanyang University, 2019</li>
-	   <li>2018 Jang, Won-Suk Special Award, Korean Institute of Construction Engineering and Management (KICEM), 2018</li>
-       <li>Outstanding Conference Paper Award, 2017 Korea Institute of Construction Engineering and Management (KICEM) Annual Conference, Seoul, South Korea, 2017</li> 
-       <li>2014 Best Paper Award, ASCE Journal of Computing in Civil Engineering, 2015</li>
-       <li>Best Conference Paper Award, 2012 ASCE International Conference on Computing in Civil Engineering, Visualization, Information Modeling, and Simulation (VIMS) Committee, 2012</li>
-       <li>Travel Grant Award, 12th International Conference on Construction Applications of Virtual Reality, National Taiwan  University, Taipei, Taiwan, 2012</li>
-       <li>Travel Grant Award, 2012 ASCE Construction Research Congress, Purdue University, Indiana, sponsored by the Korean-American Construction Engineering and Project Management Association (KACEPMA), 2012</li>
-       <li>Scholarships, Department of Civil Engineering, Hanyang University, Seoul, Korea, 2002 & 2004</li>
-	  </ul>
-    </section>
-	<section>
-      <h4>Selected Service Activities</h4>
-      <ul style="line-height: 18px">
-       <li>Associate Editor, KSCE Journal of Civil Engineering, 2023–present</li>
-	   <li>Editor-in-chief, KSARC Journal of Construction Automation and Robotics, 2022–2023</li>
-	   <li>Assistant Specialty Editor, ASCE Journal of Construction Engineering and Management, 2015–present</li>
-	   <li>Reviewer, Automation in Construction, Elsevier, 2014–present</li>
-	   <li>Reviewer, ASCE Journal of Computing in Civil Engineering, 2013–present</li>	   
-	   <li>Reviewer, ASCE Journal of Construction Engineering and Management, 2012–present</li>
-	   <li>Board Member, Korean Society of Automation and Robotics in Construction (KSARC), 2024-2025</li>
-	   <li>Board Member, Korean Institute of Building Information Modeling, 2019-2020</li>
-	   <li>Organizing Committee & Technical Committee Co-chair, 15th International Conference on Construction Applications of Virtual Reality (CONVR), Banff, Alberta, Canada, October 5-7, 2015.</li>
-	   <li>Member of Central Construction Technology Committee, Ministry of Land, Infrastructure and Transport, 2024</li>
-	   <li>Member of Technical Advisory Committee, Gyeonggi Housing and Urban Development Corporation, 2021-2022</li>
-	   <li>Member of Public-Private Partnership Project Evaluation Committee, Seoul Metropolitan Government, 2019-2022</li>
-	   <li>Member of Technical Advisory Committee, Korea Rail Network Authority, 2018-2020</li>
-       <li>Member of Technology Review and Evaluation Committee, Korea Land and Housing Corporation, 2018-2020, 2024-2025</li> 
-	   <li>Member of Plant Education Advisory Committee, Korea Plant Industries Association, 2018-2020</li>           
-	  </ul>
-    </section>
-    <section>
-     <h4>Short Biography</h4>
-      <p class="lab" style="text-align: justify; font-size: 13px">Dr. Han is an Associate Professor in the Department of Civil and Environmental Engineering at Hanyang University. He earned MS and PhD degrees in Civil Engineering from the University of Illinois at Urbana-Champaign in 2009 and 2013, and a MS degree in Computer Science from Columbia University in 2012. He joined the department in September 2016, after serving as a faculty member in the Department of Civil and Environmental Engineering at the University of Alberta, Canada.<br>
-&nbsp;&nbsp;&nbsp;He has research interests in the areas of construction automation and informatics for computer-aided decision making. His recent research projects include mixed reality (e.g., VR/AR) for quality inspection and control, digital twin technology for construction resource management, motion data-driven simulation modeling for ergonomic analysis, data mining for proactive accident prevention, and high dimensional spatial data processing for GIS data analysis.<br>
-&nbsp;&nbsp;&nbsp;He is a member of the American Society of Civil Engineers and the Korean Society of Civil Engineers. He has served as an assistant specialty editor of the ASCE Journal of Construction Engineering and Management and as a reviewer for several journals (e.g., ASCE Journal of Computing in Civil Engineering, Automation in Construction). 
-	  </p>
-      <br>
-    </section> 
- <!--   <section>
-      <h4>Recent Conference Attendance & Organization</h4>
-      <h5>Events in Edmonton</h5>
-      <ul style="line-height: 18px">
-      <li>Innovation in Construction FORUM: 2016<br>
-          November, 2016<br>
-          Edmonton, Alberta, Canada</li>
-      <li>2015 Modular and Offsite Construction Summit<br>
-          May 19-21, 2015<br>
-          Edmonton, Alberta, Canada</li>
-      <li>CONVR 2015<br>
-          October 5-7, 2015<br>
-          Banff, Alberta, Canada</li> 
-      </ul>
-      <h5 style="margin-top: 0px">Upcoming Conferences</h5>
-      <ul style="line-height: 18px">
-      <li>Winter Simulation Conference 2016<br>
-          December 11-14, 2016<br>
-          Washinton, D.C., US</li>
-      <li>IWCCE 2017<br>
-          June 25-27, 2017<br>
-          Seattle, WA, US</li>
-      </ul>
-    </section>-->
-    <!-- end .content --></article>
-  <footer>
-    <p align="center" style="color: #FFF; font-size:14px">&copy; 2013 SangUk Han</p>
+	
+	
+	
+	
+	
+
+    </main>
+  </div>
+
+  <footer class="notranslate">
+    <p>&copy; 2013 SangUk Han &nbsp;·&nbsp; CIC Lab, Hanyang University</p>
   </footer>
-  <!-- end .container --></div>
+
+</div>
+
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) { showSlides(slideIndex += n); }
+function currentSlide(n) { showSlides(slideIndex = n); }
+
+function showSlides(n) {
+  var slides = document.getElementsByClassName("mySlides");
+  var dots   = document.getElementsByClassName("dot");
+  var items  = document.getElementsByClassName("research-item");
+
+  if (n > slides.length) slideIndex = 1;
+  if (n < 1) slideIndex = slides.length;
+
+  for (var i = 0; i < slides.length; i++) slides[i].style.display = "none";
+  for (var i = 0; i < dots.length; i++) dots[i].classList.remove("active");
+  for (var i = 0; i < items.length; i++) items[i].classList.remove("active");
+
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].classList.add("active");
+  if (items[slideIndex-1]) items[slideIndex-1].classList.add("active");
+}
+
+function toggleNav(el) {
+  el.classList.toggle("open");
+  var children = el.nextElementSibling;
+  if (children) children.classList.toggle("hidden");
+}
+</script>
+
 </body>
 </html>
