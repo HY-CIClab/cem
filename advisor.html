@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CIC-Lab @ Hanyang University</title>
 <link rel="shortcut icon" type="image/x-icon" href="logo.ico" />
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
@@ -422,14 +421,8 @@ footer {
 }
 </style>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-83687716-1', 'auto');
-  ga('send', 'pageview');
-</script>
+<title>Advisor – CIC Lab</title>
+
 </head>
 
 <body>
@@ -451,7 +444,7 @@ footer {
       <div class="sidebar-inner">
 
         <div class="nav-section notranslate">
-          <a href="index.html" class="nav-link active"><span class="nav-marker"></span> Home</a>
+          <a href="index.html" class="nav-link"><span class="nav-marker"></span> Home</a>
         </div>
 
         <div class="nav-section notranslate">
@@ -459,7 +452,7 @@ footer {
             <span class="nav-marker"></span> Members <span class="nav-toggle-icon">▾</span>
           </div>
           <div class="nav-children nav-sub">
-            <a href="advisor.html" class="nav-link">Advisor</a>
+            <a href="advisor.html" class="nav-link active">Advisor</a>
             <a href="members.html" class="nav-link">Lab Members</a>
           </div>
         </div>
@@ -607,13 +600,6 @@ footer {
   <p style="text-align:justify">He is a member of the American Society of Civil Engineers and serves as an assistant specialty editor of the ASCE Journal of Construction Engineering and Management and as a reviewer for several international journals.</p>
 </div>
 
-	
-	
-	
-	
-	
-	
-
     </main>
   </div>
 
@@ -652,6 +638,23 @@ function toggleNav(el) {
   var children = el.nextElementSibling;
   if (children) children.classList.toggle("hidden");
 }
+function toggleNav(el) {
+  el.classList.toggle("open");
+  var children = el.nextElementSibling;
+  if (children) children.classList.toggle("hidden");
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const links = document.querySelectorAll(".nav-link");
+  const current = window.location.pathname.split("/").pop();
+
+  links.forEach(link => {
+    const href = link.getAttribute("href");
+    if (href === current) {
+      link.classList.add("active");
+    }
+  });
+});
 </script>
 
 </body>
