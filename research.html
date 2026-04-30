@@ -307,6 +307,32 @@ a:hover { color: var(--accent); }
   line-height: 1.6;
 }
 
+.pill {
+  font-size: 10px;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  border: 1px solid #cfd6e0;
+  background-color: #f4f6fa;
+  color: #7a8090;
+  cursor: pointer;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.pill:hover {
+  background-color: #e6ebf3;
+}
+.kor-title {
+  display: inline;
+  font-size: 12.5px;
+  color: #7a8090;
+  margin-left: 6px;
+}
+.hidden {
+  display: none;
+}
+
 /* ── FOOTER ── */
 footer {
   background: var(--navy-dark);
@@ -398,8 +424,17 @@ footer {
       <div class="card">
         <h2>Research Projects</h2>
         
+		<div class="course-item">
+          <div class="course-title">AI-Based Development and Validation of Traffic Risk Estimation for Pre-Opening Highway Routes <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">고속도로 노선 공용 전 교통위험도 추정을 위한 AI 기술 개발 및 검증</span></div>
+		    <ul>
+              <li>Funding: Korea Expressway Corporation</li>
+              <li>Role: Co-PI (PI: Seungjun Ahn at Hongik University)</li>
+              <li>Time period: 2025-2026</li>
+            </ul>          
+        </div>
+		
         <div class="course-item">
-          <div class="course-title">Human-Computer Interaction and Machine Intelligence Technologies for Long-Distance Autonomous Excavator Teleoperation</div>
+          <div class="course-title">Human-Computer Interaction and Machine Intelligence Technologies for Long-Distance Autonomous Excavator Teleoperation <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">굴착기 장거리 원격조종 자동화를 위한 인간-컴퓨터 상호작용 및 머신 인텔리전스 기술 개발</span></div>
 		    <ul>
               <li>Funding: National Research Foundation of Korea (NRF) – Mid-career Researcher Program</li>
               <li>Role: PI</li>
@@ -408,7 +443,7 @@ footer {
         </div>
 
 		<div class="course-item">
-          <div class="course-title">Developing a Team Response using Digital Construction to Mitigate Disasters related to Climate Change</div>
+          <div class="course-title">Developing a Team Response using Digital Construction to Mitigate Disasters related to Climate Change <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">기후변화-재난재해 대응형 디지털 건설공학 인재양성팀</span></div>
 		    <ul>
               <li>Funding: National Research Foundation of Korea (NRF) – Brain Korea (BK) 21 Four</li>
               <li>Role: Co-PI (PI: Dr. Young Mo Kim at Hanyang University)</li>
@@ -417,7 +452,7 @@ footer {
         </div>
 		
 		<div class="course-item">
-          <div class="course-title">Feasibility Study of a Facility Project for the Restructuring of Military Division Headquarters</div>
+          <div class="course-title">Feasibility Study of a Facility Project for the Restructuring of Military Division Headquarters <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">ㅇ사단 본부 부대개편 시설사업 적정성 검토</span></div>
 		    <ul>
               <li>Funding: Korea Institute for Defense Analyses (KIDA)</li>
               <li>Role: PI</li>
@@ -426,7 +461,7 @@ footer {
         </div>
 		
 		<div class="course-item">
-          <div class="course-title">Advancement Plan on Accident Investigation and Safety Management Strategy at Construction Sites</div>
+          <div class="course-title">Advancement Plan on Accident Investigation and Safety Management Strategy at Construction Sites <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">건설현장 안전사고 조사 및 관리기술 고도화 방안</span></div>
 		    <ul>
               <li>Funding: Seoul Institute of Technology (SIT)</li>
               <li>Role: PI (Co-PIs: Dr. Youngcheol Kang at Yonsei University and Dr. Sanghyeok Kang at Incheon National University)</li>
@@ -435,7 +470,7 @@ footer {
         </div>
 		
 		<div class="course-item">
-          <div class="course-title">Development of Construction Site Safety Management Platform using the Smart Personal Protective Equipment</div>
+          <div class="course-title">Development of Construction Site Safety Management Platform using the Smart Personal Protective Equipment <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">스마트 안전장비를 활용한 건설현장 안전관리 플랫폼 구축</span></div>
 		    <ul>
               <li>Funding: Korea Evaluation Institute of Industrial Technology (KEIT) – Technology Innovation Program</li>
               <li>Role: Co-PI (PI: Dr. Do-Keun Kim at Youngshine Corporation)</li>
@@ -444,7 +479,7 @@ footer {
         </div>
 		
 		<div class="course-item">
-          <div class="course-title">Digital Twin-driven 4D Simulation and Visualization of Construction Operations</div>
+          <div class="course-title">Digital Twin-driven 4D Simulation and Visualization of Construction Operations <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">디지털 트윈 기반 건설자원의 4D 공정 시각화 기술 개발 (주관명: 도로실증을 통한 스마트 건설기술 개발)</span></div>
 		    <ul>
               <li>Funding: Korea Agency for Infrastructure Technology Advancement (KAIA) – Smart Construction Technology Development Program</li>
               <li>Role: Co-PI (PI: Dr. Sung-Min Cho at Korea Expressway Corporation)</li>
@@ -454,7 +489,7 @@ footer {
         </div>
 		
 		<div class="course-item">
-          <div class="course-title">Smart Digital Engineering Education and Training for Lead Engineer</div>
+          <div class="course-title">Smart Digital Engineering Education and Training for Lead Engineer <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">스마트 디지털 엔지니어링 전문인력양성</span></div>
 		    <ul>
               <li>Funding: Korea Evaluation Institute of Industrial Technology (KEIT) – The Competency Development Program for Industry Specialist</li>
               <li>Role: Co-Investigator (PI: Dr. Jong Min Lee at Seoul National University)</li>
@@ -463,7 +498,7 @@ footer {
         </div>
 		
 		<div class="course-item">
-          <div class="course-title">Center for Intelligent Construction Automation (CICA)</div>
+          <div class="course-title">Center for Intelligent Construction Automation (CICA) <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">지능형 건설자동화 연구센터</span></div>
 		    <ul>
               <li>Funding: National Research Foundation of Korea (NRF) – Engineering Research Center (ERC)</li>
               <li>Role: Co-Investigator (PI: Dr. Dong-Eun Lee at Kyungpook National University)</li>
@@ -472,7 +507,7 @@ footer {
         </div>
 		
 		<div class="course-item">
-          <div class="course-title">High Dimensional Spatial Data Processing for Searching of Photovoltaic Panel Installation Sites on Highway Network</div>
+          <div class="course-title">High Dimensional Spatial Data Processing for Searching of Photovoltaic Panel Installation Sites on Highway Network <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">태양광패널의 적지 선별을 위한 고속도로망 주변 유휴국유지를 대상으로 한 다차원 공간데이터 프로세싱 기술 개발</span></div>
 		    <ul>
               <li>Funding: Korea Agency for Infrastructure Technology Advancement (KAIA) – Technology Advancement Research Program (TARP)</li>
               <li>Role: PI (Co-PI: Dr. Byungil Kim at Andong National University)</li>
@@ -481,7 +516,7 @@ footer {
         </div>
 		
 		<div class="course-item">
-          <div class="course-title">Mixed Reality Science and Technology for Smart Modular Construction of Industrial Plants</div>
+          <div class="course-title">Mixed Reality Science and Technology for Smart Modular Construction of Industrial Plants <button class="pill" onclick="toggleKor(this)">KOR</button><span class="kor-title hidden">지능형 플랜트 시공을 위한 혼합현실 기반 모듈러 건설 관리 기술 연구</span></div>
 		    <ul>
               <li>Funding: National Research Foundation of Korea (NRF) – Younger Researcher Program</li>
               <li>Role: PI</li>
@@ -547,17 +582,10 @@ function toggleNav(el) {
   var children = el.nextElementSibling;
   if (children) children.classList.toggle("hidden");
 }
-document.addEventListener("DOMContentLoaded", function() {
-  const links = document.querySelectorAll(".nav-link");
-  const current = window.location.pathname.split("/").pop();
-
-  links.forEach(link => {
-    const href = link.getAttribute("href");
-    if (href === current) {
-      link.classList.add("active");
-    }
-  });
-});
+function toggleKor(btn){
+  const kor = btn.nextElementSibling;
+  kor.classList.toggle('hidden');
+}
 </script>
 
 </body>
