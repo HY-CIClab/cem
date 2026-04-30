@@ -385,7 +385,7 @@ footer {
           </div>
           <div class="nav-children nav-sub">
             <a href="publications.html" class="nav-link">International</a>
-            <a href="publications_domestic.html" class="nav-link">Domestic (KOR)</a>
+            <a href="publications_domestic.html" class="nav-link active">Domestic (KOR)</a>
           </div>
         </div>
 
@@ -463,17 +463,6 @@ function toggleNav(el) {
   var children = el.nextElementSibling;
   if (children) children.classList.toggle("hidden");
 }
-document.addEventListener("DOMContentLoaded", function() {
-  const links = document.querySelectorAll(".nav-link");
-  const current = window.location.pathname.split("/").pop();
-
-  links.forEach(link => {
-    const href = link.getAttribute("href");
-    if (href === current) {
-      link.classList.add("active");
-    }
-  });
-});
 </script>
 
 </body>

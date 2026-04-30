@@ -342,7 +342,7 @@ footer {
         </div>
 
         <div class="nav-section notranslate">
-          <a href="courses.html" class="nav-link"><span class="nav-marker"></span> Courses</a>
+          <a href="courses.html" class="nav-link active"><span class="nav-marker"></span> Courses</a>
           <a href="admission.html" class="nav-link"><span class="nav-marker"></span> Admission</a>
         </div>
 
@@ -527,17 +527,6 @@ function toggleNav(el) {
   var children = el.nextElementSibling;
   if (children) children.classList.toggle("hidden");
 }
-document.addEventListener("DOMContentLoaded", function() {
-  const links = document.querySelectorAll(".nav-link");
-  const current = window.location.pathname.split("/").pop();
-
-  links.forEach(link => {
-    const href = link.getAttribute("href");
-    if (href === current) {
-      link.classList.add("active");
-    }
-  });
-});
 </script>
 
 </body>
